@@ -9,6 +9,7 @@ public abstract class Character {
     private int money;
     private int id;
     
+    
     public Character(){
         this.name = "";
         this.money = 0;
