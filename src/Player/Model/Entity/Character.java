@@ -1,6 +1,8 @@
 
 package Player.Model.Entity;
 
+import java.util.Objects;
+
 
 public abstract class Character {
     private String name;
@@ -22,6 +24,30 @@ public abstract class Character {
         id = 0;
         
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public abstract void sell();
     public abstract void buy();
@@ -36,6 +62,15 @@ public abstract class Character {
         if (obj == null || getClass() != obj.getClass()) return false;
         Character character = (Character) obj;
         return id == character.id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.name);
+        hash = 43 * hash + this.money;
+        hash = 43 * hash + this.id;
+        return hash;
     }
     
 }

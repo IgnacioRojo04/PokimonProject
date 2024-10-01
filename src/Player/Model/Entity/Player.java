@@ -1,11 +1,14 @@
 
 package Player.Model.Entity;
-import Player.Model.Entity.Character;
+//import Player.Model.Entity.Character;
 
 public class Player extends Character{
 
     public Player(String name){
         super(name, 10);
+    }
+    public Player(){
+         super("prueba", 10);
     }
     
     @Override
@@ -15,4 +18,5 @@ public class Player extends Character{
     @Override
     public void buy() {
     }
+    
 }
