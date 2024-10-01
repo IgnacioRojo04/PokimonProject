@@ -36,7 +36,7 @@ public class PlayerDAOJDBC implements DAO<Player>{
         try {
             String insertStmtProduct = "INSERT INTO entrenadores(ID, NOMBRE) VALUES(20,?)";
             String insertStmtStock = "INSERT INTO pokeUsables(ID, ID_POKE, RAREZA,NIVEL, PRECIO, ID_ENTRENADOR) VALUES(?,1,1,10,10,20);";
-            PreparedStatement pstmtStock = cn.prepareStatement(insertStmtStock, 20);
+            PreparedStatement pstmtStock = cn.prepareStatement(insertStmtStock, 20);//sda
             pstmtStock.setInt(1, product.getStock().getCurrentQuantity());
             pstmtStock.executeUpdate();
 
