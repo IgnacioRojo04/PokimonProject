@@ -87,15 +87,13 @@ public class PlayerView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        System.out.println(evt);
         this.player.setName(this.tfName.getText());
-            this.playerDAO.crear(player);
-            System.out.println(player.getId());
-        
+        this.playerDAO.crear(this.player);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bDeletePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletePlayerActionPerformed
-        this.playerDAO.eliminar( this.player.getId());
+        this.playerDAO.eliminar(this.player.getId());
     }//GEN-LAST:event_bDeletePlayerActionPerformed
 
 

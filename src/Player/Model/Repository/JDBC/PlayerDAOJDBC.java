@@ -37,28 +37,11 @@ public class PlayerDAOJDBC implements DAO<Player> {
     @Override
     public void crear(Player t) {
         try {
-            String insertStmtPlayer = "INSERT INTO entrenadores(ID, NOMBRE) VALUES(?,?)";
-            String insertStmtPokeU = "INSERT INTO pokeUsables(ID, ID_POKE,NIVEL, PRECIO, ID_ENTRENADOR) VALUES(?,?,?,?,?);";
-            PreparedStatement pstmtPokeU = cn.prepareStatement(insertStmtPokeU, Statement.RETURN_GENERATED_KEYS);
-
-            pstmtPokeU.setInt(2, 1);
-            pstmtPokeU.setInt(3, 10);
-            pstmtPokeU.setInt(4, 10);
-            pstmtPokeU.setInt(5, 20);
-
-            ResultSet rsPoke = pstmtPokeU.getGeneratedKeys();
-            int idPoke = 0;
-            if (rsPoke.next()) {
-                idPoke = rsPoke.getInt(1);
-            }
-            pstmtPokeU.setInt(1, idPoke);
-            pstmtPokeU.executeUpdate();
-
+            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE) VALUES(?)";
             PreparedStatement pstmtPlayer = cn.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
-
-            pstmtPlayer.setString(2, t.getName());
+            pstmtPlayer.setString(1, t.getName());
+            pstmtPlayer.executeUpdate();
             ResultSet rsPlayer = pstmtPlayer.getGeneratedKeys();
-            System.out.println(rsPlayer);
             int idPlayer = 0;
             if (rsPlayer.next()) {
                 idPlayer = rsPlayer.getInt(1);
@@ -66,12 +49,21 @@ public class PlayerDAOJDBC implements DAO<Player> {
                 System.out.println("Player agregado con ID: " + t.getId());
             } else {
                 System.out.println("No se generó un ID para el jugador.");
-                }
-            pstmtPlayer.setInt(1, idPlayer);
-            System.out.println(idPlayer);
-
-            pstmtPlayer.executeUpdate();
-            System.out.println("player agregado");
+            }
+            String insertStmtPokeU = "INSERT INTO pokeUsables(ID_POKE,NIVEL, PRECIO, ID_ENTRENADOR) VALUES(?,?,?,?);";
+            PreparedStatement pstmtPokeU = cn.prepareStatement(insertStmtPokeU, Statement.RETURN_GENERATED_KEYS);
+            pstmtPokeU.setInt(1, 1);
+            pstmtPokeU.setInt(2, 10);
+            pstmtPokeU.setInt(3, 10);
+            pstmtPokeU.setInt(4, t.getId());
+            pstmtPokeU.executeUpdate();
+            ResultSet rsPoke = pstmtPokeU.getGeneratedKeys();
+            int idPoke = 0;
+            if (rsPoke.next()) {
+                idPoke = rsPoke.getInt(1);
+            } else {
+                System.out.println("No se generó un ID para el Pokemón");
+            }
         } catch (SQLException ex) {
             System.out.println("Error al insertar player: " + ex.getErrorCode());
             ex.printStackTrace();
