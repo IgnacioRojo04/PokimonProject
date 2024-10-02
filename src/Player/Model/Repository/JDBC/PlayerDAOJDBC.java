@@ -42,10 +42,9 @@ public class PlayerDAOJDBC implements DAO<Player> {
             pstmtPlayer.setString(1, t.getName());
             pstmtPlayer.executeUpdate();
             ResultSet rsPlayer = pstmtPlayer.getGeneratedKeys();
-            int idPlayer = 0;
+       
             if (rsPlayer.next()) {
-                idPlayer = rsPlayer.getInt(1);
-                t.setId(idPlayer);
+                t.setId( rsPlayer.getInt(1));
                 System.out.println("Player agregado con ID: " + t.getId());
             } else {
                 System.out.println("No se generó un ID para el jugador.");
@@ -58,15 +57,13 @@ public class PlayerDAOJDBC implements DAO<Player> {
             pstmtPokeU.setInt(4, t.getId());
             pstmtPokeU.executeUpdate();
             ResultSet rsPoke = pstmtPokeU.getGeneratedKeys();
-            int idPoke = 0;
             if (rsPoke.next()) {
-                idPoke = rsPoke.getInt(1);
+                 rsPoke.getInt(1);
             } else {
                 System.out.println("No se generó un ID para el Pokemón");
             }
         } catch (SQLException ex) {
             System.out.println("Error al insertar player: " + ex.getErrorCode());
-            ex.printStackTrace();
         }
     }
 
@@ -88,7 +85,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
                 pstmtEntrenador.setInt(1, id);
                 int rowsAffected = pstmtEntrenador.executeUpdate();
                 if (rowsAffected > 0) {
-                    System.out.println("Entrenador con ID " + id + " eliminado.");
+                    System.out.println("Player eliminado con ID: " + id);
                 } else {
                     System.out.println("No se encontró un entrenador con el ID " + id);
                 }
@@ -96,7 +93,6 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
         } catch (SQLException e) {
             System.out.println("Error al eliminar el entrenador y sus pokeUsables: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }

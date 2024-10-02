@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Player.View;
+package main;
 
+import Player.Controller.PlayerController;
+import Player.View.PlayerView;
 import java.awt.BorderLayout;
 
 /**
@@ -11,16 +13,19 @@ import java.awt.BorderLayout;
  * @author retam
  */
 public class MainView extends javax.swing.JFrame {
-    public PlayerView playerview;
+
+    
+    private PlayerView playerView;
+
     /**
      * Creates new form MainView
      */
     public MainView() {
         initComponents();
-        this.playerview = new PlayerView();
-         playerview.setSize(800, 600);
-        this.playerview.setLocation(0, 0);
-         this.container.add(this.playerview, BorderLayout.CENTER);
+      // this.playerController = new PlayerController();
+       this.playerView = new PlayerView();
+       this.playerView.setSize(900,600);
+       this.playerView.setLocation(0,0);
     }
 
     /**
@@ -33,33 +38,59 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         container = new javax.swing.JPanel();
+        home2 = new main.Home();
+        bNewGame = new javax.swing.JButton();
+        bUs = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Main");
 
-        javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
-        container.setLayout(containerLayout);
-        containerLayout.setHorizontalGroup(
-            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        containerLayout.setVerticalGroup(
-            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        container.setBackground(new java.awt.Color(0, 102, 0));
+        container.setBorder(new javax.swing.border.MatteBorder(null));
+        container.setLayout(new java.awt.GridBagLayout());
+        container.add(home2, new java.awt.GridBagConstraints());
+
+        bNewGame.setText("Nuevo Juego");
+        bNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNewGameActionPerformed(evt);
+            }
+        });
+        container.add(bNewGame, new java.awt.GridBagConstraints());
+
+        bUs.setText("Nosotros");
+        bUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bUsActionPerformed(evt);
+            }
+        });
+        container.add(bUs, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNewGameActionPerformed
+       this.container.removeAll();
+       this.home2.removeAll();
+       this.container.add(this.playerView, BorderLayout.CENTER);
+       this.container.revalidate();
+       this.container.repaint();
+    }//GEN-LAST:event_bNewGameActionPerformed
+
+    private void bUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUsActionPerformed
+       
+    }//GEN-LAST:event_bUsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,6 +128,9 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bNewGame;
+    private javax.swing.JButton bUs;
     private javax.swing.JPanel container;
+    private main.Home home2;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,14 +36,14 @@ public class PlayerView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        bCreatePlayer = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         bDeletePlayer = new javax.swing.JButton();
 
-        jButton1.setText("Crear player");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bCreatePlayer.setText("Crear player");
+        bCreatePlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bCreatePlayerActionPerformed(evt);
             }
         });
 
@@ -61,16 +61,14 @@ public class PlayerView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bDeletePlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(90, 90, 90)
+                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(bCreatePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(bDeletePlayer))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,19 +76,18 @@ public class PlayerView extends javax.swing.JPanel {
                 .addGap(127, 127, 127)
                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(bCreatePlayer)
                 .addGap(18, 18, 18)
-                .addComponent(bDeletePlayer)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addComponent(bDeletePlayer))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bCreatePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCreatePlayerActionPerformed
 
         this.player.setName(this.tfName.getText());
         this.playerDAO.crear(this.player);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bCreatePlayerActionPerformed
 
     private void bDeletePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletePlayerActionPerformed
         this.playerDAO.eliminar(this.player.getId());
@@ -98,8 +95,8 @@ public class PlayerView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bCreatePlayer;
     private javax.swing.JButton bDeletePlayer;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 }
