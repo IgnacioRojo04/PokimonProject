@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/View/PlayerView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/View/PokemonView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/PokemonProject.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/View/MainView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Entity/Player.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Entity/Character.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Interface/DAO.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Repository/JDBC/PlayerDAOJDBC.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
