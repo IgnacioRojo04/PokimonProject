@@ -14,7 +14,7 @@ import java.awt.BorderLayout;
  */
 public class MainView extends javax.swing.JFrame {
 
-    
+    private Menu MenuView;
     private PlayerView playerView;
 
     /**
@@ -23,9 +23,11 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
       // this.playerController = new PlayerController();
-       this.playerView = new PlayerView();
+       this.playerView = new PlayerView(this);
        this.playerView.setSize(900,600);
        this.playerView.setLocation(0,0);
+       
+
     }
 
     /**
@@ -47,8 +49,8 @@ public class MainView extends javax.swing.JFrame {
 
         container.setBackground(new java.awt.Color(0, 102, 0));
         container.setBorder(new javax.swing.border.MatteBorder(null));
-        container.setLayout(new java.awt.GridBagLayout());
-        container.add(home2, new java.awt.GridBagConstraints());
+        container.setLayout(new java.awt.BorderLayout());
+        container.add(home2, java.awt.BorderLayout.CENTER);
 
         bNewGame.setText("Nuevo Juego");
         bNewGame.addActionListener(new java.awt.event.ActionListener() {
@@ -56,7 +58,7 @@ public class MainView extends javax.swing.JFrame {
                 bNewGameActionPerformed(evt);
             }
         });
-        container.add(bNewGame, new java.awt.GridBagConstraints());
+        container.add(bNewGame, java.awt.BorderLayout.PAGE_START);
 
         bUs.setText("Nosotros");
         bUs.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +66,7 @@ public class MainView extends javax.swing.JFrame {
                 bUsActionPerformed(evt);
             }
         });
-        container.add(bUs, new java.awt.GridBagConstraints());
+        container.add(bUs, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

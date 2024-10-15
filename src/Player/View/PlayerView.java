@@ -8,6 +8,11 @@ import Interface.DAO;
 import Player.Model.Entity.Player;
 import Player.Model.Repository.JDBC.PlayerDAOJDBC;
 import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import main.MainView;
+
+import main.Menu;
 
 /**
  *
@@ -17,14 +22,17 @@ public class PlayerView extends javax.swing.JPanel {
 
     private final DAO<Player> playerDAO;
     private Player player;
-
+    private Menu menuView;
+    private JFrame parentFrame;
+    
     /**
      * Creates new form PlayerView
      */
-    public PlayerView() {
+    public PlayerView(JFrame parentFrame) {
         initComponents();
         this.playerDAO = new PlayerDAOJDBC();
         this.player = new Player();
+        this.parentFrame = parentFrame;
     }
 
     /**
@@ -39,6 +47,9 @@ public class PlayerView extends javax.swing.JPanel {
         bCreatePlayer = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         bDeletePlayer = new javax.swing.JButton();
+
+        setToolTipText("");
+        setName(""); // NOI18N
 
         bCreatePlayer.setText("Crear player");
         bCreatePlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -61,32 +72,38 @@ public class PlayerView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(bCreatePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(bDeletePlayer))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bDeletePlayer)
+                            .addComponent(bCreatePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
+                .addGap(66, 66, 66)
                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bCreatePlayer)
-                .addGap(18, 18, 18)
-                .addComponent(bDeletePlayer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bDeletePlayer)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCreatePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCreatePlayerActionPerformed
-
+        this.menuView = new Menu();
+        menuView.setVisible(true);
+        this.parentFrame.setVisible(false);
         this.player.setName(this.tfName.getText());
         this.playerDAO.crear(this.player);
-
+        
+        
     }//GEN-LAST:event_bCreatePlayerActionPerformed
 
     private void bDeletePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletePlayerActionPerformed

@@ -14,7 +14,7 @@ public class PlayerController {
     public PlayerView playerView;
 
     public PlayerController() {
-        this.playerView = new PlayerView();
+        //this.playerView = new PlayerView();
     }
     
    
