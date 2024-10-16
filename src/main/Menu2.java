@@ -5,75 +5,29 @@
 package main;
 
 import Market.View.MarketView;
-import Player.View.PlayerView;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 
-/**
- *
- * @author retam
- */
-public class MainView extends javax.swing.JFrame {
 
-    private PlayerView playerView = new PlayerView(this);
-    private Home homeView = new Home();
-    private Menu menu = new Menu();
+public class Menu2 extends javax.swing.JFrame {
+
+    public MarketView marketView;
+    public Menu menuPanel;
     private CardLayout layout;
-    private MarketView marketView = new MarketView();
-
-    /**
-     * Creates new form MainView
-     */
-    public MainView() {
+    public Menu2() {
         initComponents();
-        container_add();
-        showPlayerView();
-        showMenuPanel();
-        showMarketView();
-
-    }
-
-    public void container_add() {
+        this.menuPanel = new Menu();
         container.setLayout(new CardLayout());
-        container.add(this.homeView, "Home");
-        container.add(this.playerView, "Player");
-        container.add(this.menu, "Menu");
-        container.add(this.marketView, "Market");
+        container.add(this.menuPanel, "Menu");
         setContentPane(container);
         this.layout = (CardLayout) container.getLayout();
-        layout.show(container, "Home");
+        layout.show(container, "Menu");
+        this.setResizable(true);
+        this.marketView = new MarketView();
+        this.container.setSize(200,200);
+
     }
 
-    public void showPlayerView() {
-        this.homeView.btnNewGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                layout.show(container, "Player");
-            }
-        });
-    }
-
-    public void showMenuPanel() {
-        this.playerView.bCreatePlayer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                layout.show(container, "Menu");
-            }
-        });
-    }
-
-    public void showMarketView() {
-        this.menu.btnMarket.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                layout.show(container, "Market");
-            }
-        });
-    }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,9 +35,7 @@ public class MainView extends javax.swing.JFrame {
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Main");
 
-        container.setBorder(new javax.swing.border.MatteBorder(null));
         container.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,20 +43,23 @@ public class MainView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1058, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+  
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -119,20 +74,21 @@ public class MainView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainView().setVisible(true);
+                new Menu2().setVisible(true);
             }
         });
     }
