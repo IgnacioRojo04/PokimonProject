@@ -18,6 +18,8 @@ public class PlayerController {
       this.playerView.createPlayer();
      this.playerDao.crear(player);
     }
+
+        
       
 
 

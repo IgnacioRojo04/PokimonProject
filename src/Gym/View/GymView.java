@@ -61,7 +61,7 @@ public class GymView extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(102, 102, 102)
                             .addComponent(btnTrain, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(432, Short.MAX_VALUE))
+                .addContainerGap(429, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

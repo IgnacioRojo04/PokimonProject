@@ -36,6 +36,7 @@ public class MainView extends javax.swing.JFrame {
     private CardLayout layout;
     private GymView gymView = new GymView(); // -> agregar el controller.
     private List<Pokemon> pokemonList = new ArrayList<>();
+    private List<Pokemon> pokemonTeam = new ArrayList<>();
 
     public MainView() {
         initComponents();
@@ -48,7 +49,7 @@ public class MainView extends javax.swing.JFrame {
         backPoke();
         backGym();
         showGym();
-
+        buyMarket();
     }
 
     public void container_add() {
@@ -90,6 +91,8 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnMarket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                marketController.fillTable(pokemonList);
+                marketController.showMoney(playerController.playerView.player.getMoney());
                 layout.show(container, "Market");
             }
         });
@@ -136,6 +139,22 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layout.show(container, "Menu");
+            }
+        });
+    }
+    public void buyMarket(){
+        this.marketController.marketView.btnBuy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int plata = playerController.playerView.player.getMoney();
+                int indice = marketController.marketView.cbMarket.getSelectedIndex();
+                if (pokemonTeam.size() < 6 && (plata-pokemonList.get(indice).getCost()) >= 0){
+                    playerController.playerView.player.setMoney(plata-pokemonList.get(indice).getCost());
+                    marketController.buyPoke(pokemonTeam, pokemonList);
+                    
+                }
+                
+                
             }
         });
     }
