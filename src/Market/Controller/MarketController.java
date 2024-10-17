@@ -7,46 +7,49 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class MarketController {
-    
+
     public MarketView marketView;
     public MarketDAOJDBC marketDao;
-    
-    public MarketController(){
-    this.marketView = new MarketView();
-    this.marketDao = new MarketDAOJDBC();
+
+    public MarketController() {
+        this.marketView = new MarketView();
+        this.marketDao = new MarketDAOJDBC();
     }
-    
-    public void fillTable(List<Pokemon> pokemonList){
-//        pokemonList.add(new Pokemon("pika"));
-//        pokemonList.add(new Pokemon("charmander"));
-//        pokemonList.add(new Pokemon("Squirtle"));
+
+    public void fillTable() {
+        this.marketView.listPokemon.add(new Pokemon("pika2"));
+        this.marketView.listPokemon.add(new Pokemon("charmander2"));
+        this.marketView.listPokemon.add(new Pokemon("Squirtle2"));
         DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
 
         model.setRowCount(0);
-        for (Pokemon pokemon : pokemonList) {
+        for (Pokemon pokemon : this.marketView.listPokemon) {
             model.addRow(new Object[]{
                 pokemon.getName(),
-                pokemon.getLevel(),
                 pokemon.getRarity(),
-                pokemon.getOwner(),
-            });
-            this.marketView.cbMarket.addItem(pokemon.getName()); 
+                pokemon.getLevel(),
+                pokemon.getCost(),
+                pokemon.getOwner(),});
+            this.marketView.cbMarket.addItem(pokemon.getName());
         }
     }
-    public void showMoney(int money){
-        money = 2;
+
+    public void showMoney(int money) {
         this.marketView.lblMoney.setText(money + "");
     }
-    public void buyPoke(List<Pokemon> pokemonTeam, List<Pokemon> pokemonList){
+
+    public void buyPoke(List<Pokemon> pokemonTeam, int moneyPlayer) {
         int indice = this.marketView.cbMarket.getSelectedIndex();
-        Pokemon comprado = pokemonList.get(indice);
+        Pokemon comprado = this.marketView.listPokemon.get(indice);
         System.out.println(comprado.getName());
+        this.marketView.lblMoney.setText(moneyPlayer+"");
         comprado.setOwner(20); //pokemonTeam.get(1).getOwner()
-        pokemonList.remove(indice);
         pokemonTeam.add(comprado);
-        DefaultTableModel model = (DefaultTableModel) marketView.tMarket.getModel();
+
+        this.marketView.listPokemon.remove(indice);
+        DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
         model.removeRow(indice);
-        marketView.cbMarket.removeItem(marketView.cbMarket.getSelectedItem());
-               //updateDAO(comprado);
+        this.marketView.cbMarket.removeItem(this.marketView.cbMarket.getSelectedItem());
+        //updateDAO(comprado);
     }
 }

@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,13 +37,12 @@ public class MainView extends javax.swing.JFrame {
     private Menu menu = new Menu();
     private CardLayout layout;
     private GymView gymView = new GymView(); // -> agregar el controller.
-    private List<Pokemon> pokemonList = new ArrayList<>();
     private List<Pokemon> pokemonTeam = new ArrayList<>();
 
     public MainView() {
         initComponents();
         container_add();
-        showPlayerView(this.pokemonList, this.pokemonController);
+        showPlayerView(this.pokemonTeam, this.pokemonController);
         showMenuPanel(this.playerController);
         showMarketView();
         backMarket();
@@ -91,7 +92,7 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnMarket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                marketController.fillTable(pokemonList);
+                marketController.fillTable();
                 marketController.showMoney(playerController.playerView.player.getMoney());
                 layout.show(container, "Market");
             }
@@ -142,19 +143,50 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-    public void buyMarket(){
+
+    public void buyMarket() {
         this.marketController.marketView.btnBuy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int plata = playerController.playerView.player.getMoney();
-                int indice = marketController.marketView.cbMarket.getSelectedIndex();
-                if (pokemonTeam.size() < 6 && (plata-pokemonList.get(indice).getCost()) >= 0){
-                    playerController.playerView.player.setMoney(plata-pokemonList.get(indice).getCost());
-                    marketController.buyPoke(pokemonTeam, pokemonList);
-                    
+                String titleJd = "No podes comprar: ";
+                if (marketController.marketView.listPokemon.size() > 0) {
+                    int moneyPlayer = playerController.playerView.player.getMoney();
+                    int indice = marketController.marketView.cbMarket.getSelectedIndex();
+                    int pokemonCost = marketController.marketView.listPokemon.get(indice).getCost();
+                    for (Pokemon p : pokemonTeam) {
+                        System.out.println(p.getName());
+                    }
+                    if (pokemonTeam.size() < 6 && moneyPlayer - pokemonCost >= 0) {
+                        playerController.setMoney(-pokemonCost);
+                        marketController.buyPoke(pokemonTeam, moneyPlayer);
+                        marketController.showMoney(playerController.playerView.player.getMoney());
+
+                    } else {
+
+                        if (pokemonTeam.size() >= 6) {
+                            titleJd += "Equipo lleno. ";
+                        }
+                        if (moneyPlayer - pokemonCost < 0) {
+                            titleJd += "Sin Dinero. ";
+                        }
+                        if (marketController.marketView.listPokemon.size() <= 0) {
+                            titleJd += "No hay pokemon para comprar. ";
+                        }
+                        marketController.marketView.jdExeption.setTitle(titleJd);
+                        marketController.marketView.jdExeption.setSize(400, 300);
+                        marketController.marketView.jdExeption.setModal(true);
+
+                        marketController.marketView.jdExeption.setVisible(true);
+
+                    }
+                } else {
+                    titleJd += "No hay pokemon para comprar. ";
+                    marketController.marketView.jdExeption.setTitle(titleJd);
+                    marketController.marketView.jdExeption.setSize(400, 300);
+                    marketController.marketView.jdExeption.setModal(true);
+
+                    marketController.marketView.jdExeption.setVisible(true);
                 }
-                
-                
             }
         });
     }

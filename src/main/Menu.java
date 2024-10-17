@@ -3,7 +3,6 @@ package main;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
 public class Menu extends javax.swing.JPanel {
 
     public Image fondo;
@@ -54,39 +53,97 @@ public class Menu extends javax.swing.JPanel {
         lblArrow1 = new javax.swing.JLabel();
         lblArrow2 = new javax.swing.JLabel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         lblGym.setText("Gym");
-        add(lblGym, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, -1, -1));
 
         lblArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
-        add(lblArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, -1, -1));
 
         btnPoke.setOpaque(true);
-        add(btnPoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 230, 180));
 
         btnMarket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMarketActionPerformed(evt);
             }
         });
-        add(btnMarket, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 170, 150));
-        add(btnGym, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, 160, 110));
 
         lblPoke.setText("Pokemones");
-        add(lblPoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, -1, -1));
 
         lblMain.setText("Haz click en alguna de las opciones para viajar !!");
-        add(lblMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, -1, -1));
 
         lblMarket.setText("Mercado");
-        add(lblMarket, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
 
         lblArrow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
-        add(lblArrow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         lblArrow2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
-        add(lblArrow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(390, 390, 390)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(lblPoke))
+                    .addComponent(btnPoke, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(lblArrow2))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblArrow1))
+                    .addComponent(btnMarket, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(lblMarket)))
+                .addGap(560, 560, 560)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblArrow))
+                    .addComponent(btnGym, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblGym))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(lblMain))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(lblPoke))
+                    .addComponent(btnPoke, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(lblArrow2)))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblArrow1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btnMarket, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(lblMarket))))
+                    .addComponent(lblArrow)
+                    .addComponent(btnGym, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblGym)))
+                .addGap(40, 40, 40)
+                .addComponent(lblMain))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMarketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarketActionPerformed

@@ -13,6 +13,7 @@ public class Pokemon {
 
     public Pokemon(String name) {
         this.name = name;
+        this.cost = 1;
     }
     
 
