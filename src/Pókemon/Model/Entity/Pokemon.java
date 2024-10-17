@@ -7,6 +7,14 @@ public class Pokemon {
     int level;
     Character owner; // check 
 
+    public Pokemon() {
+    }
+
+    public Pokemon(String name) {
+        this.name = name;
+    }
+    
+
     public String getName() {
         return name;
     }

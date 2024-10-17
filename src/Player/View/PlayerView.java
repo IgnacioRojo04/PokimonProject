@@ -5,6 +5,7 @@
 package Player.View;
 
 import Interface.DAO;
+import Player.Controller.PlayerController;
 import Player.Model.Entity.Player;
 import Player.Model.Repository.JDBC.PlayerDAOJDBC;
 import java.sql.SQLException;
@@ -19,18 +20,20 @@ import main.Menu2;
  * @author retam
  */
 public class PlayerView extends javax.swing.JPanel {
-
-    private final DAO<Player> playerDAO;
-    private Player player;
     
+    public DAO<Player> playerDAO;
+    public Player player;
+   
+
     /**
      * Creates new form PlayerView
      */
-    public PlayerView(JFrame parentFrame) {
+    public PlayerView() {
         initComponents();
         this.playerDAO = new PlayerDAOJDBC();
         this.player = new Player();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,7 +52,7 @@ public class PlayerView extends javax.swing.JPanel {
             }
         });
 
-        tfName.setText("jTextField1");
+        tfName.setText("Nombre");
 
         bDeletePlayer.setText("Eliminar Player");
         bDeletePlayer.addActionListener(new java.awt.event.ActionListener() {
@@ -88,14 +91,16 @@ public class PlayerView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCreatePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCreatePlayerActionPerformed
-  
-        
+
     }//GEN-LAST:event_bCreatePlayerActionPerformed
 
     private void bDeletePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletePlayerActionPerformed
         this.playerDAO.eliminar(this.player.getId());
     }//GEN-LAST:event_bDeletePlayerActionPerformed
 
+    public void createPlayer(){
+        this.player.setName(this.tfName.getText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCreatePlayer;

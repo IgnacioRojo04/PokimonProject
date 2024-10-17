@@ -1,24 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Player.Controller;
 
+import Player.Model.Entity.Player;
+import Player.Model.Repository.JDBC.PlayerDAOJDBC;
 import Player.View.PlayerView;
 
-/**
- *
- * @author retam
- */
 public class PlayerController {
+
     public PlayerView playerView;
+    public PlayerDAOJDBC playerDao;
 
     public PlayerController() {
-        //this.playerView = new PlayerView();
+        this.playerView = new PlayerView();
+        this.playerDao = new PlayerDAOJDBC();
     }
-    
-   
-    
-    
-    
+    public void createPlayer(Player player){
+      this.playerView.createPlayer();
+     this.playerDao.crear(player);
+    }
+      
+
+
 }

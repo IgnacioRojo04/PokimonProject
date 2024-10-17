@@ -43,7 +43,8 @@ public class PlayerDAOJDBC implements DAO<Player> {
             pstmtPlayer.executeUpdate();
             ResultSet rsPlayer = pstmtPlayer.getGeneratedKeys();
        
-            if (rsPlayer.next()) {
+            if (rsPlayer.next())
+            {
                 t.setId( rsPlayer.getInt(1));
                 System.out.println("Player agregado con ID: " + t.getId());
             } else {
@@ -73,8 +74,8 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public void eliminar(int id) {
-        String deletePokeUsablesSQL = "DELETE FROM pokeusables WHERE ID_ENTRENADOR = ?";
-        String deleteEntrenadorSQL = "DELETE FROM entrenadores WHERE ID = ?";
+        String deletePokeUsablesSQL = "DELETE FROM pokeusables WHERE ID_ENTRENADOR >= ?";
+        String deleteEntrenadorSQL = "DELETE FROM entrenadores WHERE ID >= ?";
 
         try {
             try (PreparedStatement pstmtPokeUsables = cn.prepareStatement(deletePokeUsablesSQL)) {

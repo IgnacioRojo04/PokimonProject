@@ -11,7 +11,7 @@ public class Menu extends javax.swing.JPanel {
     public Menu() {
         this.fondo = new ImageIcon("src/img/fondoMenu.jpg").getImage();
         initComponents();
-       // transparentButton();
+       transparentButton();
     }
 
     @Override
@@ -43,12 +43,12 @@ public class Menu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblGym = new javax.swing.JLabel();
+        lblArrow = new javax.swing.JLabel();
         btnPoke = new javax.swing.JButton();
         btnMarket = new javax.swing.JButton();
         btnGym = new javax.swing.JButton();
-        lblArrow = new javax.swing.JLabel();
         lblPoke = new javax.swing.JLabel();
-        lblGym = new javax.swing.JLabel();
         lblMain = new javax.swing.JLabel();
         lblMarket = new javax.swing.JLabel();
         lblArrow1 = new javax.swing.JLabel();
@@ -56,25 +56,25 @@ public class Menu extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblGym.setText("Gym");
+        add(lblGym, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 320, -1, -1));
+
+        lblArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
+        add(lblArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, -1, -1));
+
         btnPoke.setOpaque(true);
-        add(btnPoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 230, 180));
+        add(btnPoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 230, 180));
 
         btnMarket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMarketActionPerformed(evt);
             }
         });
-        add(btnMarket, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 170, 150));
+        add(btnMarket, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 170, 150));
         add(btnGym, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, 160, 110));
 
-        lblArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
-        add(lblArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, -1, -1));
-
         lblPoke.setText("Pokemones");
-        add(lblPoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
-
-        lblGym.setText("Gym");
-        add(lblGym, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 430, -1, -1));
+        add(lblPoke, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, -1, -1));
 
         lblMain.setText("Haz click en alguna de las opciones para viajar !!");
         add(lblMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, -1, -1));
@@ -86,7 +86,7 @@ public class Menu extends javax.swing.JPanel {
         add(lblArrow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         lblArrow2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
-        add(lblArrow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, -1, -1));
+        add(lblArrow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMarketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarketActionPerformed

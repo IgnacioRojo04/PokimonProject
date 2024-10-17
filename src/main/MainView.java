@@ -4,13 +4,23 @@
  */
 package main;
 
+import Gym.View.GymView;
+import Market.Controller.MarketController;
 import Market.View.MarketView;
+import Player.Controller.PlayerController;
+import Player.Model.Entity.Player;
 import Player.View.PlayerView;
+import Pókemon.Controller.PokemonController;
+import Pókemon.Model.Entity.Pokemon;
+import Pókemon.View.PokemonView;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,48 +28,59 @@ import javax.swing.JFrame;
  */
 public class MainView extends javax.swing.JFrame {
 
-    private PlayerView playerView = new PlayerView(this);
+    private PlayerController playerController = new PlayerController();
+    private MarketController marketController = new MarketController();
+    private PokemonController pokemonController = new PokemonController();
     private Home homeView = new Home();
     private Menu menu = new Menu();
     private CardLayout layout;
-    private MarketView marketView = new MarketView();
+    private GymView gymView = new GymView(); // -> agregar el controller.
+    private List<Pokemon> pokemonList = new ArrayList<>();
 
-    /**
-     * Creates new form MainView
-     */
     public MainView() {
         initComponents();
         container_add();
-        showPlayerView();
-        showMenuPanel();
+        showPlayerView(this.pokemonList, this.pokemonController);
+        showMenuPanel(this.playerController);
         showMarketView();
+        backMarket();
+        showPokemonView();
+        backPoke();
+        backGym();
+        showGym();
 
     }
 
     public void container_add() {
         container.setLayout(new CardLayout());
         container.add(this.homeView, "Home");
-        container.add(this.playerView, "Player");
+        container.add(this.playerController.playerView, "Player");
         container.add(this.menu, "Menu");
-        container.add(this.marketView, "Market");
+        container.add(this.marketController.marketView, "Market");
+        container.add(this.pokemonController.pokemonView, "Pokemon");
+
+        container.add(this.gymView, "Gym");
+
         setContentPane(container);
         this.layout = (CardLayout) container.getLayout();
         layout.show(container, "Home");
     }
 
-    public void showPlayerView() {
+    public void showPlayerView(List<Pokemon> pokemonList, PokemonController pokemonController) {
         this.homeView.btnNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                pokemonController.fillTable(pokemonList);
                 layout.show(container, "Player");
             }
         });
     }
 
-    public void showMenuPanel() {
-        this.playerView.bCreatePlayer.addActionListener(new ActionListener() {
+    public void showMenuPanel(PlayerController playerController) {
+        this.playerController.playerView.bCreatePlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                playerController.createPlayer(playerController.playerView.player);
                 layout.show(container, "Menu");
             }
         });
@@ -70,6 +91,51 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layout.show(container, "Market");
+            }
+        });
+    }
+
+    public void showGym() {
+        this.menu.btnGym.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Gym");
+            }
+        });
+    }
+
+    public void backMarket() {
+        this.marketController.marketView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Menu");
+            }
+        });
+    }
+
+    public void showPokemonView() {
+        this.menu.btnPoke.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Pokemon");
+            }
+        });
+    }
+
+    public void backPoke() {
+        this.pokemonController.pokemonView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Menu");
+            }
+        });
+    }
+
+    public void backGym() {
+        this.gymView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Menu");
             }
         });
     }
