@@ -37,7 +37,7 @@ public class PokemonController {
                 pokemon.getRarity(),
                 pokemon.getOwner(),
             });
-            this.pokemonView.cbPokeName.addItem(pokemon); 
+           
         }
     }
     public void SellPokemon(){

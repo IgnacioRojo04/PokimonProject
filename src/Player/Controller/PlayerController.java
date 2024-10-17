@@ -14,9 +14,9 @@ public class PlayerController {
         this.playerView = new PlayerView();
         this.playerDao = new PlayerDAOJDBC();
     }
-    public void createPlayer(Player player){
+    public void createPlayer(){
       this.playerView.createPlayer();
-     this.playerDao.crear(player);
+     this.playerDao.crear(this.playerView.player);
     }
       
 

@@ -80,7 +80,7 @@ public class MainView extends javax.swing.JFrame {
         this.playerController.playerView.bCreatePlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerController.createPlayer(playerController.playerView.player);
+                playerController.createPlayer();
                 layout.show(container, "Menu");
             }
         });
