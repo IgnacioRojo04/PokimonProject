@@ -18,7 +18,14 @@ public class PlayerController {
       this.playerView.createPlayer();
      this.playerDao.crear(this.playerView.player);
     }
-      
+
+        
+    public void setMoney(int price){
+       int currentMoney = this.playerView.player.getMoney();
+        System.out.println(currentMoney);
+        System.out.println(price);
+       this.playerView.player.setMoney(currentMoney + price); 
+    }  
 
 
 }

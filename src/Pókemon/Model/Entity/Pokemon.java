@@ -5,13 +5,15 @@ public class Pokemon {
     String name;
     int rarity;
     int level;
-    Character owner; // check 
+    int owner; // check 
+    int cost;
 
     public Pokemon() {
     }
 
     public Pokemon(String name) {
         this.name = name;
+        this.cost = 1;
     }
     
 
@@ -39,12 +41,19 @@ public class Pokemon {
         this.level = level;
     }
 
-    public Character getOwner() {
+    public int getOwner() {
         return owner;
     }
 
-    public void setOwner(Character owner) {
+    public void setOwner(int owner) {
         this.owner = owner;
+    }
+    
+    public int getCost(){
+        return this.cost;
+    }
+    public void setCost(int money){
+        this.cost = money;
     }
     
     

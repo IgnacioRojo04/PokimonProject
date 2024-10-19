@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/View/PokemonView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/RepositoryJDBC/PokemonDAOJDBC.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
@@ -13,6 +14,16 @@
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/View/PlayerView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/MainView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
+=======
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Market/Model/Entity/Market.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Market/Controller/MarketController.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Pókemon/View/PokemonView.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Market/View/MarketView.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Gym/Controller/GymController.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/main/MainView.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Gym/View/GymView.java</file>
+            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
+>>>>>>> origin/market
         </group>
     </open-files>
 </project-private>
