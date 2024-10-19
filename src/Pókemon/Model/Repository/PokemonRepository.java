@@ -1,4 +1,4 @@
-package Pókemon.Model.RepositoryJDBC;
+package Pókemon.Model.Repository;
 
 import Interface.DAO;
 import Player.Model.Entity.Player;
@@ -15,7 +15,7 @@ import Interface.DAO;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.Random;
 
-public class PokemonDAOJDBC implements DAO<Pokemon> {
+public class PokemonRepository implements DAO<Pokemon> {
 
     
     private Connection conexion = null;
@@ -23,7 +23,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
     String USER = "root"; // Usuario de tu base de datos
     String PASS = "root"; // Contraseña de tu base de datos
 
-    public PokemonDAOJDBC() {
+    public PokemonRepository() {
        conectar();
        
     }

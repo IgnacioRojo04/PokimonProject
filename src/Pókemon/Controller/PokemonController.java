@@ -5,7 +5,7 @@
 package Pókemon.Controller;
 
 import Pókemon.Model.Entity.Pokemon;
-import Pókemon.Model.RepositoryJDBC.PokemonDAOJDBC;
+import Pókemon.Model.Repository.PokemonRepository;
 import Pókemon.View.PokemonView;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -17,11 +17,11 @@ import javax.swing.table.DefaultTableModel;
 public class PokemonController {
 
     public PokemonView pokemonView;
-    public PokemonDAOJDBC pokemonDao;
+   // public PokemonRepository pokemonDao;
 
     public PokemonController() {
         this.pokemonView = new PokemonView();
-        this.pokemonDao = new PokemonDAOJDBC();
+       //this.pokemonDao = new PokemonRepository();
     }
 
     public void fillTable(List<Pokemon> teamPokemon) {
