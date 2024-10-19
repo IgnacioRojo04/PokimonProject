@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import main.MainView;
 
-import main.Menu2;
+
 
 /**
  *
@@ -21,17 +21,11 @@ import main.Menu2;
  */
 public class PlayerView extends javax.swing.JPanel {
     
-    public DAO<Player> playerDAO;
-    public Player player;
+
    
 
-    /**
-     * Creates new form PlayerView
-     */
     public PlayerView() {
         initComponents();
-        this.playerDAO = new PlayerDAOJDBC();
-        this.player = new Player();
     }
 
     @SuppressWarnings("unchecked")
@@ -95,16 +89,14 @@ public class PlayerView extends javax.swing.JPanel {
     }//GEN-LAST:event_bCreatePlayerActionPerformed
 
     private void bDeletePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletePlayerActionPerformed
-        this.playerDAO.eliminar(this.player.getId());
+        
     }//GEN-LAST:event_bDeletePlayerActionPerformed
 
-    public void createPlayer(){
-        this.player.setName(this.tfName.getText());
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCreatePlayer;
     private javax.swing.JButton bDeletePlayer;
-    private javax.swing.JTextField tfName;
+    public javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 }

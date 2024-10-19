@@ -1,7 +1,7 @@
 
 package Player.Controller;
 
-import Player.Model.Entity.Player;
+
 import Player.Model.Repository.JDBC.PlayerDAOJDBC;
 import Player.View.PlayerView;
 
@@ -15,16 +15,18 @@ public class PlayerController {
         this.playerDao = new PlayerDAOJDBC();
     }
     public void createPlayer(){
-      this.playerView.createPlayer();
-     this.playerDao.crear(this.playerView.player);
+     this.playerDao.player.setName(this.playerView.tfName.getText());
+     this.playerDao.crear(this.playerDao.player);
     }
-
+    public void deletePlayer(){
+        this.playerDao.eliminar(this.playerDao.player.getId());
+    }
         
     public void setMoney(int price){
-       int currentMoney = this.playerView.player.getMoney();
+       int currentMoney = this.playerDao.player.getMoney();
         System.out.println(currentMoney);
         System.out.println(price);
-       this.playerView.player.setMoney(currentMoney + price); 
+       this.playerDao.player.setMoney(currentMoney + price); 
     }  
 
 

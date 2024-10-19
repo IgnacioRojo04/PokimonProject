@@ -39,13 +39,13 @@ public class MainView extends javax.swing.JFrame {
     private Menu menu = new Menu();
     private CardLayout layout;
     private GymView gymView = new GymView(); // -> agregar el controller.
-    private List<Pokemon> teamPokemon = this.pokemonController.pokemonView.teamPokemon;
+    //private List<Pokemon> teamPokemon = this.pokemonController.pokemonView.teamPokemon;
 
     public MainView() {
         initComponents();
         
         container_add();
-        showPlayerView(this.teamPokemon, this.pokemonController);
+        showPlayerView(this.playerController.playerDao.player.teamPokemon );
         showMenuPanel(this.playerController);
         showMarketView();
         backMarket();
@@ -72,10 +72,11 @@ public class MainView extends javax.swing.JFrame {
         layout.show(container, "Home");
     }
 
-    public void showPlayerView(List<Pokemon> pokemonList, PokemonController pokemonController) {
+    public void showPlayerView(List<Pokemon> pokemonList) {
         this.homeView.btnNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                playerController.createPlayer();
                 layout.show(container, "Player");
             }
         });
@@ -96,7 +97,7 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 marketController.fillTable();
-                marketController.showMoney(playerController.playerView.player.getMoney());
+                marketController.showMoney(playerController.playerDao.player.getMoney());
                 layout.show(container, "Market");
             }
         });
@@ -106,8 +107,9 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnGym.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gymController.fillTable(pokemonController.pokemonView.teamPokemon);
+                gymController.fillTable(playerController.playerDao.player.teamPokemon);
                 layout.show(container, "Gym");
+                //pokemonController.pokemonView.player.listpokemon
             }
         });
     }
@@ -125,8 +127,8 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnPoke.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pokemonController.fillTable();
-                pokemonController.showMoney(playerController.playerView.player.getMoney());
+                pokemonController.fillTable(playerController.playerDao.player.teamPokemon);
+                pokemonController.showMoney(playerController.playerDao.player.getMoney());
                 layout.show(container, "Pokemon");
             }
         });
@@ -155,27 +157,23 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String titleJd = "No podes comprar: ";
-                if (marketController.marketView.listPokemon.size() > 0) {
-                    int moneyPlayer = playerController.playerView.player.getMoney();
+                if (marketController.marketDao.market.pokemonList.size() > 0) {
+                    int moneyPlayer = playerController.playerDao.player.getMoney();
                     int indice = marketController.marketView.cbMarket.getSelectedIndex();
-                    int pokemonCost = marketController.marketView.listPokemon.get(indice).getCost();
-                    for (Pokemon p : teamPokemon) {
-                        System.out.println(p.getName());
-                    }
-                    if (teamPokemon.size() < 6 && moneyPlayer - pokemonCost >= 0) {
+                    int pokemonCost = marketController.marketDao.market.pokemonList.get(indice).getCost();
+                    if (playerController.playerDao.player.teamPokemon.size() < 6 && moneyPlayer - pokemonCost >= 0) {
                         playerController.setMoney(-pokemonCost);
-                        marketController.buyPoke(teamPokemon, moneyPlayer);
-                        marketController.showMoney(playerController.playerView.player.getMoney());
-
+                        marketController.buyPoke(playerController.playerDao.player.teamPokemon, playerController.playerDao.player);
+                        marketController.showMoney(playerController.playerDao.player.getMoney());
                     } else {
 
-                        if (teamPokemon.size() >= 6) {
+                        if (playerController.playerDao.player.teamPokemon.size() >= 6) {
                             titleJd += "Equipo lleno. ";
                         }
                         if (moneyPlayer - pokemonCost < 0) {
                             titleJd += "Sin Dinero. ";
                         }
-                        if (marketController.marketView.listPokemon.size() <= 0) {
+                        if (marketController.marketDao.market.pokemonList.size() <= 0) {
                             titleJd += "No hay pokemon para comprar. ";
                         }
                         marketController.marketView.jdExeption.setTitle(titleJd);
@@ -201,11 +199,11 @@ public class MainView extends javax.swing.JFrame {
         this.pokemonController.pokemonView.btnSellPoke.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (teamPokemon.size() > 0) {
+                if (playerController.playerDao.player.teamPokemon.size() > 0) {
                     int indice = pokemonController.pokemonView.cbPokeName.getSelectedIndex();
-                    playerController.setMoney(pokemonController.pokemonView.teamPokemon.get(indice).getCost());
-                    pokemonController.showMoney(playerController.playerView.player.getMoney());
-                    pokemonController.SellPokemon();
+                    playerController.setMoney(playerController.playerDao.player.teamPokemon.get(indice).getCost());
+                    pokemonController.showMoney(playerController.playerDao.player.getMoney());
+                    pokemonController.SellPokemon(playerController.playerDao.player.teamPokemon);
                 }
                 else{
                     String titleJd = "No hay pokemon para vender";

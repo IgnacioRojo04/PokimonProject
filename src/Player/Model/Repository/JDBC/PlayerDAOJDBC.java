@@ -13,9 +13,15 @@ import java.util.HashSet;
 
 public class PlayerDAOJDBC implements DAO<Player> {
 
+    public Player player;
     private Connection cn = null;
 
     public PlayerDAOJDBC() {
+        connectar();
+        this.player = new Player();
+    }
+
+    public void connectar() {
         try {
             cn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/Pokemones?user=root&password=root");
             System.out.println("Conectado");
@@ -26,7 +32,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public List<Player> listar() {
-        return null;
+        return null; // ver tus stats ( devuelve lista. mostramos plata y nombre del solo el primer player) 
     }
 
     @Override
@@ -35,18 +41,17 @@ public class PlayerDAOJDBC implements DAO<Player> {
     }
 
     @Override
-    public void crear(Player t) {
+    public void crear(Player player) {
         try {
             String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE) VALUES(?)";
             PreparedStatement pstmtPlayer = cn.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
-            pstmtPlayer.setString(1, t.getName());
+            pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.executeUpdate();
             ResultSet rsPlayer = pstmtPlayer.getGeneratedKeys();
-       
-            if (rsPlayer.next())
-            {
-                t.setId( rsPlayer.getInt(1));
-                System.out.println("Player agregado con ID: " + t.getId());
+
+            if (rsPlayer.next()) {
+                player.setId(rsPlayer.getInt(1));
+                System.out.println("Player agregado con ID: " + player.getId());
             } else {
                 System.out.println("No se generó un ID para el jugador.");
             }
@@ -55,21 +60,23 @@ public class PlayerDAOJDBC implements DAO<Player> {
             pstmtPokeU.setInt(1, 1);
             pstmtPokeU.setInt(2, 10);
             pstmtPokeU.setInt(3, 10);
-            pstmtPokeU.setInt(4, t.getId());
+            pstmtPokeU.setInt(4, player.getId());
             pstmtPokeU.executeUpdate();
             ResultSet rsPoke = pstmtPokeU.getGeneratedKeys();
             if (rsPoke.next()) {
-                 rsPoke.getInt(1);
+                rsPoke.getInt(1);
             } else {
                 System.out.println("No se generó un ID para el Pokemón");
             }
+            this.player = player;
         } catch (SQLException ex) {
             System.out.println("Error al insertar player: " + ex.getErrorCode());
         }
     }
 
     @Override
-    public void actualizar(Player t) {
+    public void actualizar(Player player) {
+        this.player = player; // solo actualizacion 
     }
 
     @Override

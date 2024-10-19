@@ -4,6 +4,7 @@
  */
 package Market.View;
 
+import Market.Model.Entity.Market;
 import Pókemon.Model.Entity.Pokemon;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,11 +17,9 @@ import javax.swing.table.DefaultTableModel;
 public class MarketView extends javax.swing.JPanel {
 
     private Image fondo;
-    public List<Pokemon> listPokemon;
     
     public MarketView() {
         this.fondo = new ImageIcon("src/img/mrkt.png").getImage();
-        this.listPokemon = new ArrayList<>();
         initComponents();
         setVisible(true);
     }

@@ -14,10 +14,9 @@ import javax.swing.ImageIcon;
 public class PokemonView extends javax.swing.JPanel {
 
     private Image fondo;
-    public List<Pokemon> teamPokemon;
+   
     
     public PokemonView() {
-        this.teamPokemon = new ArrayList<>();
         this.fondo = new ImageIcon("src/img/gym5.png").getImage();
         initComponents();
     }

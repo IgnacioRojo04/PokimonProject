@@ -17,6 +17,7 @@ import java.util.Random;
 
 public class PokemonDAOJDBC implements DAO<Pokemon> {
 
+    
     private Connection conexion = null;
     String URL = "jdbc:mariadb://localhost:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
@@ -24,7 +25,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
 
     public PokemonDAOJDBC() {
        conectar();
-      
+       
     }
 
     

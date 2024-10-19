@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class MarketDAOJDBC implements DAO<Market> {
 
+    public Market market;
     private Connection conexion = null;
     String URL = "jdbc:mariadb://localhost:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
@@ -25,6 +26,7 @@ public class MarketDAOJDBC implements DAO<Market> {
 
     public MarketDAOJDBC() {
         conectar();
+        this.market = new Market();
     }
 
     @Override
