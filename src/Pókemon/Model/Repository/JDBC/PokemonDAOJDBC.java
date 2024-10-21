@@ -1,4 +1,4 @@
-package Pókemon.Model.Repository;
+package Pókemon.Model.Repository.JDBC;
 
 import Interface.DAO;
 import Player.Model.Entity.Player;
@@ -15,7 +15,7 @@ import Interface.DAO;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.Random;
 
-public class PokemonRepository implements DAO<Pokemon> {
+public class PokemonDAOJDBC implements DAO<Pokemon> {
 
     
     private Connection conexion = null;
@@ -23,7 +23,7 @@ public class PokemonRepository implements DAO<Pokemon> {
     String USER = "root"; // Usuario de tu base de datos
     String PASS = "root"; // Contraseña de tu base de datos
 
-    public PokemonRepository() {
+    public PokemonDAOJDBC() {
        conectar();
        
     }
@@ -46,10 +46,6 @@ public class PokemonRepository implements DAO<Pokemon> {
         return null;
     }
 
-    @Override
-    public Pokemon leer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void crear(Pokemon t) {

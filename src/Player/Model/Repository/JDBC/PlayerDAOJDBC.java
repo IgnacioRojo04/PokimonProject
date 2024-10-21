@@ -36,11 +36,6 @@ public class PlayerDAOJDBC implements DAO<Player> {
     }
 
     @Override
-    public Player leer(int id) {
-        return null;
-    }
-
-    @Override
     public void crear(Player player) {
         try {
             String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE) VALUES(?)";

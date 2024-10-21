@@ -5,7 +5,7 @@
 package Pókemon.Controller;
 
 import Pókemon.Model.Entity.Pokemon;
-import Pókemon.Model.Repository.PokemonRepository;
+import Pókemon.Model.Repository.JDBC.PokemonDAOJDBC;
 import Pókemon.View.PokemonView;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
