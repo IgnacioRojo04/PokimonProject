@@ -1,7 +1,7 @@
 
 package Pokemon.Controller;
 
-import Pókemon.Model.RepositoryJDBC.PokemonDAOJDBC;
+import Pókemon.Model.Repository.JDBC.PokemonDAOJDBC;
 import Pókemon.View.PokemonView;
 
 

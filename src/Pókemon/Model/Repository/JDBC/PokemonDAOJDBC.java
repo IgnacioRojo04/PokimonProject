@@ -1,4 +1,4 @@
-package Pókemon.Model.RepositoryJDBC;
+package Pókemon.Model.Repository.JDBC;
 
 import Interface.DAO;
 import Player.Model.Entity.Player;
