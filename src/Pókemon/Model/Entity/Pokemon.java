@@ -55,6 +55,11 @@ public class Pokemon {
     public void setCost(int money){
         this.cost = money;
     }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" + "name=" + name + ", rarity=" + rarity + ", level=" + level + ", owner=" + owner + ", cost=" + cost + '}';
+    }
     
     
     

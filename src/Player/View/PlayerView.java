@@ -4,14 +4,6 @@
  */
 package Player.View;
 
-import Interface.DAO;
-import Player.Controller.PlayerController;
-import Player.Model.Entity.Player;
-import Player.Model.Repository.JDBC.PlayerDAOJDBC;
-import java.sql.SQLException;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import main.MainView;
 
 
 

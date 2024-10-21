@@ -24,8 +24,6 @@ public class PlayerController {
         
     public void setMoney(int price){
        int currentMoney = this.playerDao.player.getMoney();
-        System.out.println(currentMoney);
-        System.out.println(price);
        this.playerDao.player.setMoney(currentMoney + price); 
     }  
 

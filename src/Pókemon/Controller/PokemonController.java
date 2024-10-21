@@ -17,21 +17,20 @@ import javax.swing.table.DefaultTableModel;
 public class PokemonController {
 
     public PokemonView pokemonView;
-   // public PokemonRepository pokemonDao;
+    // public PokemonRepository pokemonDao;
 
     public PokemonController() {
         this.pokemonView = new PokemonView();
-       //this.pokemonDao = new PokemonRepository();
+        //this.pokemonDao = new PokemonRepository();
     }
 
     public void fillTable(List<Pokemon> teamPokemon) {
         // aca estaria el metodo en la controlladora que llama a getAll, de esta forma
-
         teamPokemon.add(new Pokemon("pika"));
         teamPokemon.add(new Pokemon("charmander"));
         teamPokemon.add(new Pokemon("Squirtle"));
-        DefaultTableModel model = (DefaultTableModel) pokemonView.tPoke.getModel();
-
+        DefaultTableModel model = (DefaultTableModel) pokemonView.tPokePlayer.getModel();
+        System.out.println(model + " :model");
         model.setRowCount(0);
         for (Pokemon pokemon : teamPokemon) {
             model.addRow(new Object[]{
@@ -39,10 +38,9 @@ public class PokemonController {
                 pokemon.getRarity(),
                 pokemon.getLevel(),
                 pokemon.getCost(),});
-
             this.pokemonView.cbPokeName.addItem(pokemon.getName());
-
         }
+        
     }
 
     public void showMoney(int money) {
@@ -53,7 +51,7 @@ public class PokemonController {
         int indice = this.pokemonView.cbPokeName.getSelectedIndex();
         Pokemon vendido = teamPokemon.get(indice);
         teamPokemon.remove(indice);
-        DefaultTableModel model = (DefaultTableModel) this.pokemonView.tPoke.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.pokemonView.tPokePlayer.getModel();
         model.removeRow(indice);
         this.pokemonView.cbPokeName.removeItem(this.pokemonView.cbPokeName.getSelectedItem());
         //deleteDao(vendido);

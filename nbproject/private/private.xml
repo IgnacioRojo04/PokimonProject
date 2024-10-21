@@ -3,27 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/View/PokemonView.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/RepositoryJDBC/PokemonDAOJDBC.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/Model/Repository/JDBC/PlayerDAOJDBC.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Market/Controller/MarketController.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/Controller/PlayerController.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Market/Model/Entity/Market.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/View/PlayerView.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/MainView.java</file>
-            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
-=======
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Market/Model/Entity/Market.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Market/Controller/MarketController.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Pókemon/View/PokemonView.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Market/View/MarketView.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Gym/Controller/GymController.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/main/MainView.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Gym/View/GymView.java</file>
-            <file>file:/C:/Users/Administrador/Downloads/Facu/Objetos/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
->>>>>>> origin/market
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/Model/RepositoryJDBC/MarketDAOJDBC.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Gym/View/GymView2.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Gym/Controller/GymController.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/View/MarketView.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/Controller/MarketController.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Model/Repository/PokemonRepository.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/PokemonProject.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/Model/Entity/Market.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/MainView.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Controller/PlayerController.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Entity/Player.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Entity/Character.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Gym/View/GymView.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Repository/JDBC/PlayerDAOJDBC.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/Home.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/View/PlayerView.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/View/PokemonView.java</file>
+            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
         </group>
     </open-files>
 </project-private>

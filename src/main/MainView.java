@@ -1,36 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package main;
 
 import Gym.Controller.GymController;
-import Gym.View.GymView;
 import Market.Controller.MarketController;
-import Market.View.MarketView;
 import Player.Controller.PlayerController;
-import Player.Model.Entity.Player;
-import Player.View.PlayerView;
 import Pókemon.Controller.PokemonController;
 import Pókemon.Model.Entity.Pokemon;
-import Pókemon.View.PokemonView;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author retam
  */
 public class MainView extends javax.swing.JFrame {
-
+    
     private PlayerController playerController = new PlayerController();
     private MarketController marketController = new MarketController();
     private PokemonController pokemonController = new PokemonController();
@@ -38,14 +23,12 @@ public class MainView extends javax.swing.JFrame {
     private Home homeView = new Home();
     private Menu menu = new Menu();
     private CardLayout layout;
-    private GymView gymView = new GymView(); // -> agregar el controller.
-    //private List<Pokemon> teamPokemon = this.pokemonController.pokemonView.teamPokemon;
-
+    
     public MainView() {
         initComponents();
         
         container_add();
-        showPlayerView(this.playerController.playerDao.player.teamPokemon );
+        showPlayerView(this.playerController.playerDao.player.teamPokemon);
         showMenuPanel(this.playerController);
         showMarketView();
         backMarket();
@@ -55,8 +38,9 @@ public class MainView extends javax.swing.JFrame {
         showGym();
         buyMarket();
         sellPoke();
+        trainPokemon();
     }
-
+    
     public void container_add() {
         container.setLayout(new CardLayout());
         container.add(this.homeView, "Home");
@@ -64,14 +48,12 @@ public class MainView extends javax.swing.JFrame {
         container.add(this.menu, "Menu");
         container.add(this.marketController.marketView, "Market");
         container.add(this.pokemonController.pokemonView, "Pokemon");
-
-        container.add(this.gymView, "Gym");
-
+        container.add(this.gymController.gymView, "Gym");
         setContentPane(container);
         this.layout = (CardLayout) container.getLayout();
         layout.show(container, "Home");
     }
-
+    
     public void showPlayerView(List<Pokemon> pokemonList) {
         this.homeView.btnNewGame.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +63,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void showMenuPanel(PlayerController playerController) {
         this.playerController.playerView.bCreatePlayer.addActionListener(new ActionListener() {
             @Override
@@ -91,7 +73,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void showMarketView() {
         this.menu.btnMarket.addActionListener(new ActionListener() {
             @Override
@@ -102,27 +84,18 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void showGym() {
         this.menu.btnGym.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney() + "");
                 gymController.fillTable(playerController.playerDao.player.teamPokemon);
                 layout.show(container, "Gym");
-                //pokemonController.pokemonView.player.listpokemon
             }
         });
     }
-
-    public void backMarket() {
-        this.marketController.marketView.btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                layout.show(container, "Menu");
-            }
-        });
-    }
-
+    
     public void showPokemonView() {
         this.menu.btnPoke.addActionListener(new ActionListener() {
             @Override
@@ -133,7 +106,16 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public void backMarket() {
+        this.marketController.marketView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Menu");
+            }
+        });
+    }
+    
     public void backPoke() {
         this.pokemonController.pokemonView.btnBack.addActionListener(new ActionListener() {
             @Override
@@ -142,21 +124,22 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void backGym() {
-        this.gymView.btnBack.addActionListener(new ActionListener() {
+        this.gymController.gymView.btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("back");
                 layout.show(container, "Menu");
             }
         });
     }
-
+    
     public void buyMarket() {
         this.marketController.marketView.btnBuy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String titleJd = "No podes comprar: ";
+                String titleJd = " ";
                 if (marketController.marketDao.market.pokemonList.size() > 0) {
                     int moneyPlayer = playerController.playerDao.player.getMoney();
                     int indice = marketController.marketView.cbMarket.getSelectedIndex();
@@ -166,7 +149,7 @@ public class MainView extends javax.swing.JFrame {
                         marketController.buyPoke(playerController.playerDao.player.teamPokemon, playerController.playerDao.player);
                         marketController.showMoney(playerController.playerDao.player.getMoney());
                     } else {
-
+                        
                         if (playerController.playerDao.player.teamPokemon.size() >= 6) {
                             titleJd += "Equipo lleno. ";
                         }
@@ -176,25 +159,27 @@ public class MainView extends javax.swing.JFrame {
                         if (marketController.marketDao.market.pokemonList.size() <= 0) {
                             titleJd += "No hay pokemon para comprar. ";
                         }
-                        marketController.marketView.jdExeption.setTitle(titleJd);
-                        marketController.marketView.jdExeption.setSize(400, 300);
+                        marketController.marketView.jdExeption.setTitle("No podes comprar:");
+                        marketController.marketView.lblDialog.setText(titleJd);
+                        marketController.marketView.jdExeption.setSize(400, 100);
                         marketController.marketView.jdExeption.setModal(true);
-
+                        
                         marketController.marketView.jdExeption.setVisible(true);
-
+                        
                     }
                 } else {
                     titleJd += "No hay pokemon para comprar. ";
-                    marketController.marketView.jdExeption.setTitle(titleJd);
-                    marketController.marketView.jdExeption.setSize(400, 300);
+                    marketController.marketView.jdExeption.setTitle("No podes comprar:");
+                    marketController.marketView.lblDialog.setText(titleJd);
+                    marketController.marketView.jdExeption.setSize(400, 100);
                     marketController.marketView.jdExeption.setModal(true);
-
+                    
                     marketController.marketView.jdExeption.setVisible(true);
                 }
             }
         });
     }
-
+    
     public void sellPoke() {
         this.pokemonController.pokemonView.btnSellPoke.addActionListener(new ActionListener() {
             @Override
@@ -204,19 +189,38 @@ public class MainView extends javax.swing.JFrame {
                     playerController.setMoney(playerController.playerDao.player.teamPokemon.get(indice).getCost());
                     pokemonController.showMoney(playerController.playerDao.player.getMoney());
                     pokemonController.SellPokemon(playerController.playerDao.player.teamPokemon);
-                }
-                else{
-                    String titleJd = "No hay pokemon para vender";
-                    marketController.marketView.jdExeption.setTitle(titleJd);
-                    marketController.marketView.jdExeption.setSize(400, 300);
+                } else {
+                    marketController.marketView.jdExeption.setTitle("No podes vender:");
+                    marketController.marketView.lblDialog.setText("No hay pokemon para vender");
+                    marketController.marketView.jdExeption.setSize(400, 100);
                     marketController.marketView.jdExeption.setModal(true);
-
+                    
                     marketController.marketView.jdExeption.setVisible(true);
                 }
             }
         });
     }
-
+    
+    public void trainPokemon() {
+        this.gymController.gymView.btnTrain.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (playerController.playerDao.player.getMoney() >= 5) {
+                    System.out.println(playerController.playerDao.player.getMoney());
+                    playerController.setMoney(-5);
+                    gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney() + "");
+                    gymController.trainPokemon(playerController.playerDao.player.teamPokemon);
+                } else {
+                    marketController.marketView.jdExeption.setTitle("No podes Entrenar");
+                    marketController.marketView.lblDialog.setText("No Tienes Dinero.");
+                    marketController.marketView.jdExeption.setSize(400, 100);
+                    marketController.marketView.jdExeption.setModal(true);
+                    marketController.marketView.jdExeption.setVisible(true);
+                }
+            }
+        });
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

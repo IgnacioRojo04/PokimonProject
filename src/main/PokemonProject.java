@@ -8,7 +8,6 @@ public class PokemonProject {
         MainView mainView = new MainView();
         mainView.setSize(900, 600);
         mainView.setVisible(true);
-
     }
     
 }
