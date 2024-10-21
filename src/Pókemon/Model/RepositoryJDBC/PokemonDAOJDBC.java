@@ -45,10 +45,6 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
         return null;
     }
 
-    @Override
-    public Pokemon leer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void crear(Pokemon t) {

@@ -1,6 +1,8 @@
 package Market.Model.RepositoryJDBC;
 
 import Interface.DAO;
+
+import Interface.DAO;
 import Player.Model.Entity.Player;
 import java.sql.Statement;
 import java.util.List;
@@ -10,80 +12,139 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashSet;
-
-import Interface.DAO;
 import Market.Model.Entity.Market;
 import Pókemon.Model.Entity.Pokemon;
+import java.util.ArrayList;
 import java.util.Random;
 
-public class MarketDAOJDBC implements DAO<Market> {
+public class MarketDAOJDBC implements DAO<Pokemon> {
 
     private Connection conexion = null;
     String URL = "jdbc:mariadb://localhost:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
     String PASS = "root"; // Contraseña de tu base de datos
+    private int idPokeUsable;
+    private List<Pokemon> pokemones;
+    private List<Pokemon> pokemonesEntrenador;
 
     public MarketDAOJDBC() {
-        conectar();
+        this.pokemones = new ArrayList<>();
+        this.pokemonesEntrenador = new ArrayList<>();
+    }
+
+    public List<Pokemon> getPokemones() {
+        return pokemones;
+    }
+
+    public int getIdPokeUsable() {
+        return this.idPokeUsable;
     }
 
     @Override
-    public List<Market> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Market leer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void crear(Market t) {
-        Random random = new Random();
+    public List<Pokemon> listar() {
+        this.pokemones.clear();
 
         try {
+            // Consulta SQL para obtener todos los registros de pokeusables donde id_entrenador < 20
+            String sqlSelect = "SELECT pu.ID_POKE, pu.RAREZA, pu.NIVEL, pu.PRECIO, pu.ID_ENTRENADOR, p.nombre AS pokemon_name, e.nombre AS entrenador_name "
+                    + "FROM pokeusables pu "
+                    + "JOIN pokemones p ON pu.ID_POKE = p.id "
+                    + "JOIN entrenadores e ON pu.ID_ENTRENADOR = e.id "
+                    + "WHERE pu.ID_ENTRENADOR < 20";
+            PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
 
+            // Ejecutar la consulta y obtener los resultados
+            ResultSet rs = stmtSelect.executeQuery();
+
+            // Recorrer los resultados
+            while (rs.next()) {
+                // Crear una nueva instancia de Pokemon
+                Pokemon pokemon = new Pokemon();
+
+                // Asignar los valores de las columnas a los atributos del objeto Pokemon
+                pokemon.setId(rs.getInt("ID_POKE"));                // Columna ID_POKE -> id del Pokemon
+                pokemon.setRarity(rs.getInt("RAREZA"));             // Columna RAREZA -> rareza
+                pokemon.setLevel(rs.getInt("NIVEL"));               // Columna NIVEL -> nivel
+                pokemon.setCost(rs.getInt("PRECIO"));               // Columna PRECIO -> precio
+                pokemon.setOwner(rs.getInt("ID_ENTRENADOR"));       // Columna ID_ENTRENADOR -> id del entrenador
+                pokemon.setName(rs.getString("pokemon_name"));      // Columna pokemon_name -> nombre del Pokemon
+                pokemon.setEntrenador(rs.getString("entrenador_name"));  // Columna entrenador_name -> nombre del entrenador
+
+                // Añadir el Pokemon a la lista
+                pokemones.add(pokemon);
+            }
+
+            System.out.println("Pokemones listados correctamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } //finally {
+//            // Cerrar la conexión
+//            if (conexion != null) {
+//                try {
+//                    conexion.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+
+        return pokemones; // Devolver la lista de pokemones
+    } // llamar Listar despues de cada cambio en la base de datos, para que la lista siempre sea igual
+
+    @Override
+    public void crear(Pokemon t) {
+        try {
             // Query para insertar en la tabla PokeUsables
             String sqlInsert = "INSERT INTO pokeusables (ID_POKE, RAREZA, NIVEL, PRECIO, ID_ENTRENADOR) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmtInsert = conexion.prepareStatement(sqlInsert);
 
-            for (int i = 0; i < 20; i++) {
-                // Generar valores aleatorios para los campos
-                int pokemonId = random.nextInt(151) + 1; // Pokémon id (de 1 a 151)
-                int rareza = random.nextInt(5) + 1; // Rareza (de 1 a 5)
-                int nivel = random.nextInt(100) + 1; // Nivel (de 1 a 100)
-                int entrenadorId = random.nextInt(19) + 1; // Entrenador id (de 1 a 19)
+            // Asignar los valores del objeto Pokemon al PreparedStatement
+            stmtInsert.setInt(1, t.getId());         // ID del Pokemon
+            stmtInsert.setInt(2, t.getRarity());     // Rareza del Pokemon
+            stmtInsert.setInt(3, t.getLevel());      // Nivel del Pokemon
+            stmtInsert.setInt(4, t.getCost());       // Precio del Pokemon
+            stmtInsert.setInt(5, t.getOwner());      // ID del entrenador (dueño)
 
-                // Calcular el precio en base a la rareza y el nivel
-                double multiplicador = 1.0 + (rareza - 1) * 0.50;
-                double precio = nivel * multiplicador;
+            // Ejecutar la inserción
+            stmtInsert.executeUpdate();
 
-                // Asignar los valores en el PreparedStatement
-                stmtInsert.setInt(1, pokemonId);
-                stmtInsert.setInt(2, rareza);
-                stmtInsert.setInt(3, nivel);
-                stmtInsert.setDouble(4, precio);
-                stmtInsert.setInt(5, entrenadorId);
-
-                // Ejecutar la inserción
-                stmtInsert.executeUpdate();
-
-                System.out.println("Registro " + (i + 1) + " insertado: Pokémon ID " + pokemonId + ", Entrenador ID " + entrenadorId);
-            }
-
-            System.out.println("Inserción completada.");
+            System.out.println("Pokemon ID " + t.getId() + " insertado en la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Cerrar la conexión
-            if (conexion != null) {
-                try {
-                    conexion.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        } //finally {
+//            // Cerrar la conexión
+//            if (conexion != null) {
+//                try {
+//                    conexion.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+    }
+
+    public void reiniciarAutoIncrement() {
+        try {
+            // Consulta SQL para reiniciar el valor de AUTO_INCREMENT a 1
+            String sqlResetAutoIncrement = "ALTER TABLE pokeusables AUTO_INCREMENT = 1";
+            PreparedStatement stmtReset = conexion.prepareStatement(sqlResetAutoIncrement);
+
+            // Ejecutar la actualización
+            stmtReset.executeUpdate();
+
+            System.out.println("Auto-increment reiniciado a 1 en la tabla pokeusables.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } //finally {
+//            // Cerrar la conexión
+//            if (conexion != null) {
+//                try {
+//                    conexion.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
     }
 
     public void conectar() {
@@ -98,13 +159,129 @@ public class MarketDAOJDBC implements DAO<Market> {
     }
 
     @Override
-    public void actualizar(Market t) {
+    public void actualizar(Pokemon t) {
+        try {
+            // Query para actualizar el ID_ENTRENADOR a 20
+            String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = 20 WHERE ID_POKEUSABLE = ?";
+            PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate);
 
+            // Asignar el valor del ID_POKEUSABLE del objeto `Market`
+            stmtUpdate.setInt(1, t.getId()); // Asumiendo que `getId()` devuelve el ID del registro
+
+            // Ejecutar la actualización
+            int filasActualizadas = stmtUpdate.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                System.out.println("El Pokémon fue comprado por el jugador (ID_ENTRENADOR = 20).");
+            } else {
+                System.out.println("No se encontró ningún registro con ese ID_POKEUSABLE.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Opcional: No cierres la conexión si la vas a seguir utilizando en otras operaciones
+            // if (conexion != null) {
+            //     try {
+            //         conexion.close();
+            //     } catch (SQLException e) {
+            //         e.printStackTrace();
+            //     }
+            // }
+        }
     }
 
     @Override
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            // Primero obtenemos el ID_ENTRENADOR del registro que queremos eliminar
+            String sqlSelect = "SELECT ID_ENTRENADOR FROM pokeusables WHERE ID = ?";
+            PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
+            stmtSelect.setInt(1, id);
+            ResultSet rs = stmtSelect.executeQuery();
+
+            if (rs.next()) {
+                int entrenadorId = rs.getInt("ID_ENTRENADOR"); // Obtenemos el ID_ENTRENADOR
+
+                if (entrenadorId >= 20) {
+                    // Si el entrenador tiene un ID mayor o igual a 20, no borramos y mostramos un mensaje
+                    System.out.println("Pokémon del jugador, no se puede eliminar.");
+                } else {
+                    // Si el entrenador tiene un ID menor a 20, procedemos con la eliminación
+                    String sqlDelete = "DELETE FROM pokeusables WHERE ID = ?";
+                    PreparedStatement stmtDelete = conexion.prepareStatement(sqlDelete);
+                    stmtDelete.setInt(1, id); // Asignar el valor del ID_POKEUSABLE
+                    int filasAfectadas = stmtDelete.executeUpdate();
+
+                    if (filasAfectadas > 0) {
+                        System.out.println("Registro eliminado exitosamente: Pokémon ID_POKEUSABLE " + id);
+                    } else {
+                        System.out.println("No se encontró un registro con ID_POKEUSABLE " + id);
+                    }
+                }
+            } else {
+                System.out.println("No se encontró un registro con ID_ENTRENADOR " + id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } //finally {
+        // Cerrar la conexión
+        // if (conexion != null) {
+        //    try {
+        //       conexion.close();
+        //   } catch (SQLException e) {
+        //       e.printStackTrace();
+        //   }
+        // }
+        //}
+    }
+
+    public List<Pokemon> listarPokeEntrenador() {
+        pokemonesEntrenador.clear();
+
+        try {
+            // Consulta SQL para obtener todos los registros de pokeusables donde id_entrenador >= 20
+            String sqlSelect = "SELECT ID_POKE, RAREZA, NIVEL, PRECIO, ID_ENTRENADOR FROM pokeusables WHERE ID_ENTRENADOR >= 20";
+            PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
+
+            // Ejecutar la consulta y obtener los resultados
+            ResultSet rs = stmtSelect.executeQuery();
+
+            // Recorrer los resultados
+            while (rs.next()) {
+                // Crear una nueva instancia de Pokemon
+                Pokemon pokemon = new Pokemon();
+
+                // Asignar los valores de las columnas a los atributos del objeto Pokemon
+                pokemon.setId(rs.getInt("ID_POKE"));           // Columna ID_POKE -> id del Pokemon
+                pokemon.setRarity(rs.getInt("RAREZA"));        // Columna RAREZA -> rareza
+                pokemon.setLevel(rs.getInt("NIVEL"));          // Columna NIVEL -> nivel
+                pokemon.setCost(rs.getInt("PRECIO"));          // Columna PRECIO -> precio
+                pokemon.setOwner(rs.getInt("ID_ENTRENADOR"));  // Columna ID_ENTRENADOR -> id del entrenador
+
+                // Añadir el Pokemon a la lista
+                pokemonesEntrenador.add(pokemon);
+            }
+
+            System.out.println("Pokemones del entrenador listados correctamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } //finally {
+//            // Cerrar la conexión
+//            if (conexion != null) {
+//                try {
+//                    conexion.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+
+        return pokemonesEntrenador; // Devolver la lista de pokemones del entrenador
+    }
+
+    public void saludar() {
+        System.out.println("Hola marinola");
     }
 
 }

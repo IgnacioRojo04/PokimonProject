@@ -29,10 +29,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
         return null;
     }
 
-    @Override
-    public Player leer(int id) {
-        return null;
-    }
+  
 
     @Override
     public void crear(Player t) {

@@ -2,10 +2,34 @@
 package Pókemon.Model.Entity;
 
 public class Pokemon {
+    int id;
     String name;
     int rarity;
     int level;
-    Character owner; // check 
+    int owner; // check 
+    int cost;
+    String entrenador;
+
+    public Pokemon(int id, String name, int rarity, int level, int precio , int entrenador ) {
+        this.id = id;
+        this.name = name;
+        this.rarity = rarity;
+        this.level = level;
+         this.cost = precio;
+        this.owner = entrenador;
+       
+    }
+
+    public Pokemon() {
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -31,12 +55,28 @@ public class Pokemon {
         this.level = level;
     }
 
-    public Character getOwner() {
-        return owner;
+    public int getOwner() {
+        return this.owner;
     }
 
-    public void setOwner(Character owner) {
-        this.owner = owner;
+    public void setOwner(int entrenador) {
+        this.owner = entrenador;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public String getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(String entrenador) {
+        this.entrenador = entrenador;
     }
     
     

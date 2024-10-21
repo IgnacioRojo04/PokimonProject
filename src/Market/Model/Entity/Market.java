@@ -22,6 +22,10 @@ public class Market {
     public void setPokemonList(List<Pokemon> pokemonList) {
         this.pokemonList = pokemonList;
     }
+
+    public int getIdPokeUsable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
    
    
     
