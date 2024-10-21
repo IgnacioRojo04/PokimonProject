@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Character {
 
     private String name;
-    public List<Pokemon> teamPokemon;
+    private List<Pokemon> teamPokemon;
     private int money;
     private int id;
 
@@ -32,6 +32,9 @@ public abstract class Character {
 
     public void setName(String name) {
         this.name = name;
+    }
+     public List<Pokemon> getTeamPokemon() {
+        return teamPokemon;
     }
 
     public int getMoney() {

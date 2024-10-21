@@ -15,6 +15,14 @@ public class Pokemon {
         this.name = name;
         this.cost = 1;
     }
+
+    public Pokemon(String name, int rarity, int level, int owner, int cost) {
+        this.name = name;
+        this.rarity = rarity;
+        this.level = level;
+        this.owner = owner;
+        this.cost = cost;
+    }
     
 
     public String getName() {

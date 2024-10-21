@@ -37,8 +37,6 @@ public class MarketView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jdExeption = new javax.swing.JDialog();
-        lblDialog = new javax.swing.JLabel();
         btnBuy = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tMarket = new javax.swing.JTable();
@@ -46,19 +44,6 @@ public class MarketView extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblMoney = new javax.swing.JLabel();
         cbMarket = new javax.swing.JComboBox<>();
-
-        javax.swing.GroupLayout jdExeptionLayout = new javax.swing.GroupLayout(jdExeption.getContentPane());
-        jdExeption.getContentPane().setLayout(jdExeptionLayout);
-        jdExeptionLayout.setHorizontalGroup(
-            jdExeptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblDialog, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        jdExeptionLayout.setVerticalGroup(
-            jdExeptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdExeptionLayout.createSequentialGroup()
-                .addComponent(lblDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 259, Short.MAX_VALUE))
-        );
 
         btnBuy.setText("Comprar");
         btnBuy.addActionListener(new java.awt.event.ActionListener() {
@@ -148,8 +133,6 @@ public class MarketView extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> cbMarket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JDialog jdExeption;
-    public javax.swing.JLabel lblDialog;
     public javax.swing.JLabel lblMoney;
     public javax.swing.JTable tMarket;
     // End of variables declaration//GEN-END:variables
