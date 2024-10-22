@@ -2,30 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/Model/RepositoryJDBC/MarketDAOJDBC.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Gym/Controller/GymController.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/View/MarketView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/Controller/MarketController.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Model/Repository/PokemonRepository.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/PokemonProject.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Market/Model/Entity/Market.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/MainView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Controller/PlayerController.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Entity/Player.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Entity/Character.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Gym/View/GymView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/Model/Repository/JDBC/PlayerDAOJDBC.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/Home.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Player/View/PlayerView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/main/Menu.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/View/PokemonView.java</file>
-            <file>file:/D:/Datos%20PC/Documentos/Facultad/TDS/2%20Año/Programación%20orientada%20a%20objetos/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Pókemon/View/PokemonView.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/main/Menu.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/main/Home.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Player/Model/Repository/JDBC/PlayerDAOJDBC.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Player/Model/Entity/Character.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Player/Controller/PlayerController.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Player/Model/Entity/Player.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Gym/Controller/GymController.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Market/Model/RepositoryJDBC/MarketDAOJDBC.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Market/Controller/MarketController.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/Interface/DAO.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/main/MainView.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Rojo%20Juan/2do%20año/Prog%20Orientada%20a%20objetos/Pokem%2014-10/PokimonProject/src/main/PokemonProject.java</file>
         </group>
->>>>>>> mainMarket
     </open-files>
 </project-private>
