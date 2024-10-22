@@ -94,15 +94,15 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
         }
     }
 
-    public void reiniciarAutoIncrement() {
+    public void reiniciarTablaBD() {
         try {
-            // Consulta SQL para reiniciar el valor de AUTO_INCREMENT a 1
-            String sqlResetAutoIncrement = "ALTER TABLE pokeusables AUTO_INCREMENT = 1";
+             String sqlDeleteTable = "DELETE FROM pokeusables WHERE ID_ENTRENADOR < 20  ";
+            PreparedStatement stmtDelete = conexion.prepareStatement(sqlDeleteTable);
+            stmtDelete.executeUpdate();
+            System.out.println("Se eliminaron los registros.");
+             String sqlResetAutoIncrement = "ALTER TABLE pokeusables AUTO_INCREMENT = 1";
             PreparedStatement stmtReset = conexion.prepareStatement(sqlResetAutoIncrement);
-
-            // Ejecutar la actualización
             stmtReset.executeUpdate();
-
             System.out.println("Auto-increment reiniciado a 1 en la tabla pokeusables.");
         } catch (SQLException e) {
             e.printStackTrace();

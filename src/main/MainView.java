@@ -8,7 +8,10 @@ import Pókemon.Model.Entity.Pokemon;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -39,6 +42,20 @@ public class MainView extends javax.swing.JFrame {
         sellPoke();
         trainPokemon();
         catchPokemon();
+        upgradeMarket();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Aquí puedes llamar a tu método
+                marketController.marketDao.reiniciarTablaBD();
+                // Finalmente, cierra el JFrame
+                // dispose(); // O usa System.exit(0) si quieres salir de la aplicación
+                System.exit(0);
+            }
+        });
+
     }
 
     public void container_add() {
@@ -239,6 +256,27 @@ public class MainView extends javax.swing.JFrame {
                     }
                 } else {
                     jdExeption.setTitle("No podes Capturar");
+                    lblDialog.setText("No Tienes Dinero.");
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
+                }
+            }
+        });
+    }
+
+    public void upgradeMarket() {
+        this.marketController.marketView.btnUpgrade.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (playerController.playerDao.player.getMoney() >= 10) {
+                    playerController.setMoney(-10);
+                    marketController.marketDao.pokemonList.clear();
+                    marketController.marketDao.reiniciarTablaBD();
+                    marketController.fillTable();
+                    marketController.showMoney(playerController.playerDao.player.getMoney());
+                } else {
+                    jdExeption.setTitle("No podes actualizar:");
                     lblDialog.setText("No Tienes Dinero.");
                     jdExeption.setSize(400, 100);
                     jdExeption.setModal(true);

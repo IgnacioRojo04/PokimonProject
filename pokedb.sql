@@ -1,61 +1,44 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         11.5.2-MariaDB - mariadb.org binary distribution
--- SO del servidor:              Win64
--- HeidiSQL Versión:             12.6.0.6765
--- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Volcando estructura de base de datos para pokemones
-CREATE DATABASE IF NOT EXISTS `pokemones` /*!40100 DEFAULT CHARACTER SET armscii8 COLLATE armscii8_bin */;
+CREATE DATABASE IF NOT EXISTS `pokemones`;
 USE `pokemones`;
-
--- Volcando estructura para tabla pokemones.entrenadores
+entrenadoresentrenadores
 CREATE TABLE IF NOT EXISTS `entrenadores` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(50) DEFAULT NULL,
+  `DINERO` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin COMMENT='Los personajes, el ID 1 es para el usuario, el resto para los entrenadores';
+) ENGINE=InnoDB;
 
--- Volcando datos para la tabla pokemones.entrenadores: ~19 rows (aproximadamente)
-INSERT INTO `entrenadores` (`ID`, `NOMBRE`) VALUES
-	( 'Juan_Rojo'),
-	( 'Santiago'),
-	( 'Martin'),
-	( 'Matias'),
-	( 'Agustin'),
-	( 'Nachote_Rojo'),
-	( 'Tomas'),
-	( 'Lucas'),
-	( 'Francisco'),
-	( 'Federico'),
-	( 'Nahuel'),
-	( 'Messi'),
-	( 'Nicolas'),
-	( 'Emiliano'),
-	( 'Galadriel'),
-	('Lautaro_Retamales'),
-	( 'Mariano'),
-	( 'Carlos'),
-	( 'Andres');
+-- Insertar datos en entrenadores
+INSERT INTO `entrenadores` (`ID`, `NOMBRE`, `DINERO`) VALUES
+	(1, 'Juan_Rojo', 505),
+	(2, 'Santiago', 191),
+	(3, 'Martin', 488),
+	(4, 'Matias', 772),
+	(5, 'Agustin', 426),
+	(6, 'Nachote_Rojo', 827),
+	(7, 'Tomas', 848),
+	(8, 'Lucas', 205),
+	(9, 'Francisco', 632),
+	(10, 'Federico', 921),
+	(11, 'Nahuel', 408),
+	(12, 'Messi', 930),
+	(13, 'Nicolas', 148),
+	(14, 'Emiliano', 372),
+	(15, 'Galadriel', 601),
+	(16, 'Lautaro_Retamales', 915),
+	(17, 'Mariano', 493),
+	(18, 'Carlos', 525),
+	(19, 'Andres', 363);
 
--- Volcando estructura para tabla pokemones.pokemones
+-- Crear tabla pokemones
 CREATE TABLE IF NOT EXISTS `pokemones` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(50) DEFAULT '',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin COMMENT='Esta es la lista referencial de pokemones por su nombre';
+) ENGINE=InnoDB;
 
--- Volcando datos para la tabla pokemones.pokemones: ~151 rows (aproximadamente)
+-- Insertar datos en pokemones
 INSERT INTO `pokemones` (`ID`, `NOMBRE`) VALUES
 	(1, 'Bulbasaur'),
 	(2, 'Ivysaur'),
@@ -209,26 +192,22 @@ INSERT INTO `pokemones` (`ID`, `NOMBRE`) VALUES
 	(150, 'Mewtwo'),
 	(151, 'Mew');
 
--- Volcando estructura para tabla pokemones.pokeusables
+-- Crear tabla pokeusables
 CREATE TABLE IF NOT EXISTS `pokeusables` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `ID_POKE` int(11) NOT NULL,
+  `ID_POKE` int(11) unsigned NOT NULL,
   `RAREZA` int(11) NOT NULL,
   `NIVEL` int(11) NOT NULL,
   `PRECIO` int(11) NOT NULL,
-  `ID_ENTRENADOR` int(11) NOT NULL,
+  `ID_ENTRENADOR` int(11) unsigned NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `NOMBRE` (`ID_POKE`) USING BTREE,
-  KEY `ENTRENADOR` (`ID_ENTRENADOR`) USING BTREE,
-  CONSTRAINT `fk_entrenador` FOREIGN KEY (`ID`) REFERENCES `entrenadores` (`ID`),
-  CONSTRAINT `fk_pokemon` FOREIGN KEY (`ID`) REFERENCES `pokemones` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin COMMENT='Pokemones activos con sus caracteristicas\r\n';
+  CONSTRAINT `fk_entrenador` FOREIGN KEY (`ID_ENTRENADOR`) REFERENCES `entrenadores` (`ID`),
+  CONSTRAINT `fk_pokemon` FOREIGN KEY (`ID_POKE`) REFERENCES `pokemones` (`ID`)
+) ENGINE=InnoDB;
 
--- Volcando datos para la tabla pokemones.pokeusables: ~0 rows (aproximadamente)
+-- Insertar datos en pokeusables
+INSERT INTO `pokeusables` (`ID`, `ID_POKE`, `RAREZA`, `NIVEL`, `PRECIO`, `ID_ENTRENADOR`) VALUES
+	(1, 56, 1, 1, 1, 3),
+	(2, 56, 1, 1
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
-entrenadores
+
