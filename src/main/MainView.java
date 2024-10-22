@@ -140,10 +140,10 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String titleJd = " ";
-                if (marketController.marketDao.market.pokemonList.size() > 0) {
+                if (marketController.marketDao.pokemonList.size() > 0) {
                     int moneyPlayer = playerController.playerDao.player.getMoney();
                     int indice = marketController.marketView.cbMarket.getSelectedIndex();
-                    int pokemonCost = marketController.marketDao.market.pokemonList.get(indice).getCost();
+                    int pokemonCost = marketController.marketDao.pokemonList.get(indice).getCost();
                     if (playerController.playerDao.player.getTeamPokemon().size() < 6 && moneyPlayer - pokemonCost >= 0) {
                         playerController.setMoney(-pokemonCost);
                         marketController.buyPoke(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player);
@@ -156,7 +156,7 @@ public class MainView extends javax.swing.JFrame {
                         if (moneyPlayer - pokemonCost < 0) {
                             titleJd += "Sin Dinero. ";
                         }
-                        if (marketController.marketDao.market.pokemonList.size() <= 0) {
+                        if (marketController.marketDao.pokemonList.size() <= 0) {
                             titleJd += "No hay pokemon para comprar. ";
                         }
                         jdExeption.setTitle("No podes comprar:");

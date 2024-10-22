@@ -1,7 +1,6 @@
-
 package Market.Controller;
 
-import Market.Model.RepositoryJDBC.MarketDAOJDBC;
+import Market.Model.Repository.JDBC.MarketDAOJDBC;
 import Market.View.MarketView;
 import Player.Model.Entity.Player;
 import Pókemon.Model.Entity.Pokemon;
@@ -19,13 +18,24 @@ public class MarketController {
     }
 
     public void fillTable() {
-        this.marketDao.market.pokemonList.add(new Pokemon("pika2"));
-        this.marketDao.market.pokemonList.add(new Pokemon("charmander2"));
-        this.marketDao.market.pokemonList.add(new Pokemon("Squirtle2"));
+        if (this.marketDao.pokemonList.size() == 0) {
+            System.out.println(this.marketDao.pokemonList.size()+ "hola");
+            Pokemon pokemonNew = new Pokemon();
+            for (int i = 0; i < 20; i++) {
+                pokemonNew.setLevel((int) (1 + (Math.random() * 100)));
+                pokemonNew.setRarity((int) (1 + (Math.random() * 5)));
+                pokemonNew.setOwner((int) (1 + (Math.random() * 19)));
+                pokemonNew.setId((int) (1 + (Math.random() * 150)));
+                pokemonNew.setCost(3);
+                System.out.println(pokemonNew.getOwner());
+                this.marketDao.crear(pokemonNew);
+            }
+        }
+        this.marketDao.listar();
         DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
 
         model.setRowCount(0);
-        for (Pokemon pokemon : this.marketDao.market.pokemonList) {
+        for (Pokemon pokemon : this.marketDao.pokemonList) {
             model.addRow(new Object[]{
                 pokemon.getName(),
                 pokemon.getRarity(),
@@ -42,15 +52,14 @@ public class MarketController {
 
     public void buyPoke(List<Pokemon> pokemonTeam, Player player) {
         int indice = this.marketView.cbMarket.getSelectedIndex();
-        Pokemon comprado = this.marketDao.market.pokemonList.get(indice);
-        this.marketView.lblMoney.setText(player.getMoney() +"");
+        Pokemon comprado = this.marketDao.pokemonList.get(indice);
+        this.marketView.lblMoney.setText(player.getMoney() + "");
         comprado.setOwner(player.getId()); //pokemonTeam.get(1).getOwner()
         pokemonTeam.add(comprado);
-        this.marketDao.market.pokemonList.remove(indice);
+        this.marketDao.pokemonList.remove(indice);
         DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
         model.removeRow(indice);
         this.marketView.cbMarket.removeItem(this.marketView.cbMarket.getSelectedItem());
         //updateDAO(comprado);
     }
 }
-

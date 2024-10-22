@@ -1,5 +1,4 @@
-
-package Market.Model.RepositoryJDBC;
+package Market.Model.Repository.JDBC;
 
 import Interface.DAO;
 
@@ -20,26 +19,15 @@ import java.util.Random;
 public class MarketDAOJDBC implements DAO<Pokemon> {
 
     private Connection conexion = null;
-    String URL = "jdbc:mariadb://localhost:3306/pokemones"; // Nombre de tu base de datos
+    String URL = "jdbc:mariadb://127.0.0.1:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
     String PASS = "root"; // Contraseña de tu base de datos
     private int idPokeUsable;
-    private List<Pokemon> pokemonList;
-    public Market market;
-//    private List<Pokemon> pokemonesEntrenador;
-
+    public List<Pokemon> pokemonList;
     public MarketDAOJDBC() {
         this.pokemonList = new ArrayList<>();
-        this.market = new Market();
 //        this.pokemonesEntrenador = new ArrayList<>();
-    }
-
-    public List<Pokemon> getPokemones() {
-        return pokemonList;
-    }
-
-    public int getIdPokeUsable() {
-        return this.idPokeUsable;
+        conectar();
     }
 
     @Override
@@ -79,17 +67,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
             System.out.println("Pokemones listados correctamente.");
         } catch (SQLException e) {
             e.printStackTrace();
-        } //finally {
-//            // Cerrar la conexión
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-
+        }
         return pokemonList; // Devolver la lista de pokemones
     } // llamar Listar despues de cada cambio en la base de datos, para que la lista siempre sea igual
 
@@ -113,16 +91,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
             System.out.println("Pokemon ID " + t.getId() + " insertado en la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
-        } //finally {
-//            // Cerrar la conexión
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
+        }
     }
 
     public void reiniciarAutoIncrement() {
@@ -137,16 +106,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
             System.out.println("Auto-increment reiniciado a 1 en la tabla pokeusables.");
         } catch (SQLException e) {
             e.printStackTrace();
-        } //finally {
-//            // Cerrar la conexión
-//            if (conexion != null) {
-//                try {
-//                    conexion.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
+        }
     }
 
     public void conectar() {
@@ -180,16 +140,8 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            // Opcional: No cierres la conexión si la vas a seguir utilizando en otras operaciones
-            // if (conexion != null) {
-            //     try {
-            //         conexion.close();
-            //     } catch (SQLException e) {
-            //         e.printStackTrace();
-            //     }
-            // }
         }
+
     }
 
     @Override
@@ -226,17 +178,9 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } //finally {
-        // Cerrar la conexión
-        // if (conexion != null) {
-        //    try {
-        //       conexion.close();
-        //   } catch (SQLException e) {
-        //       e.printStackTrace();
-        //   }
-        // }
-        //}
-    }}
+        }
+    }
+}
 
 //    public List<Pokemon> listarPokeEntrenador() {
 //        pokemonesEntrenador.clear();
@@ -281,5 +225,4 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 //
 //        return pokemonesEntrenador; // Devolver la lista de pokemones del entrenador
 //    }
-
 

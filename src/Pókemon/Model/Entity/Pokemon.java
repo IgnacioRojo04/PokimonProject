@@ -10,6 +10,9 @@ public class Pokemon {
     int cost;
     String entrenador;
 
+    public Pokemon() {
+    }
+
     public Pokemon(String name) {
         this.name = name;
         this.cost = 1;
@@ -31,9 +34,6 @@ public class Pokemon {
         this.level = level;
         this.owner = owner;
         this.cost = cost;
-    }
-
-    public Pokemon() {
     }
 
     public void setId(int id) {
@@ -71,7 +71,6 @@ public class Pokemon {
     public int getOwner() {
         return this.owner;
     }
-  
 
     public int getCost() {
         return cost;
@@ -93,12 +92,9 @@ public class Pokemon {
         this.owner = owner;
     }
 
-
-
     @Override
     public String toString() {
         return "Pokemon{" + "name=" + name + ", rarity=" + rarity + ", level=" + level + ", owner=" + owner + ", cost=" + cost + '}';
     }
-
 
 }

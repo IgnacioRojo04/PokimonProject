@@ -28,25 +28,25 @@ CREATE TABLE IF NOT EXISTS `entrenadores` (
 
 -- Volcando datos para la tabla pokemones.entrenadores: ~19 rows (aproximadamente)
 INSERT INTO `entrenadores` (`ID`, `NOMBRE`) VALUES
-	(1, 'Juan_Rojo'),
-	(2, 'Santiago'),
-	(3, 'Martin'),
-	(4, 'Matias'),
-	(5, 'Agustin'),
-	(6, 'Nachote_Rojo'),
-	(7, 'Tomas'),
-	(8, 'Lucas'),
-	(9, 'Francisco'),
-	(10, 'Federico'),
-	(11, 'Nahuel'),
-	(12, 'Messi'),
-	(13, 'Nicolas'),
-	(14, 'Emiliano'),
-	(15, 'Galadriel'),
-	(16, 'Lautaro_Retamales'),
-	(17, 'Mariano'),
-	(18, 'Carlos'),
-	(19, 'Andres');
+	( 'Juan_Rojo'),
+	( 'Santiago'),
+	( 'Martin'),
+	( 'Matias'),
+	( 'Agustin'),
+	( 'Nachote_Rojo'),
+	( 'Tomas'),
+	( 'Lucas'),
+	( 'Francisco'),
+	( 'Federico'),
+	( 'Nahuel'),
+	( 'Messi'),
+	( 'Nicolas'),
+	( 'Emiliano'),
+	( 'Galadriel'),
+	('Lautaro_Retamales'),
+	( 'Mariano'),
+	( 'Carlos'),
+	( 'Andres');
 
 -- Volcando estructura para tabla pokemones.pokemones
 CREATE TABLE IF NOT EXISTS `pokemones` (
