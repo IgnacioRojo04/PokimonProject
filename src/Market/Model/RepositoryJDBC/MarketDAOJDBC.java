@@ -1,9 +1,9 @@
+
 package Market.Model.RepositoryJDBC;
 
 import Interface.DAO;
 
 import Interface.DAO;
-import Player.Model.Entity.Player;
 import java.sql.Statement;
 import java.util.List;
 import java.sql.DriverManager;
@@ -25,10 +25,12 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     String PASS = "root"; // Contraseña de tu base de datos
     private int idPokeUsable;
     private List<Pokemon> pokemonList;
+    public Market market;
 //    private List<Pokemon> pokemonesEntrenador;
 
     public MarketDAOJDBC() {
         this.pokemonList = new ArrayList<>();
+        this.market = new Market();
 //        this.pokemonesEntrenador = new ArrayList<>();
     }
 
@@ -234,7 +236,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
         //   }
         // }
         //}
-    }
+    }}
 
 //    public List<Pokemon> listarPokeEntrenador() {
 //        pokemonesEntrenador.clear();
@@ -281,5 +283,3 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 //    }
 
 
-
-}

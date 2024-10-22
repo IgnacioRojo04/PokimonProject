@@ -1,7 +1,7 @@
-
 package Pókemon.Model.Entity;
 
 public class Pokemon {
+
     int id;
     String name;
     int rarity;
@@ -10,19 +10,32 @@ public class Pokemon {
     int cost;
     String entrenador;
 
-    public Pokemon(int id, String name, int rarity, int level, int precio , int entrenador ) {
+    public Pokemon(String name) {
+        this.name = name;
+        this.cost = 1;
+    }
+
+    public Pokemon(int id, String name, int rarity, int level, int owner, int cost) {
         this.id = id;
         this.name = name;
         this.rarity = rarity;
         this.level = level;
-         this.cost = precio;
-        this.owner = entrenador;
-       
+        this.cost = cost;
+        this.owner = owner;
+
+    }
+
+    public Pokemon(String name, int rarity, int level, int owner, int cost) {
+        this.name = name;
+        this.rarity = rarity;
+        this.level = level;
+        this.owner = owner;
+        this.cost = cost;
     }
 
     public Pokemon() {
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -58,10 +71,7 @@ public class Pokemon {
     public int getOwner() {
         return this.owner;
     }
-
-    public void setOwner(int entrenador) {
-        this.owner = entrenador;
-    }
+  
 
     public int getCost() {
         return cost;
@@ -78,8 +88,17 @@ public class Pokemon {
     public void setEntrenador(String entrenador) {
         this.entrenador = entrenador;
     }
-    
-    
-    
-    
+
+    public void setOwner(int owner) {
+        this.owner = owner;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Pokemon{" + "name=" + name + ", rarity=" + rarity + ", level=" + level + ", owner=" + owner + ", cost=" + cost + '}';
+    }
+
+
 }

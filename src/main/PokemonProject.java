@@ -20,6 +20,7 @@ public class PokemonProject {
         mainView.setSize(900, 600);
         mainView.setVisible(true);
 
+
 //        MarketDAOJDBC market = new MarketDAOJDBC();
 //        market.saludar();
 
@@ -44,6 +45,7 @@ public class PokemonProject {
 //            System.out.println("Entrenador: " + pokemos.getEntrenador());
 //            System.out.println("--------------------------");
 //        }
+
 
     }
 
