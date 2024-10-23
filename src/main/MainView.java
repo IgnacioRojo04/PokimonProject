@@ -31,7 +31,7 @@ public class MainView extends javax.swing.JFrame {
         initComponents();
         container_add();
         showPlayerView(this.playerController.playerDao.player.getTeamPokemon());
-        showMenuPanel(this.playerController);
+        showMenuPanel();
         showMarketView();
         backMarket();
         showPokemonView();
@@ -45,6 +45,8 @@ public class MainView extends javax.swing.JFrame {
         upgradeMarket();
         deleteRarity();
         continueGame();
+        selectPlayer();
+        deletePlayer();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
 
         addWindowListener(new WindowAdapter() {
@@ -78,13 +80,12 @@ public class MainView extends javax.swing.JFrame {
         this.homeView.btnNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerController.createPlayer();
                 layout.show(container, "Player");
             }
         });
     }
 
-    public void showMenuPanel(PlayerController playerController) {
+    public void showMenuPanel() {
         this.playerController.playerView.bCreatePlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,7 +121,8 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnPoke.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pokemonController.fillTable(playerController.playerDao.player.getTeamPokemon());
+                System.out.println(playerController.playerDao.player.getName());
+                pokemonController.fillTable(playerController.playerDao.player);
                 pokemonController.showMoney(playerController.playerDao.player.getMoney());
                 layout.show(container, "Pokemon");
             }
@@ -315,6 +317,24 @@ public class MainView extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 playerController.ContinueGame();
                  layout.show(container, "TablePlayer");
+            }
+        });
+    }
+    public void selectPlayer(){
+        this.playerController.tablePlayerView.jContinue.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playerController.selectContinue();
+                layout.show(container, "Menu");
+            }
+        });
+    }
+    public void deletePlayer(){
+        this.playerController.tablePlayerView.jDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //pokemonController.deletePlayer(playerController.playerDao.player.getTeamPokemon());
+                playerController.deletePlayer();
             }
         });
     }

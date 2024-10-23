@@ -22,16 +22,16 @@ public class PokemonController {
 
     public PokemonController(Player player) {
         this.pokemonView = new PokemonView();
-            this.pokemonDao = new PokemonDAOJDBC(player);
+        
     }
 
-    public void fillTable(List<Pokemon> teamPokemon) {
+    public void fillTable(Player player ) {
+        this.pokemonDao = new PokemonDAOJDBC(player);
         this.pokemonDao.listar();
         DefaultTableModel model = (DefaultTableModel) pokemonView.tPokePlayer.getModel();
-        System.out.println(model + " :model");
         model.setRowCount(0);
         this.pokemonView.cbPokeName.removeAllItems();
-        for (Pokemon pokemon : teamPokemon) {
+        for (Pokemon pokemon : player.getTeamPokemon()) {
             model.addRow(new Object[]{
                 pokemon.getName(),
                 pokemon.getRarity(),
@@ -49,11 +49,19 @@ public class PokemonController {
     public void SellPokemon(List<Pokemon> teamPokemon) {
         int indice = this.pokemonView.cbPokeName.getSelectedIndex();
         Pokemon vendido = teamPokemon.get(indice);
+
         teamPokemon.remove(indice);
         DefaultTableModel model = (DefaultTableModel) this.pokemonView.tPokePlayer.getModel();
         model.removeRow(indice);
         this.pokemonView.cbPokeName.removeItem(this.pokemonView.cbPokeName.getSelectedItem());
-        //deleteDao(vendido);
+        this.pokemonDao.eliminar(vendido.getId());
     }
+    public void deletePlayer(List<Pokemon> teamPokemon){
+        for (Pokemon p: teamPokemon){
+            this.pokemonDao.eliminar(p.getId());
+        }
+    }
+    
+    
 
 }

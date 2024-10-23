@@ -47,8 +47,9 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
                 + "JOIN pokemones p ON pu.ID_POKE = p.id "
                 + "JOIN entrenadores e ON pu.ID_ENTRENADOR = e.id "
                 + "WHERE pu.ID_ENTRENADOR = ?";
+        System.out.println("HOLAAA " + this.player.getId());
         try (PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect)) {
-
+            System.out.println(this.player.getId());
             stmtSelect.setInt(1, this.player.getId());
 
             // Ejecutar la consulta y obtener los resultados
@@ -90,7 +91,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
 
             // Asignar los valores del objeto Pokemon al PreparedStatement
             stmtInsert.setInt(1, ((int) (1 + (Math.random() * 3))));
-            stmtInsert.setInt(2,  ((int) (1 + (Math.random() * 2))));
+            stmtInsert.setInt(2, ((int) (1 + (Math.random() * 2))));
             stmtInsert.setInt(3, ((int) (1 + (Math.random() * 2))));
             stmtInsert.setInt(4, 0);
             stmtInsert.setInt(5, this.player.getId());
@@ -111,7 +112,25 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
 
     @Override
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            // Query para eliminar de la tabla PokeUsables según el ID
+            String sqlDelete = "DELETE FROM pokeusables WHERE ID = ?";
+            PreparedStatement stmtDelete = conexion.prepareStatement(sqlDelete);
+
+            // Asignar el valor del ID al PreparedStatement
+            stmtDelete.setInt(1, id);
+
+            // Ejecutar la eliminación
+            int rowsAffected = stmtDelete.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Pokemon con ID " + id + " eliminado de la base de datos.");
+            } else {
+                System.out.println("No se encontró un Pokemon con ID " + id);
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
     }
 
 }

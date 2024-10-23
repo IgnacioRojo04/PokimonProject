@@ -45,8 +45,10 @@ public class PlayerDAOJDBC implements DAO<Player> {
                 
                 player.setId(rs.getInt("ID"));
                 player.setName(rs.getString("NOMBRE"));
-                 System.out.println("pLAYER NAME:" + player.getName());
-                player.setMoney(rs.getInt("DINERO"));        
+                System.out.println("pLAYER NAME:" + player.getName());
+                player.setMoney(rs.getInt("DINERO"));  
+                
+                
                 this.playerList.add(player);
             }
 
@@ -60,12 +62,12 @@ public class PlayerDAOJDBC implements DAO<Player> {
     @Override
     public void crear(Player player) {
         try {
-            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE) VALUES(?)";
+            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 1000)";
             PreparedStatement pstmtPlayer = conexion.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
             pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.executeUpdate();
             ResultSet rsPlayer = pstmtPlayer.getGeneratedKeys();
-
+            System.out.println("Método crear llamado");
             if (rsPlayer.next()) {
                 player.setId(rsPlayer.getInt(1));
                 System.out.println("Player agregado con ID: " + player.getId());
