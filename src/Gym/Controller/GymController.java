@@ -22,6 +22,7 @@ public class GymController {
         DefaultTableModel model = (DefaultTableModel) this.gymView.tGym.getModel();
         model.setRowCount(0);
         this.gymView.cbGym.removeAllItems();
+        this.gymView.cbGym.removeAllItems();
         for (Pokemon pokemon : teamPokemon) {
             System.out.println(pokemon.getName() + "hola");
             model.addRow(new Object[]{
@@ -36,9 +37,6 @@ public class GymController {
 
     public void fillTable(List<Pokemon> teamPokemon, Player player) {
         // base de datos que returnea  a los pokemones 
-        teamPokemon.add(new Pokemon("vulva Saur"));
-        teamPokemon.add(new Pokemon("chad al mander"));
-        teamPokemon.add(new Pokemon("squirt el"));
         this.repaintView(teamPokemon, player);
 
     }

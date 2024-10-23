@@ -64,6 +64,11 @@ public class Home extends javax.swing.JPanel {
         add(btnNewGame, new java.awt.GridBagConstraints());
 
         btnContinue.setText("Continuar");
+        btnContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinueActionPerformed(evt);
+            }
+        });
         add(btnContinue, new java.awt.GridBagConstraints());
 
         btnUs.setText("Nosotros");
@@ -73,6 +78,10 @@ public class Home extends javax.swing.JPanel {
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         
     }//GEN-LAST:event_btnNewGameActionPerformed
+
+    private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContinueActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

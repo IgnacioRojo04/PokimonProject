@@ -20,8 +20,8 @@ import javax.swing.JFrame;
 public class MainView extends javax.swing.JFrame {
 
     private PlayerController playerController = new PlayerController();
-    private MarketController marketController = new MarketController();
-    private PokemonController pokemonController = new PokemonController();
+    private MarketController marketController = new MarketController(this.playerController.playerDao.player);
+    private PokemonController pokemonController = new PokemonController(this.playerController.playerDao.player);
     private GymController gymController = new GymController();
     private Home homeView = new Home();
     private Menu menu = new Menu();
@@ -44,6 +44,7 @@ public class MainView extends javax.swing.JFrame {
         catchPokemon();
         upgradeMarket();
         deleteRarity();
+        continueGame();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
 
         addWindowListener(new WindowAdapter() {
@@ -67,6 +68,7 @@ public class MainView extends javax.swing.JFrame {
         container.add(this.marketController.marketView, "Market");
         container.add(this.pokemonController.pokemonView, "Pokemon");
         container.add(this.gymController.gymView, "Gym");
+         container.add(this.playerController.tablePlayerView, "TablePlayer");
         setContentPane(container);
         this.layout = (CardLayout) container.getLayout();
         layout.show(container, "Home");
@@ -292,7 +294,6 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (true) {
-
                     int rarity = (int) (marketController.marketView.cbRarity.getSelectedIndex());
                     rarity += 1;
                     marketController.marketDao.eliminar(rarity);
@@ -305,6 +306,15 @@ public class MainView extends javax.swing.JFrame {
                     jdExeption.setModal(true);
                     jdExeption.setVisible(true);
                 }
+            }
+        });
+    }
+    public void continueGame(){
+        this.homeView.btnContinue.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playerController.ContinueGame();
+                 layout.show(container, "TablePlayer");
             }
         });
     }

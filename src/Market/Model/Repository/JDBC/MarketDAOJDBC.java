@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashSet;
 import Market.Model.Entity.Market;
+import Player.Model.Entity.Player;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
 import java.util.Random;
@@ -22,13 +23,13 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     String URL = "jdbc:mariadb://127.0.0.1:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
     String PASS = "root"; // Contraseña de tu base de datos
-    private int idPokeUsable;
     public List<Pokemon> pokemonList;
+    private Player player;
 
-    public MarketDAOJDBC() {
+    public MarketDAOJDBC(Player player) {
         this.pokemonList = new ArrayList<>();
-//        this.pokemonesEntrenador = new ArrayList<>();
         conectar();
+        this.player = player;
     }
 
     @Override
@@ -90,7 +91,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
             // Ejecutar la inserción
             stmtInsert.executeUpdate();
 
-            System.out.println("Pokemon ID " + t.getId() + " insertado en la base de datos.");
+            System.out.println("Pokemon ID " + t.getIdPoke() + " insertado en la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -124,15 +125,10 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
     @Override
     public void actualizar(Pokemon t) {
-        try {
-            // Query para actualizar el ID_ENTRENADOR a 20
-            String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = 20 WHERE ID = ?";
-            PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate);
-
-            // Asignar el valor del ID_POKEUSABLE del objeto `Market`
-            stmtUpdate.setInt(1, t.getId()); // Asumiendo que `getId()` devuelve el ID del registro
-
-            // Ejecutar la actualización
+          String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = ? WHERE ID = ?";
+        try(PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate)) {
+           stmtUpdate.setInt(1, this.player.getId());
+            stmtUpdate.setInt(2, t.getId()); 
             int filasActualizadas = stmtUpdate.executeUpdate();
 
             if (filasActualizadas > 0) {
@@ -147,12 +143,12 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(int rarity) {
         String sqlDelete = "DELETE FROM pokeusables WHERE RAREZA <> ? AND ID_ENTRENADOR < 20";
 
         try (PreparedStatement stmtDelete = conexion.prepareStatement(sqlDelete)) {
             // Asignar el valor del parámetro (la rareza que se va a comparar)
-            stmtDelete.setInt(1, id);
+            stmtDelete.setInt(1, rarity);
 
             // Ejecutar la consulta
             int filasAfectadas = stmtDelete.executeUpdate();

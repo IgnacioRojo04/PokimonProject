@@ -4,6 +4,7 @@
  */
 package Pókemon.Controller;
 
+import Player.Model.Entity.Player;
 import Pókemon.Model.Entity.Pokemon;
 import Pókemon.Model.Repository.JDBC.PokemonDAOJDBC;
 import Pókemon.View.PokemonView;
@@ -17,21 +18,19 @@ import javax.swing.table.DefaultTableModel;
 public class PokemonController {
 
     public PokemonView pokemonView;
-    // public PokemonRepository pokemonDao;
+     public PokemonDAOJDBC pokemonDao;
 
-    public PokemonController() {
+    public PokemonController(Player player) {
         this.pokemonView = new PokemonView();
-        //this.pokemonDao = new PokemonRepository();
+            this.pokemonDao = new PokemonDAOJDBC(player);
     }
 
     public void fillTable(List<Pokemon> teamPokemon) {
-        // aca estaria el metodo en la controlladora que llama a getAll, de esta forma
-        teamPokemon.add(new Pokemon("pika"));
-        teamPokemon.add(new Pokemon("charmander"));
-        teamPokemon.add(new Pokemon("Squirtle"));
+        this.pokemonDao.listar();
         DefaultTableModel model = (DefaultTableModel) pokemonView.tPokePlayer.getModel();
         System.out.println(model + " :model");
         model.setRowCount(0);
+        this.pokemonView.cbPokeName.removeAllItems();
         for (Pokemon pokemon : teamPokemon) {
             model.addRow(new Object[]{
                 pokemon.getName(),

@@ -10,16 +10,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class PlayerDAOJDBC implements DAO<Player> {
 
     public Player player;
-    public List<Player> botList;
+    public List<Player> playerList;
     private Connection conexion = null;
 
     public PlayerDAOJDBC() {
         this.connectar();
+        this.playerList = new ArrayList<>();
         this.player = new Player();
     }
 
@@ -34,9 +36,8 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public List<Player> listar() {
-        this.botList.clear();
         try {
-            String sqlSelect = "SELECT ID, NOMBRE, DINERO  FROM entrenadores WHERE ID < 20";
+            String sqlSelect = "SELECT ID, NOMBRE, DINERO  FROM entrenadores WHERE ID >= 20";
             PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
             ResultSet rs = stmtSelect.executeQuery();
             while (rs.next()) {
@@ -44,15 +45,16 @@ public class PlayerDAOJDBC implements DAO<Player> {
                 
                 player.setId(rs.getInt("ID"));
                 player.setName(rs.getString("NOMBRE"));
-                player.setName(rs.getString("DINERO"));        
-                this.botList.add(player);
+                 System.out.println("pLAYER NAME:" + player.getName());
+                player.setMoney(rs.getInt("DINERO"));        
+                this.playerList.add(player);
             }
 
-            System.out.println("Pokemones listados correctamente.");
+            System.out.println("Players listados correctamente.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return this.botList;
+        return this.playerList;
     }
 
     @Override
