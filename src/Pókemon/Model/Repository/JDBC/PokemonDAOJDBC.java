@@ -107,7 +107,31 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
 
     @Override
     public void actualizar(Pokemon t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            // Query para actualizar los valores de la tabla pokeusables basados en el ID_POKE
+            String sqlUpdate = "UPDATE pokeusables SET RAREZA = ?, NIVEL = ?, PRECIO = ?, ID_ENTRENADOR = ? WHERE ID = ?";
+            PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate);
+
+            // Asignar los nuevos valores del objeto Pokemon al PreparedStatement
+            stmtUpdate.setInt(1, t.getRarity());       // Nueva rareza
+            stmtUpdate.setInt(2, t.getLevel());        // Nuevo nivel
+            stmtUpdate.setInt(3, t.getCost());         // Nuevo precio
+            stmtUpdate.setInt(4, t.getOwner());        // Nuevo ID de entrenador
+            stmtUpdate.setInt(5, t.getId());       // ID del Pokémon que se va a actualizar
+
+            // Ejecutar la actualización
+            int rowsAffected = stmtUpdate.executeUpdate();
+
+            // Comprobar si se actualizó algún registro
+            if (rowsAffected > 0) {
+                System.out.println("Pokemon con ID_POKE " + t.getIdPoke() + " actualizado en la base de datos.");
+            } else {
+                System.out.println("No se encontró un Pokemon con ID_POKE " + t.getIdPoke());
+            }
+
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        }
     }
 
     @Override

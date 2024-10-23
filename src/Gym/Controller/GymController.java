@@ -41,14 +41,15 @@ public class GymController {
 
     }
 
-    public void trainPokemon(List<Pokemon> teamPokemon, Player player) {
+    public Pokemon trainPokemon(List<Pokemon> teamPokemon, Player player) {
         int indice = this.gymView.cbGym.getSelectedIndex();
         Pokemon pokeTrain = teamPokemon.get(indice);
-        pokeTrain.setLevel(pokeTrain.getLevel() + 1);
+        pokeTrain.setLevel(pokeTrain.getLevel() + 10);
         this.repaintView(teamPokemon, player);
         this.gymView.cbGym.setSelectedIndex(indice);
+        return pokeTrain;
     }
-
+    
     public Pokemon catchPokemon(List<Pokemon> teamPokemon, Player player) {
         Pokemon pokemonNew = new Pokemon("nombre", (int) (Math.random() * 3), (int) (Math.random() * 2), player.getId(), (int) (Math.random() * 18));
         int ifCatchPokemon = (int) (Math.random() * 1.4); // Probabilidad de que captures el pokemon es de  menos del 30%

@@ -227,7 +227,8 @@ public class MainView extends javax.swing.JFrame {
                 if (playerController.playerDao.player.getMoney() >= 5) {
                     System.out.println(playerController.playerDao.player.getMoney());
                     playerController.setMoney(-5);
-                    gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player);
+                    pokemonController.pokemonDao.actualizar(gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player));
+                    
                 } else {
                     jdExeption.setTitle("No podes Entrenar");
                     lblDialog.setText("No Tienes Dinero.");

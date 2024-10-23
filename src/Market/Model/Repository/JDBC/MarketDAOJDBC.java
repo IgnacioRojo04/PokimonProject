@@ -125,7 +125,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
     @Override
     public void actualizar(Pokemon t) {
-          String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = ? WHERE ID = ?";
+        String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = ? WHERE ID = ?";
         try(PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate)) {
            stmtUpdate.setInt(1, this.player.getId());
             stmtUpdate.setInt(2, t.getId()); 
