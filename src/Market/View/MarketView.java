@@ -45,6 +45,8 @@ public class MarketView extends javax.swing.JPanel {
         lblMoney = new javax.swing.JLabel();
         cbMarket = new javax.swing.JComboBox<>();
         btnUpgrade = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        cbRarity = new javax.swing.JComboBox<>();
 
         btnBuy.setText("Comprar");
         btnBuy.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +89,20 @@ public class MarketView extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setText("Filtrar por rareza [Los demás registros se eliminarán]");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        cbRarity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3",  "4","5" }));
+        cbRarity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRarityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,10 +117,12 @@ public class MarketView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMoney, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUpgrade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnUpgrade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbRarity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,6 +136,10 @@ public class MarketView extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnUpgrade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbRarity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete)
+                        .addGap(53, 53, 53)
                         .addComponent(btnBack)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,12 +162,22 @@ public class MarketView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpgradeActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void cbRarityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRarityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbRarityActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBack;
     public javax.swing.JButton btnBuy;
+    public javax.swing.JButton btnDelete;
     public javax.swing.JButton btnUpgrade;
     public javax.swing.JComboBox<String> cbMarket;
+    public javax.swing.JComboBox<String> cbRarity;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblMoney;

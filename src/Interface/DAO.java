@@ -8,6 +8,6 @@ public interface DAO<T>{
     List<T> listar();
     void crear (T t);
     void actualizar (T t);
-    void eliminar (int id);
+    void eliminar (int number);
 
 }

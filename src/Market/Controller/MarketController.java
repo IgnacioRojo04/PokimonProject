@@ -17,7 +17,7 @@ public class MarketController {
         this.marketDao = new MarketDAOJDBC();
     }
 
-    public void fillTable() {
+    public void createPokemon() {
         if (this.marketDao.pokemonList.size() == 0) {
             System.out.println(this.marketDao.pokemonList.size()+ "hola");
             Pokemon pokemonNew = new Pokemon();
@@ -25,16 +25,20 @@ public class MarketController {
                 pokemonNew.setLevel((int) (1 + (Math.random() * 100)));
                 pokemonNew.setRarity((int) (1 + (Math.random() * 5)));
                 pokemonNew.setOwner((int) (1 + (Math.random() * 19)));
-                pokemonNew.setId((int) (1 + (Math.random() * 150)));
+                pokemonNew.setIdPoke((int) (1 + (Math.random() * 150)));
                 pokemonNew.setCost(3);
                 System.out.println(pokemonNew.getOwner());
                 this.marketDao.crear(pokemonNew);
             }
         }
         this.marketDao.listar();
-        DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
+       fillTable();
+    }
+    public void fillTable(){
+         DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
 
         model.setRowCount(0);
+          this.marketView.cbMarket.removeAllItems();
         for (Pokemon pokemon : this.marketDao.pokemonList) {
             model.addRow(new Object[]{
                 pokemon.getName(),
@@ -60,6 +64,6 @@ public class MarketController {
         DefaultTableModel model = (DefaultTableModel) this.marketView.tMarket.getModel();
         model.removeRow(indice);
         this.marketView.cbMarket.removeItem(this.marketView.cbMarket.getSelectedItem());
-        //updateDAO(comprado);
+        this.marketDao.actualizar(comprado);
     }
 }

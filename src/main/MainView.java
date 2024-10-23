@@ -43,6 +43,7 @@ public class MainView extends javax.swing.JFrame {
         trainPokemon();
         catchPokemon();
         upgradeMarket();
+        deleteRarity();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
 
         addWindowListener(new WindowAdapter() {
@@ -95,7 +96,7 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnMarket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                marketController.fillTable();
+                marketController.createPokemon();
                 marketController.showMoney(playerController.playerDao.player.getMoney());
                 layout.show(container, "Market");
             }
@@ -273,11 +274,33 @@ public class MainView extends javax.swing.JFrame {
                     playerController.setMoney(-10);
                     marketController.marketDao.pokemonList.clear();
                     marketController.marketDao.reiniciarTablaBD();
-                    marketController.fillTable();
+                    marketController.createPokemon();
                     marketController.showMoney(playerController.playerDao.player.getMoney());
                 } else {
                     jdExeption.setTitle("No podes actualizar:");
                     lblDialog.setText("No Tienes Dinero.");
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
+                }
+            }
+        });
+    }
+
+    public void deleteRarity() {
+        this.marketController.marketView.btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (true) {
+
+                    int rarity = (int) (marketController.marketView.cbRarity.getSelectedIndex());
+                    rarity += 1;
+                    marketController.marketDao.eliminar(rarity);
+                    marketController.marketDao.listar();
+                    marketController.fillTable();
+                } else {
+                    jdExeption.setTitle("No podes eliminar:");
+                    lblDialog.setText("No existe la rareza.");
                     jdExeption.setSize(400, 100);
                     jdExeption.setModal(true);
                     jdExeption.setVisible(true);

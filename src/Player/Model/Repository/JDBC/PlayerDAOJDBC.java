@@ -15,7 +15,8 @@ import java.util.HashSet;
 public class PlayerDAOJDBC implements DAO<Player> {
 
     public Player player;
-    private Connection cn = null;
+    public List<Player> botList;
+    private Connection conexion = null;
 
     public PlayerDAOJDBC() {
         this.connectar();
@@ -24,7 +25,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     public void connectar() {
         try {
-            cn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
+            conexion = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
             System.out.println("Conectado");
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(PlayerDAOJDBC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -33,14 +34,32 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public List<Player> listar() {
-        return null; // ver tus stats ( devuelve lista. mostramos plata y nombre del solo el primer player) 
+        this.botList.clear();
+        try {
+            String sqlSelect = "SELECT ID, NOMBRE, DINERO  FROM entrenadores WHERE ID < 20";
+            PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
+            ResultSet rs = stmtSelect.executeQuery();
+            while (rs.next()) {
+                Player player = new Player();
+                
+                player.setId(rs.getInt("ID"));
+                player.setName(rs.getString("NOMBRE"));
+                player.setName(rs.getString("DINERO"));        
+                this.botList.add(player);
+            }
+
+            System.out.println("Pokemones listados correctamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return this.botList;
     }
 
     @Override
     public void crear(Player player) {
         try {
             String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE) VALUES(?)";
-            PreparedStatement pstmtPlayer = cn.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmtPlayer = conexion.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
             pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.executeUpdate();
             ResultSet rsPlayer = pstmtPlayer.getGeneratedKeys();
@@ -52,7 +71,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
                 System.out.println("No se generó un ID para el jugador.");
             }
             String insertStmtPokeU = "INSERT INTO pokeUsables(ID_POKE,NIVEL, PRECIO, ID_ENTRENADOR) VALUES(?,?,?,?);";
-            PreparedStatement pstmtPokeU = cn.prepareStatement(insertStmtPokeU, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmtPokeU = conexion.prepareStatement(insertStmtPokeU, Statement.RETURN_GENERATED_KEYS);
             pstmtPokeU.setInt(1, 1);
             pstmtPokeU.setInt(2, 10);
             pstmtPokeU.setInt(3, 10);
@@ -72,7 +91,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public void actualizar(Player player) {
-        this.player = player; // solo actualizacion 
+        this.player = player; // solo actualizacion  // aca se podria actualizar el team.
     }
 
     @Override
@@ -81,11 +100,11 @@ public class PlayerDAOJDBC implements DAO<Player> {
         String deleteEntrenadorSQL = "DELETE FROM entrenadores WHERE ID >= ?";
 
         try {
-            try (PreparedStatement pstmtPokeUsables = cn.prepareStatement(deletePokeUsablesSQL)) {
+            try (PreparedStatement pstmtPokeUsables = conexion.prepareStatement(deletePokeUsablesSQL)) {
                 pstmtPokeUsables.setInt(1, id);
                 pstmtPokeUsables.executeUpdate();
             }
-            try (PreparedStatement pstmtEntrenador = cn.prepareStatement(deleteEntrenadorSQL)) {
+            try (PreparedStatement pstmtEntrenador = conexion.prepareStatement(deleteEntrenadorSQL)) {
                 pstmtEntrenador.setInt(1, id);
                 int rowsAffected = pstmtEntrenador.executeUpdate();
                 if (rowsAffected > 0) {

@@ -24,6 +24,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     String PASS = "root"; // Contraseña de tu base de datos
     private int idPokeUsable;
     public List<Pokemon> pokemonList;
+
     public MarketDAOJDBC() {
         this.pokemonList = new ArrayList<>();
 //        this.pokemonesEntrenador = new ArrayList<>();
@@ -33,10 +34,9 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     @Override
     public List<Pokemon> listar() {
         this.pokemonList.clear();
-
         try {
             // Consulta SQL para obtener todos los registros de pokeusables donde id_entrenador < 20
-            String sqlSelect = "SELECT pu.ID_POKE, pu.RAREZA, pu.NIVEL, pu.PRECIO, pu.ID_ENTRENADOR, p.nombre AS pokemon_name, e.nombre AS entrenador_name "
+            String sqlSelect = "SELECT pu.ID,  pu.ID_POKE, pu.RAREZA, pu.NIVEL, pu.PRECIO, pu.ID_ENTRENADOR, p.nombre AS pokemon_name, e.nombre AS entrenador_name "
                     + "FROM pokeusables pu "
                     + "JOIN pokemones p ON pu.ID_POKE = p.id "
                     + "JOIN entrenadores e ON pu.ID_ENTRENADOR = e.id "
@@ -52,7 +52,9 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
                 Pokemon pokemon = new Pokemon();
 
                 // Asignar los valores de las columnas a los atributos del objeto Pokemon
-                pokemon.setId(rs.getInt("ID_POKE"));                // Columna ID_POKE -> id del Pokemon
+                
+                pokemon.setId(rs.getInt("ID"));
+                pokemon.setIdPoke(rs.getInt("ID_POKE"));                // Columna ID_POKE -> id del Pokemon
                 pokemon.setRarity(rs.getInt("RAREZA"));             // Columna RAREZA -> rareza
                 pokemon.setLevel(rs.getInt("NIVEL"));               // Columna NIVEL -> nivel
                 pokemon.setCost(rs.getInt("PRECIO"));               // Columna PRECIO -> precio
@@ -79,7 +81,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
             PreparedStatement stmtInsert = conexion.prepareStatement(sqlInsert);
 
             // Asignar los valores del objeto Pokemon al PreparedStatement
-            stmtInsert.setInt(1, t.getId());         // ID del Pokemon
+            stmtInsert.setInt(1, t.getIdPoke());         // ID del Pokemon
             stmtInsert.setInt(2, t.getRarity());     // Rareza del Pokemon
             stmtInsert.setInt(3, t.getLevel());      // Nivel del Pokemon
             stmtInsert.setInt(4, t.getCost());       // Precio del Pokemon
@@ -96,11 +98,11 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
     public void reiniciarTablaBD() {
         try {
-             String sqlDeleteTable = "DELETE FROM pokeusables WHERE ID_ENTRENADOR < 20  ";
+            String sqlDeleteTable = "DELETE FROM pokeusables WHERE ID_ENTRENADOR < 20  ";
             PreparedStatement stmtDelete = conexion.prepareStatement(sqlDeleteTable);
             stmtDelete.executeUpdate();
             System.out.println("Se eliminaron los registros.");
-             String sqlResetAutoIncrement = "ALTER TABLE pokeusables AUTO_INCREMENT = 1";
+            String sqlResetAutoIncrement = "ALTER TABLE pokeusables AUTO_INCREMENT = 1";
             PreparedStatement stmtReset = conexion.prepareStatement(sqlResetAutoIncrement);
             stmtReset.executeUpdate();
             System.out.println("Auto-increment reiniciado a 1 en la tabla pokeusables.");
@@ -124,7 +126,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     public void actualizar(Pokemon t) {
         try {
             // Query para actualizar el ID_ENTRENADOR a 20
-            String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = 20 WHERE ID_POKEUSABLE = ?";
+            String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = 20 WHERE ID = ?";
             PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate);
 
             // Asignar el valor del ID_POKEUSABLE del objeto `Market`
@@ -146,38 +148,19 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
     @Override
     public void eliminar(int id) {
-        try {
-            // Primero obtenemos el ID_ENTRENADOR del registro que queremos eliminar
-            String sqlSelect = "SELECT ID_ENTRENADOR FROM pokeusables WHERE ID = ?";
-            PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
-            stmtSelect.setInt(1, id);
-            ResultSet rs = stmtSelect.executeQuery();
+        String sqlDelete = "DELETE FROM pokeusables WHERE RAREZA <> ? AND ID_ENTRENADOR < 20";
 
-            if (rs.next()) {
-                int entrenadorId = rs.getInt("ID_ENTRENADOR"); // Obtenemos el ID_ENTRENADOR
+        try (PreparedStatement stmtDelete = conexion.prepareStatement(sqlDelete)) {
+            // Asignar el valor del parámetro (la rareza que se va a comparar)
+            stmtDelete.setInt(1, id);
 
-                if (entrenadorId >= 20) {
-                    // Si el entrenador tiene un ID mayor o igual a 20, no borramos y mostramos un mensaje
-                    System.out.println("Pokémon del jugador, no se puede eliminar.");
-                } else {
-                    // Si el entrenador tiene un ID menor a 20, procedemos con la eliminación
-                    String sqlDelete = "DELETE FROM pokeusables WHERE ID = ?";
-                    PreparedStatement stmtDelete = conexion.prepareStatement(sqlDelete);
-                    stmtDelete.setInt(1, id); // Asignar el valor del ID_POKEUSABLE
-                    int filasAfectadas = stmtDelete.executeUpdate();
+            // Ejecutar la consulta
+            int filasAfectadas = stmtDelete.executeUpdate();
 
-                    if (filasAfectadas > 0) {
-                        System.out.println("Registro eliminado exitosamente: Pokémon ID_POKEUSABLE " + id);
-                    } else {
-                        System.out.println("No se encontró un registro con ID_POKEUSABLE " + id);
-                    }
-                }
-            } else {
-                System.out.println("No se encontró un registro con ID_ENTRENADOR " + id);
-            }
-
+            // Informar cuántas filas se eliminaron
+            System.out.println("Se eliminaron " + filasAfectadas + " registros.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Manejo de la excepción si algo falla        
         }
     }
 }
