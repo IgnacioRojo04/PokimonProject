@@ -1,7 +1,7 @@
 
 CREATE DATABASE IF NOT EXISTS `pokemones`;
 USE `pokemones`;
-entrenadoresentrenadores
+
 CREATE TABLE IF NOT EXISTS `entrenadores` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(50) DEFAULT NULL,

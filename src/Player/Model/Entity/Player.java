@@ -6,7 +6,7 @@ package Player.Model.Entity;
 public class Player extends Character{
 
     public Player(String name){
-        super(name, 10);
+        super(name, 12);
     }
     public Player(){
          super("prueba", 1000);

@@ -1,23 +1,25 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Pókemon.Model.Repository.JDBC;
 
 import Interface.DAO;
 import Player.Model.Entity.Player;
-import java.sql.Statement;
-import java.util.List;
-import java.sql.DriverManager;
+import Pókemon.Model.Entity.Pokemon;
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashSet;
+import java.sql.SQLException;
+import java.util.List;
 
-import Interface.DAO;
-import Pókemon.Model.Entity.Pokemon;
-import java.util.Random;
-
-public class PokemonDAOJDBC implements DAO<Pokemon> {
-
-    private Player player;
+/**
+ *
+ * @author retam
+ */
+public class PokemonDAOJDBC implements DAO<Pokemon>{
+     private Player player;
     private Connection conexion = null;
     String URL = "jdbc:mariadb://localhost:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
@@ -90,10 +92,10 @@ public class PokemonDAOJDBC implements DAO<Pokemon> {
             PreparedStatement stmtInsert = conexion.prepareStatement(sqlInsert);
 
             // Asignar los valores del objeto Pokemon al PreparedStatement
-            stmtInsert.setInt(1, ((int) (1 + (Math.random() * 3))));
-            stmtInsert.setInt(2, ((int) (1 + (Math.random() * 2))));
-            stmtInsert.setInt(3, ((int) (1 + (Math.random() * 2))));
-            stmtInsert.setInt(4, 0);
+            stmtInsert.setInt(1, t.getIdPoke());         // ID del Pokemon
+            stmtInsert.setInt(2, t.getRarity());     // Rareza del Pokemon
+            stmtInsert.setInt(3, t.getLevel());      // Nivel del Pokemon
+            stmtInsert.setInt(4, t.getCost());       // Precio del Pokemon
             stmtInsert.setInt(5, this.player.getId());
 
             // Ejecutar la inserción

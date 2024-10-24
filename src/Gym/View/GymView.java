@@ -75,14 +75,14 @@ public class GymView extends javax.swing.JPanel {
             }
         });
 
-        btnTrain.setText("Entrenar");
+        btnTrain.setText("Entrenar $10");
         btnTrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrainActionPerformed(evt);
             }
         });
 
-        btnCatch.setText("Capturar");
+        btnCatch.setText("Capturar $10");
 
         lblSayMoney.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblSayMoney.setText("Dinero:");

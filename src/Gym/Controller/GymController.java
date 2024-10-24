@@ -18,7 +18,7 @@ public class GymController {
         this.gymView = new GymView();
     }
 
-    private void repaintView(List<Pokemon> teamPokemon, Player player) {
+    public void repaintView(List<Pokemon> teamPokemon) {
         DefaultTableModel model = (DefaultTableModel) this.gymView.tGym.getModel();
         model.setRowCount(0);
         this.gymView.cbGym.removeAllItems();
@@ -32,31 +32,32 @@ public class GymController {
                 pokemon.getCost(),});
             this.gymView.cbGym.addItem(pokemon.getName());
         }
-        this.gymView.lblMoney.setText(player.getMoney() + "");
-    }
-
-    public void fillTable(List<Pokemon> teamPokemon, Player player) {
-        // base de datos que returnea  a los pokemones 
-        this.repaintView(teamPokemon, player);
-
     }
 
     public Pokemon trainPokemon(List<Pokemon> teamPokemon, Player player) {
         int indice = this.gymView.cbGym.getSelectedIndex();
         Pokemon pokeTrain = teamPokemon.get(indice);
-        pokeTrain.setLevel(pokeTrain.getLevel() + 10);
-        this.repaintView(teamPokemon, player);
+        System.out.println(indice);
+        pokeTrain.setLevel(pokeTrain.getLevel() + (int) (Math.random() * 10));
+        if (pokeTrain.getLevel() > 100) pokeTrain.setLevel(100);
+        pokeTrain.setCost(pokeTrain.getLevel() * pokeTrain.getRarity());
+        this.repaintView(teamPokemon);
         this.gymView.cbGym.setSelectedIndex(indice);
         return pokeTrain;
     }
-    
+    public void showMoney(Player player){
+        this.gymView.lblMoney.setText(player.getMoney() + "");
+    }
     public Pokemon catchPokemon(List<Pokemon> teamPokemon, Player player) {
-        Pokemon pokemonNew = new Pokemon("nombre", (int) (Math.random() * 3), (int) (Math.random() * 2), player.getId(), (int) (Math.random() * 18));
-        int ifCatchPokemon = (int) (Math.random() * 1.4); // Probabilidad de que captures el pokemon es de  menos del 30%
-         repaintView(teamPokemon, player); // esto es para que aparezca que se desconto el dinero.
+
+        int ifCatchPokemon = (int) (Math.random() * 1.4); // Probabilidad de que captures el pokemon es de  menos del 30%}
         if (ifCatchPokemon == 1) {
-            teamPokemon.add(pokemonNew);
-            repaintView(teamPokemon, player); // Necesito repintar dos veces para que aparezca el pokemon en la tabla.
+            Pokemon pokemonNew = new Pokemon();
+            pokemonNew.setLevel((int) (1 + (Math.random() * 70)));
+            pokemonNew.setRarity((int) (1 + (Math.random() * 5)));
+            pokemonNew.setOwner((int) (1 + (Math.random() * 19)));
+            pokemonNew.setIdPoke((int) (1 + (Math.random() * 150)));
+            pokemonNew.setCost((pokemonNew.getLevel() * pokemonNew.getRarity()));
             return pokemonNew;
         }
         return null;

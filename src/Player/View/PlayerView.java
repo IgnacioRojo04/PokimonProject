@@ -26,7 +26,7 @@ public class PlayerView extends javax.swing.JPanel {
 
         bCreatePlayer = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
-        bDeletePlayer = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setToolTipText("");
         setName(""); // NOI18N
@@ -40,10 +40,10 @@ public class PlayerView extends javax.swing.JPanel {
 
         tfName.setText("Nombre");
 
-        bDeletePlayer.setText("Eliminar Player");
-        bDeletePlayer.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bDeletePlayerActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -58,9 +58,9 @@ public class PlayerView extends javax.swing.JPanel {
                         .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bDeletePlayer)
-                            .addComponent(bCreatePlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bCreatePlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
@@ -71,7 +71,7 @@ public class PlayerView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bCreatePlayer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bDeletePlayer)
+                .addComponent(btnBack)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -80,15 +80,15 @@ public class PlayerView extends javax.swing.JPanel {
 
     }//GEN-LAST:event_bCreatePlayerActionPerformed
 
-    private void bDeletePlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletePlayerActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         
-    }//GEN-LAST:event_bDeletePlayerActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCreatePlayer;
-    private javax.swing.JButton bDeletePlayer;
+    public javax.swing.JButton btnBack;
     public javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 }

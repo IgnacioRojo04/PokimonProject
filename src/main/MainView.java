@@ -47,6 +47,8 @@ public class MainView extends javax.swing.JFrame {
         continueGame();
         selectPlayer();
         deletePlayer();
+        backHomePlayerView();
+        backHomePlayerContinue();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
 
         addWindowListener(new WindowAdapter() {
@@ -70,7 +72,7 @@ public class MainView extends javax.swing.JFrame {
         container.add(this.marketController.marketView, "Market");
         container.add(this.pokemonController.pokemonView, "Pokemon");
         container.add(this.gymController.gymView, "Gym");
-         container.add(this.playerController.tablePlayerView, "TablePlayer");
+        container.add(this.playerController.tablePlayerView, "TablePlayer");
         setContentPane(container);
         this.layout = (CardLayout) container.getLayout();
         layout.show(container, "Home");
@@ -89,8 +91,16 @@ public class MainView extends javax.swing.JFrame {
         this.playerController.playerView.bCreatePlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                playerController.createPlayer();
-                layout.show(container, "Menu");
+                if (!playerController.createPlayer()) {
+                    layout.show(container, "Menu");
+                } else {
+                    jdExeption.setTitle("No podes crear tu entrenador:");
+                    lblDialog.setText("Nombre repetido");
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
+                }
+
             }
         });
     }
@@ -111,7 +121,7 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney() + "");
-                gymController.fillTable(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player);
+                gymController.repaintView(playerController.playerDao.player.getTeamPokemon());
                 layout.show(container, "Gym");
             }
         });
@@ -206,6 +216,7 @@ public class MainView extends javax.swing.JFrame {
                 if (playerController.playerDao.player.getTeamPokemon().size() > 0) {
                     int indice = pokemonController.pokemonView.cbPokeName.getSelectedIndex();
                     playerController.setMoney(playerController.playerDao.player.getTeamPokemon().get(indice).getCost());
+                    System.out.println(playerController.playerDao.player.getTeamPokemon().get(indice).getCost());
                     pokemonController.showMoney(playerController.playerDao.player.getMoney());
                     pokemonController.SellPokemon(playerController.playerDao.player.getTeamPokemon());
                 } else {
@@ -224,14 +235,21 @@ public class MainView extends javax.swing.JFrame {
         this.gymController.gymView.btnTrain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (playerController.playerDao.player.getMoney() >= 5) {
-                    System.out.println(playerController.playerDao.player.getMoney());
+                String title = "";
+                Pokemon entrenado = playerController.playerDao.player.getTeamPokemon().get(gymController.gymView.cbGym.getSelectedIndex());
+                if (playerController.playerDao.player.getMoney() >= 5 && entrenado.getLevel() < 100) {
                     playerController.setMoney(-5);
                     pokemonController.pokemonDao.actualizar(gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player));
-                    
+                    jdExeption.setTitle("Hoy toco pecho");
+                    lblDialog.setText("Never Pony.");
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
                 } else {
                     jdExeption.setTitle("No podes Entrenar");
-                    lblDialog.setText("No Tienes Dinero.");
+                    if (playerController.playerDao.player.getMoney() < 5 )title+="No Tienes Dinero.";
+                    else if (entrenado.getLevel() >= 100)title+="Limite de nivel";
+                    lblDialog.setText(title);
                     jdExeption.setSize(400, 100);
                     jdExeption.setModal(true);
                     jdExeption.setVisible(true);
@@ -244,10 +262,17 @@ public class MainView extends javax.swing.JFrame {
         this.gymController.gymView.btnCatch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (playerController.playerDao.player.getMoney() >= 5) {
+
+                String titleJd = "";
+                if (playerController.playerDao.player.getMoney() >= 5 && playerController.playerDao.player.getTeamPokemon().size() < 6) {
                     playerController.setMoney(-5);
-                    Pokemon pokemonNew = gymController.catchPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player);
+                    gymController.showMoney(playerController.playerDao.player);
+                    Pokemon pokemonNew = new Pokemon();
+                    pokemonNew = gymController.catchPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player);
                     if (pokemonNew != null) {
+                        pokemonController.pokemonDao.crear(pokemonNew);
+                        pokemonController.pokemonDao.listar();
+                        gymController.repaintView(playerController.playerDao.player.getTeamPokemon());
                         jdExeption.setTitle("¡Captura exitosa!:");
                         lblDialog.setText("El pokemon ahora es parte de tu equipo.");
                         jdExeption.setSize(400, 100);
@@ -262,7 +287,13 @@ public class MainView extends javax.swing.JFrame {
                     }
                 } else {
                     jdExeption.setTitle("No podes Capturar");
-                    lblDialog.setText("No Tienes Dinero.");
+                    if (playerController.playerDao.player.getTeamPokemon().size() >= 6) {
+                        titleJd += "Equipo lleno. ";
+                    }
+                    if (playerController.playerDao.player.getMoney() < 5) {
+                        titleJd += "Sin Dinero. ";
+                    }
+                    lblDialog.setText(titleJd);
                     jdExeption.setSize(400, 100);
                     jdExeption.setModal(true);
                     jdExeption.setVisible(true);
@@ -312,16 +343,18 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-    public void continueGame(){
+
+    public void continueGame() {
         this.homeView.btnContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 playerController.ContinueGame();
-                 layout.show(container, "TablePlayer");
+                layout.show(container, "TablePlayer");
             }
         });
     }
-    public void selectPlayer(){
+
+    public void selectPlayer() {
         this.playerController.tablePlayerView.jContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -330,12 +363,31 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-    public void deletePlayer(){
+
+    public void deletePlayer() {
         this.playerController.tablePlayerView.jDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //pokemonController.deletePlayer(playerController.playerDao.player.getTeamPokemon());
                 playerController.deletePlayer();
+            }
+        });
+    }
+
+    public void backHomePlayerView() {
+        this.playerController.playerView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Home");
+            }
+        });
+    }
+
+    public void backHomePlayerContinue() {
+        this.playerController.tablePlayerView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.show(container, "Home");
             }
         });
     }

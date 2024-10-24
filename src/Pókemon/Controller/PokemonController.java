@@ -22,11 +22,10 @@ public class PokemonController {
 
     public PokemonController(Player player) {
         this.pokemonView = new PokemonView();
-        
+        this.pokemonDao = new PokemonDAOJDBC(player);
     }
 
     public void fillTable(Player player ) {
-        this.pokemonDao = new PokemonDAOJDBC(player);
         this.pokemonDao.listar();
         DefaultTableModel model = (DefaultTableModel) pokemonView.tPokePlayer.getModel();
         model.setRowCount(0);

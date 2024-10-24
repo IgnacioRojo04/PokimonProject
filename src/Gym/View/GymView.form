@@ -129,7 +129,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnTrain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entrenar"/>
+        <Property name="text" type="java.lang.String" value="Entrenar $10"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrainActionPerformed"/>
@@ -140,7 +140,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCatch">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Capturar"/>
+        <Property name="text" type="java.lang.String" value="Capturar $10"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

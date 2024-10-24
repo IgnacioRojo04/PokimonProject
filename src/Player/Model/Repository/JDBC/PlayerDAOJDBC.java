@@ -28,8 +28,9 @@ public class PlayerDAOJDBC implements DAO<Player> {
     public void connectar() {
         try {
             conexion = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
-            System.out.println("Conectado");
+            System.out.println("Conectado dao player");
         } catch (SQLException ex) {
+            System.out.println("NO CONECTO DAO PAYER");
             java.util.logging.Logger.getLogger(PlayerDAOJDBC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
@@ -45,9 +46,10 @@ public class PlayerDAOJDBC implements DAO<Player> {
                 
                 player.setId(rs.getInt("ID"));
                 player.setName(rs.getString("NOMBRE"));
-                System.out.println("pLAYER NAME:" + player.getName());
+                System.out.println("PLAYER NAME:" + player.getName());
                 player.setMoney(rs.getInt("DINERO"));  
                 
+                System.out.println("DIMERO PLAYER" + player.getMoney());
                 
                 this.playerList.add(player);
             }
@@ -95,7 +97,21 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public void actualizar(Player player) {
-        this.player = player; // solo actualizacion  // aca se podria actualizar el team.
+        try{
+            String sqlUpdate = "UPDATE entrenadores SET DINERO = ? WHERE ID = ?";
+            PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate);
+            stmtUpdate.setInt(1, player.getMoney());
+            stmtUpdate.setInt(2, player.getId()); 
+            int filasActualizadas = stmtUpdate.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                System.out.println("El Pokémon fue comprado por el jugador (ID_ENTRENADOR = 20).");
+            } else {
+                System.out.println("No se encontró ningún registro con ese ID_POKEUSABLE.");
+            }
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
     }
 
     @Override

@@ -19,14 +19,17 @@ public class MarketController {
 
     public void createPokemon() {
         if (this.marketDao.pokemonList.size() == 0) {
-            System.out.println(this.marketDao.pokemonList.size() + "hola");
             Pokemon pokemonNew = new Pokemon();
             for (int i = 0; i < 20; i++) {
-                pokemonNew.setLevel((int) (1 + (Math.random() * 100)));
+                pokemonNew.setLevel((int) (1 + (Math.random() * 70)));
                 pokemonNew.setRarity((int) (1 + (Math.random() * 5)));
                 pokemonNew.setOwner((int) (1 + (Math.random() * 19)));
                 pokemonNew.setIdPoke((int) (1 + (Math.random() * 150)));
-                pokemonNew.setCost(pokemonNew.getLevel() * pokemonNew.getRarity());
+                if(pokemonNew.getRarity() == 1 || pokemonNew.getRarity() == 2){
+                    pokemonNew.setCost((pokemonNew.getLevel() * pokemonNew.getRarity())) ;
+                }else{
+                 pokemonNew.setCost((pokemonNew.getLevel() * pokemonNew.getRarity()) * (int) ((1 + (Math.random() * 2))) );   
+                }
                 System.out.println(pokemonNew.getOwner());
                 this.marketDao.crear(pokemonNew);
             }
