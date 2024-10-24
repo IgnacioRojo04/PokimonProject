@@ -36,7 +36,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
     }
 
     @Override
-    public List<Player> listar() {
+    public void listar() {
         try {
             String sqlSelect = "SELECT ID, NOMBRE, DINERO  FROM entrenadores WHERE ID >= 20";
             PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
@@ -58,13 +58,13 @@ public class PlayerDAOJDBC implements DAO<Player> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return this.playerList;
+        
     }
 
     @Override
     public void crear(Player player) {
         try {
-            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 1000)";
+            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 100)";
             PreparedStatement pstmtPlayer = conexion.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
             pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.executeUpdate();

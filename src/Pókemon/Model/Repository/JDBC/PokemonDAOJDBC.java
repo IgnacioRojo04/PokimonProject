@@ -42,7 +42,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
     }
 
     @Override
-    public List<Pokemon> listar() {
+    public void listar() {
         this.player.getTeamPokemon().clear();
         String sqlSelect = "SELECT pu.ID,  pu.ID_POKE, pu.RAREZA, pu.NIVEL, pu.PRECIO, pu.ID_ENTRENADOR, p.nombre AS pokemon_name, e.nombre AS entrenador_name "
                 + "FROM pokeusables pu "
@@ -81,7 +81,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
-        return this.player.getTeamPokemon();
+        
     }
 
     @Override

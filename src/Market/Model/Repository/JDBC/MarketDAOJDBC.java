@@ -33,7 +33,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     }
 
     @Override
-    public List<Pokemon> listar() {
+    public void listar() {
         this.pokemonList.clear();
         try {
             // Consulta SQL para obtener todos los registros de pokeusables donde id_entrenador < 20
@@ -71,8 +71,8 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return pokemonList; // Devolver la lista de pokemones
-    } // llamar Listar despues de cada cambio en la base de datos, para que la lista siempre sea igual
+       
+    } 
 
     @Override
     public void crear(Pokemon t) {
