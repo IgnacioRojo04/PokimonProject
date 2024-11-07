@@ -1,22 +1,23 @@
 
 package League.Model.Entity;
 
-import Lideres.Model.Entity.Lideres;
+
+import Player.Model.Entity.Leader;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.List;
 
 
 public class League {
     
- Lideres lider;  
+ Leader lider;  
  public List<Pokemon> pokemonLeagueList;   
 
-    public League(Lideres lider, List<Pokemon> pokemonLeagueList) {
+    public League(Leader lider, List<Pokemon> pokemonLeagueList) {
         this.lider = lider;
         this.pokemonLeagueList = pokemonLeagueList;
     }
 
-    public Lideres getLider() {
+    public Leader getLider() {
         return lider;
     }
 
@@ -24,7 +25,7 @@ public class League {
         return pokemonLeagueList;
     }
 
-    public void setLider(Lideres lider) {
+    public void setLider(Leader lider) {
         this.lider = lider;
     }
 

@@ -9,7 +9,7 @@ import java.util.Objects;
 public abstract class Character {
 
     private String name;
-    private List<Pokemon> teamPokemon;
+    public List<Pokemon> teamPokemon;
     private int money;
     private int id;
 
