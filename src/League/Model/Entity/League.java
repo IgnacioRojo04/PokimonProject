@@ -1,11 +1,10 @@
 
 package League.Model.Entity;
-
-
 import Player.Model.Entity.Leader;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.List;
 
+// esto Habria que BORRARLO creo, por si acaso lo dejo aca pero lo borramo despues
 
 public class League {
     

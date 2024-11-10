@@ -1,6 +1,5 @@
 package Player.Model.Repository.JDBC;
 
-import Interface.DAO;
 import Player.Model.Entity.Leader;
 import Pókemon.Model.Entity.Pokemon;
 import java.sql.Connection;
@@ -13,12 +12,12 @@ import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LeaderDAOJDBC implements DAO<Leader> {
+public class LeaderDAOJDBC {
 
     public Leader leader;
     public List<Leader> leaderList;
     private Connection conexion = null;
-    // public List<Pokemon> pokemonLideres;
+    public List<Pokemon> leaderPokemonList;
 
     public void connectar() {
         try {
@@ -40,50 +39,51 @@ public class LeaderDAOJDBC implements DAO<Leader> {
         this.leaderList = new ArrayList<>();
     }
 
-    public void listar() {
+    //hace un map y lista, todos los lideres con su team
+    public void listarLeaderTeams() {
         this.leaderList.clear();
         String sqlSelect = """
-            SELECT pl.ID_LIDER, l.NOMBRE AS leader_name, l.DIFICULTAD, 
-                   pl.ID_POKEMON, pl.IMPORTANCIA, p.NOMBRE AS pokemon_name
-            FROM pokemoneslideres pl
-            JOIN lideres l ON pl.ID_LIDER = l.ID_LIDER
-            JOIN pokemones p ON pl.ID_POKEMON = p.ID_POKEMON
-            ORDER BY pl.ID_LIDER, pl.IMPORTANCIA;
+            SELECT e.ID AS id_entrenador, e.NOMBRE AS leader_name, 
+                   pu.ID_POKE AS id_pokemon, pu.NIVEL, pu.RAREZA, p.NOMBRE AS pokemon_name
+            FROM entrenadores e
+            JOIN pokeusables pu ON e.ID = pu.ID_ENTRENADOR
+            JOIN pokemones p ON pu.ID_POKE = p.ID
+            WHERE e.ID BETWEEN 10 AND 19
+            ORDER BY e.ID, pu.RAREZA DESC;
             """;
 
-        try (PreparedStatement stmt = conexion.prepareStatement(sqlSelect);
-             ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = conexion.prepareStatement(sqlSelect); ResultSet rs = stmt.executeQuery()) {
 
-            // Usamos un Map para agrupar los Pokémon por líder
             Map<Integer, Leader> leaderMap = new HashMap<>();
 
             while (rs.next()) {
-                int leaderId = rs.getInt("ID_LIDER");
+                int leaderId = rs.getInt("id_entrenador");
                 String leaderName = rs.getString("leader_name");
-                int difficulty = rs.getInt("DIFICULTAD");
 
-                // Obtenemos o creamos el líder
+                // Obtener o crear el líder en el Map
                 Leader leader = leaderMap.get(leaderId);
                 if (leader == null) {
                     leader = new Leader();
                     leader.setId(leaderId);
                     leader.setName(leaderName);
-                    leader.setDificultad(difficulty);
                     leader.setTeamPokemon(new ArrayList<>());  // Inicializar la lista de Pokémon
+                    leader.setMoney(999);
+                    leader.setDefeated(false);
                     leaderMap.put(leaderId, leader);
                 }
 
-                // Crear un objeto Pokemon y asignar sus valores
+                // Crear el objeto Pokemon y asignar sus valores
                 Pokemon pokemon = new Pokemon();
-                pokemon.setId(rs.getInt("ID_POKEMON"));
+                pokemon.setId(rs.getInt("id_pokemon"));
                 pokemon.setName(rs.getString("pokemon_name"));
-                pokemon.setImportance(rs.getInt("IMPORTANCIA"));
+                pokemon.setLevel(rs.getInt("NIVEL"));
+                pokemon.setRarity(rs.getInt("RAREZA"));
 
                 // Añadir el Pokémon al equipo del líder
                 leader.getTeamPokemon().add(pokemon);
             }
 
-            // Añadir todos los líderes al leaderList
+            // Añadir todos los líderes a la lista leaderList
             leaderList.addAll(leaderMap.values());
 
             System.out.println("Líderes y sus pokemones listados correctamente.");
@@ -92,24 +92,85 @@ public class LeaderDAOJDBC implements DAO<Leader> {
             e.printStackTrace();
         }
     }
+    
+    //hace una lista con todos los pokemones de los lideres, con su id de entrenador
+    public void listarPokemonesDeLideres() 
+    {
+        this.leaderPokemonList.clear();
+
+        // Consulta SQL para obtener los Pokémon de los líderes (entrenadores con ID entre 10 y 19)
+        String sqlSelect = """
+            SELECT pu.ID_POKE AS id_pokemon, pu.NIVEL, pu.RAREZA, p.NOMBRE AS pokemon_name, 
+                   e.NOMBRE AS leader_name
+            FROM pokeusables pu
+            JOIN pokemones p ON pu.ID_POKE = p.ID
+            JOIN entrenadores e ON pu.ID_ENTRENADOR = e.ID
+            WHERE pu.ID_ENTRENADOR BETWEEN 10 AND 19
+            ORDER BY pu.ID_ENTRENADOR, pu.RAREZA DESC;
+            """;
+
+        try (PreparedStatement stmt = conexion.prepareStatement(sqlSelect); ResultSet rs = stmt.executeQuery()) {
+
+            // Iterar sobre los resultados y construir los objetos Pokémon
+            while (rs.next()) {
+                // Crear una nueva instancia de Pokemon
+                Pokemon pokemon = new Pokemon();
+
+                // Asignar valores de la consulta al objeto Pokemon
+                pokemon.setId(rs.getInt("id_pokemon"));
+                pokemon.setName(rs.getString("pokemon_name"));
+                pokemon.setLevel(rs.getInt("NIVEL"));
+                pokemon.setRarity(rs.getInt("RAREZA"));
+                pokemon.setEntrenador(rs.getString("leader_name"));  // Nombre del líder como entrenador
+
+                // Añadir el Pokémon a la lista
+                leaderPokemonList.add(pokemon);
+            }
+
+            System.out.println("Pokémon de los líderes listados correctamente.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //hace y devuelva un lista con el nombre de los lideres
+    public List<Leader> listarNombreLideres() {
+        List<Leader> leadersList = new ArrayList<>();
+
+        // Consulta SQL para obtener todos los líderes de la base de datos (ID entre 10 y 19)
+        String sqlSelect = """
+        SELECT ID, NOMBRE
+        FROM entrenadores
+        WHERE ID BETWEEN 10 AND 19;
+        """;
+
+        try (PreparedStatement stmt = conexion.prepareStatement(sqlSelect); ResultSet rs = stmt.executeQuery()) {
+
+            // Recorrer los resultados y crear objetos Leader
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String name = rs.getString("NOMBRE");
+
+                // Crear un objeto Leader y añadirlo a la lista
+                Leader leader = new Leader(name);
+                leadersList.add(leader);
+            }
+
+            System.out.println("Líderes listados correctamente.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return leadersList;
+    }
+
+    public List<Pokemon> getLeaderTeams() {
+        return leaderPokemonList;
+    }
 
     public List<Leader> getLeaderList() {
         return leaderList;
-    }
-
-    @Override
-    public void crear(Leader t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void actualizar(Leader t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void eliminar(int number) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

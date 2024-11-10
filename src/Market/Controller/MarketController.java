@@ -23,7 +23,7 @@ public class MarketController {
             for (int i = 0; i < 20; i++) {
                 pokemonNew.setLevel((int) (1 + (Math.random() * 70)));
                 pokemonNew.setRarity((int) (1 + (Math.random() * 5)));
-                pokemonNew.setOwner((int) (1 + (Math.random() * 19)));
+                pokemonNew.setOwner((int) (1 + (Math.random() * 9)));
                 pokemonNew.setIdPoke((int) (1 + (Math.random() * 150)));
                 if(pokemonNew.getRarity() == 1 || pokemonNew.getRarity() == 2){
                     pokemonNew.setCost((pokemonNew.getLevel() * pokemonNew.getRarity())) ;

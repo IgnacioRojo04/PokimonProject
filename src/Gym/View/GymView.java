@@ -75,7 +75,7 @@ public class GymView extends javax.swing.JPanel {
             }
         });
 
-        btnTrain.setText("Entrenar $10");
+        btnTrain.setText("Entrenar $5");
         btnTrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrainActionPerformed(evt);

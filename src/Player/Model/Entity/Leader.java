@@ -7,26 +7,36 @@ import java.util.List;
 
 
 public class Leader extends Character{
+    
+    private boolean defeated;
 
-    public int dificultad;
+    public boolean isDefeated() {
+        return defeated;
+    }
+
+    public void setDefeated(boolean defeated) {
+        this.defeated = defeated;
+    }
+
+    
 
     public Leader() {
     }
     
-    public Leader(String name, List<Pokemon> teamPokemon, int money, int dificultad) {
+     public Leader( String name) {
+        super(name) ;   
+    }
+    
+    public Leader(String name, List<Pokemon> teamPokemon, int money, boolean defeated) {
         super(name, money);
         this.teamPokemon = new ArrayList<>();
-        this.dificultad = dificultad;
+        this.defeated = false;
         
     }
+    
+    
 
-    public int getDificultad() {
-        return dificultad;
-    }
-
-    public void setDificultad(int dificultad) {
-        this.dificultad = dificultad;
-    }
+  
 
     public void setTeamPokemon(List<Pokemon> teamPokemon) {
         this.teamPokemon = teamPokemon;
@@ -47,11 +57,13 @@ public class Leader extends Character{
             System.out.println(pokemon);
         }
     }
-    
+
     @Override
-       public String toString() {
-        return "Líder: " + getName() + " (Dificultad: " + dificultad + ")";
+    public String toString() {
+        return "Leader{" + '}';
     }
+    
+    
 
   
     

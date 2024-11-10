@@ -26,6 +26,10 @@ public abstract class Character {
         id = 0;
          this.teamPokemon = new ArrayList<>();
     }
+    
+    public Character(String name){
+        this.name=name;
+    }
 
     public String getName() {
         return name;
