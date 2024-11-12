@@ -33,6 +33,11 @@ public class LeaderDAOJDBC {
         this.conexion = connection;
     }
 
+//   public LeaderDAOJDBC() {
+//    }
+
+    
+    
     public LeaderDAOJDBC(Leader leader) {
         this.leader = leader;
         connectar();
@@ -92,6 +97,64 @@ public class LeaderDAOJDBC {
             e.printStackTrace();
         }
     }
+    
+    
+    public List<Leader> listarLideresConEquipo() {
+    List<Leader> leadersList = new ArrayList<>();  // Cambiamos leaderList a una lista local
+    String sqlSelect = """
+        SELECT e.ID AS id_entrenador, e.NOMBRE AS leader_name, 
+               pu.ID_POKE AS id_pokemon, pu.NIVEL, pu.RAREZA, p.NOMBRE AS pokemon_name
+        FROM entrenadores e
+        JOIN pokeusables pu ON e.ID = pu.ID_ENTRENADOR
+        JOIN pokemones p ON pu.ID_POKE = p.ID
+        WHERE e.ID BETWEEN 10 AND 19
+        ORDER BY e.ID, pu.RAREZA DESC;
+        """;
+
+    try (PreparedStatement stmt = conexion.prepareStatement(sqlSelect); ResultSet rs = stmt.executeQuery()) {
+
+        Map<Integer, Leader> leaderMap = new HashMap<>();
+
+        while (rs.next()) {
+            int leaderId = rs.getInt("id_entrenador");
+            String leaderName = rs.getString("leader_name");
+
+            // Obtener o crear el líder en el Map
+            Leader leaders = leaderMap.get(leaderId);
+            if (leaders == null) {
+                leaders = new Leader();
+                leaders.setId(leaderId);
+                leaders.setName(leaderName);
+                leaders.setTeamPokemon(new ArrayList<>());  // Inicializar la lista de Pokémon
+                leaders.setMoney(999);
+                leaders.setDefeated(false);
+                leaderMap.put(leaderId, leaders);
+            }
+
+            // Crear el objeto Pokemon y asignar sus valores
+            Pokemon pokemon = new Pokemon();
+            pokemon.setId(rs.getInt("id_pokemon"));
+            pokemon.setName(rs.getString("pokemon_name"));
+            pokemon.setLevel(rs.getInt("NIVEL"));
+            pokemon.setRarity(rs.getInt("RAREZA"));
+
+            // Añadir el Pokémon al equipo del líder
+            leaders.getTeamPokemon().add(pokemon);
+        }
+
+        // Añadir todos los líderes a la lista leaderList
+        leadersList.addAll(leaderMap.values());
+
+        System.out.println("Líderes y sus pokemones listados correctamente.");
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return leadersList;  // Retornar la lista de líderes
+}
+
+    
     
     //hace una lista con todos los pokemones de los lideres, con su id de entrenador
     public void listarPokemonesDeLideres() 
@@ -173,4 +236,19 @@ public class LeaderDAOJDBC {
         return leaderList;
     }
 
+    public Connection getConexion() {
+        try {
+            return DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
+            //System.out.println("Conectado dao leader");
+        } catch (SQLException ex) {
+            System.out.println("NO CONECTO DAO leader");
+            java.util.logging.Logger.getLogger(PlayerDAOJDBC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        
+    }
+
+    
+    
 }

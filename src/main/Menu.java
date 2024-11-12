@@ -35,6 +35,10 @@ public class Menu extends javax.swing.JPanel {
         this.btnMarket.setOpaque(false);
         this.btnMarket.setContentAreaFilled(false);
         this.btnMarket.setBorderPainted(false);
+        
+        this.btnLiga.setOpaque(false);
+        this.btnLiga.setContentAreaFilled(false);
+        this.btnLiga.setBorderPainted(false);
 
     }
 
@@ -97,6 +101,12 @@ public class Menu extends javax.swing.JPanel {
         lblLiga.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblLiga.setText("Liga Pokemon");
         add(lblLiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 340, 50));
+
+        btnLiga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLigaActionPerformed(evt);
+            }
+        });
         add(btnLiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, 370, 70));
 
         lblArrow3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
@@ -106,6 +116,10 @@ public class Menu extends javax.swing.JPanel {
     private void btnMarketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarketActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMarketActionPerformed
+
+    private void btnLigaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLigaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLigaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

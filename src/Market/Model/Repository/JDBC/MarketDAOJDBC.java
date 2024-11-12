@@ -41,7 +41,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
                     + "FROM pokeusables pu "
                     + "JOIN pokemones p ON pu.ID_POKE = p.id "
                     + "JOIN entrenadores e ON pu.ID_ENTRENADOR = e.id "
-                    + "WHERE pu.ID_ENTRENADOR < 20";
+                    + "WHERE pu.ID_ENTRENADOR < 10";
             PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect);
 
             // Ejecutar la consulta y obtener los resultados
@@ -99,7 +99,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
     public void reiniciarTablaBD() {
         try {
-            String sqlDeleteTable = "DELETE FROM pokeusables WHERE ID_ENTRENADOR < 20  ";
+            String sqlDeleteTable = "DELETE FROM pokeusables WHERE ID_ENTRENADOR < 10  ";
             PreparedStatement stmtDelete = conexion.prepareStatement(sqlDeleteTable);
             stmtDelete.executeUpdate();
             System.out.println("Se eliminaron los registros.");
@@ -144,7 +144,7 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
 
     @Override
     public void eliminar(int rarity) {
-        String sqlDelete = "DELETE FROM pokeusables WHERE RAREZA <> ? AND ID_ENTRENADOR < 20";
+        String sqlDelete = "DELETE FROM pokeusables WHERE RAREZA <> ? AND ID_ENTRENADOR < 10";
 
         try (PreparedStatement stmtDelete = conexion.prepareStatement(sqlDelete)) {
             // Asignar el valor del parámetro (la rareza que se va a comparar)

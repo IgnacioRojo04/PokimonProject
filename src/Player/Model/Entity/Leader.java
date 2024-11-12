@@ -9,6 +9,7 @@ import java.util.List;
 public class Leader extends Character{
     
     private boolean defeated;
+    private int difficulty;
 
     public boolean isDefeated() {
         return defeated;
@@ -24,14 +25,37 @@ public class Leader extends Character{
     }
     
      public Leader( String name) {
-        super(name) ;   
+        super(name) ;  
+        this.difficulty = this.getId() - 10;
     }
     
     public Leader(String name, List<Pokemon> teamPokemon, int money, boolean defeated) {
         super(name, money);
         this.teamPokemon = new ArrayList<>();
         this.defeated = false;
+        this.difficulty = this.getId() - 10;
         
+    }
+
+    public Leader(boolean defeated, int difficulty) {
+        this.defeated = defeated;
+        this.difficulty = this.getId() - 10;
+    }
+
+    public Leader(boolean defeated, int difficulty, String name, int money) {
+        super(name, money);
+        this.defeated = defeated;
+        this.difficulty = this.getId() - 10;
+    }
+
+    public Leader(boolean defeated, int difficulty, String name) {
+        super(name);
+        this.defeated = defeated;
+        this.difficulty = this.getId() - 10;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
     
     
@@ -62,6 +86,8 @@ public class Leader extends Character{
     public String toString() {
         return "Leader{" + '}';
     }
+
+    
     
     
 
