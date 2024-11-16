@@ -6,8 +6,11 @@ package Player.View;
 
 import Player.Model.Entity.Player;
 import Pókemon.Model.Entity.Pokemon;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,10 +19,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TablePlayerView extends javax.swing.JPanel {
 
+    private Image pikachu;
     
     public TablePlayerView() {
+        this.pikachu = new ImageIcon("src/img/pikachu.png").getImage();
         initComponents();
        
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // Dibujar la imagen de fondo
+        if (pikachu != null) {
+            g.drawImage(pikachu, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     /**

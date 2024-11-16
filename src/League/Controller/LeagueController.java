@@ -1,4 +1,5 @@
 package League.Controller;
+
 import java.sql.SQLException;
 import League.View.LeagueView;
 import Player.Model.Entity.Leader;
@@ -7,9 +8,8 @@ import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import org.mariadb.jdbc.Connection;
-
-
+//import org.mariadb.jdbc.Connection;
+import java.sql.Connection;
 
 /**
  * Controlador para gestionar la Liga Pokémon, donde el jugador puede
@@ -26,7 +26,6 @@ public class LeagueController {
     private LeaderDAOJDBC leaderDAO;
     public LeagueView leagueView;
     public Leader leader;
-   
 
     public LeagueController(LeagueView leagueView) {
         this.leagueView = leagueView;
@@ -41,11 +40,20 @@ public class LeagueController {
      */
     public LeagueController() {
         leagueView = new LeagueView(); // Asegúrate de inicializar la vista
-        this.leaderDAO = new LeaderDAOJDBC(leaderDAO.getConexion()); /////////////////////////////////////////ERROR
-         // Usa DBConnection para obtener la conexión
-        
-    
+        this.leaderDAO = new LeaderDAOJDBC();
+        Connection connection = LeaderDAOJDBC.getConexion();
+        //this.leaderDAO = new LeaderDAOJDBC(leaderDAO.getConexion()); /////////////////////////////////////////ERROR
+        // Usa DBConnection para obtener la conexión
 
+    }
+
+    public void conexionBD() {
+        Connection connection = LeaderDAOJDBC.getConexion();
+        if (connection != null) {
+            System.out.println("Conexión obtenida exitosamente.");
+        } else {
+            System.out.println("No se pudo obtener la conexión.");
+        }
     }
 
     // public LeagueController(LeaderDAOJDBC leaderDAO) {
@@ -160,6 +168,10 @@ public class LeagueController {
             System.out.println("Índice de líder inválido: " + index);
             return null;
         }
+    }
+
+    public void setLeaderDAO(LeaderDAOJDBC leaderDAO) {
+        this.leaderDAO = leaderDAO;
     }
 
     public void cargarDatosLigaEnTabla() {

@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/main/Menu.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/main/MainView.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/main/Home.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/League/Controller/LeagueController.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/League/View/LeagueView.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/Player/Model/Repository/JDBC/LeaderDAOJDBC.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/Player/Model/Entity/Leader.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/Player/View/PlayerView.java</file>
+            <file>file:/C:/Users/juanm/OneDrive/Escritorio/Pokemon%20Definitivo%20POO/PokimonProject/src/main/PokemonProject.java</file>
+        </group>
     </open-files>
 </project-private>

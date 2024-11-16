@@ -30,6 +30,8 @@ public class MainView extends javax.swing.JFrame {
     private Home homeView = new Home();
     private Menu menu = new Menu();
     private CardLayout layout;
+    
+    
 
     public MainView() {
         initComponents();
