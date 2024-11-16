@@ -4,6 +4,10 @@
  */
 package Player.View;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 
 
 
@@ -14,10 +18,21 @@ package Player.View;
 public class PlayerView extends javax.swing.JPanel {
     
 
-   
+   private Image intro;
 
     public PlayerView() {
+        this.intro = new ImageIcon("src/img/intro.png").getImage();
         initComponents();
+        setVisible(true);
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // Dibujar la imagen de fondo
+        if (intro != null) {
+            g.drawImage(intro, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     @SuppressWarnings("unchecked")

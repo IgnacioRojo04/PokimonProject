@@ -1,4 +1,5 @@
 package League.Controller;
+
 import java.sql.SQLException;
 import League.View.LeagueView;
 import Player.Model.Entity.Leader;
@@ -9,6 +10,11 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
+
+
+
+//import org.mariadb.jdbc.Connection;
+import java.sql.Connection;
 
 
 /**
@@ -26,7 +32,6 @@ public class LeagueController {
     private LeaderDAOJDBC leaderDAO;
     public LeagueView leagueView;
     public Leader leader;
-   
 
     public LeagueController(LeagueView leagueView) {
         this.leagueView = leagueView;
@@ -41,12 +46,11 @@ public class LeagueController {
      */
     public LeagueController() {
         leagueView = new LeagueView(); // Asegúrate de inicializar la vista
-        this.leaderDAO = new LeaderDAOJDBC(leaderDAO.getConexion()); /////////////////////////////////////////ERROR
-         // Usa DBConnection para obtener la conexión
-        
-    
+        this.leaderDAO = new LeaderDAOJDBC();
+        // Usa DBConnection para obtener la conexión
 
     }
+
 
     // public LeagueController(LeaderDAOJDBC leaderDAO) {
     // Inicializa la lista de líderes llamando al método listar
@@ -160,6 +164,10 @@ public class LeagueController {
             System.out.println("Índice de líder inválido: " + index);
             return null;
         }
+    }
+
+    public void setLeaderDAO(LeaderDAOJDBC leaderDAO) {
+        this.leaderDAO = leaderDAO;
     }
 
     public void cargarDatosLigaEnTabla() {

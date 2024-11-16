@@ -9,7 +9,7 @@ import java.util.List;
 public class Leader extends Character{
     
     private boolean defeated;
-    private int difficulty;
+    private int difficulty = this.getId();
 
     public boolean isDefeated() {
         return defeated;

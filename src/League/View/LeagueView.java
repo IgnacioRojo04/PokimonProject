@@ -6,8 +6,11 @@ package League.View;
 
 import Player.Model.Repository.JDBC.LeaderDAOJDBC;
 import Pókemon.Model.Entity.Pokemon;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.List;
 import java.util.Map;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,8 +21,22 @@ public class LeagueView extends javax.swing.JPanel {
     /**
      * Creates new form LeagueView
      */
+    
+    private Image liga;
+    
     public LeagueView() {
+        this.liga = new ImageIcon("src/img/liga.png").getImage();
         initComponents();
+        
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        // Dibujar la imagen de fondo
+        if (liga != null) {
+            g.drawImage(liga, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     /**
