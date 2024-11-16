@@ -7,7 +7,7 @@ import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import org.mariadb.jdbc.Connection;
+
 
 
 
