@@ -27,6 +27,8 @@ public class Leader extends Character{
      public Leader( String name) {
         super(name) ;  
         this.difficulty = this.getId() - 10;
+        // borar esot es solo prueba
+        this.teamPokemon = new ArrayList<>();
     }
     
     public Leader(String name, List<Pokemon> teamPokemon, int money, boolean defeated) {

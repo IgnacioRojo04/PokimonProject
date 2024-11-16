@@ -60,7 +60,7 @@ public class LeagueController {
         for (Leader leader : leadersList) {
             if (leader.getId() == leaderId) {
                 leader.setDefeated(true);
-                System.out.println("Felicidades haz derrotado al Líder " + leader.getName() + " , ya fue marcado como derrotado, sigue con los demás lideres antes de que se recuperen.");
+                System.out.println("Felicidades haz derrotado al líder " + leader.getName() + ", ya fue marcado como derrotado, sigue con los demás lideres antes de que se recuperen.");
                 break;
             }
         }
@@ -74,7 +74,6 @@ public class LeagueController {
      */
     public List<Leader> getNonDefeatedLeaders() {
         List<Leader> nonDefeatedLeaders = new ArrayList<>(); // Lista para almacenar los líderes no derrotados
-
         // Recorrer cada líder en la lista de líderes
         for (Leader leader : leadersList) {
             // Si el líder no está derrotado, lo añadimos a la lista de no derrotados
@@ -82,7 +81,6 @@ public class LeagueController {
                 nonDefeatedLeaders.add(leader);
             }
         }
-
         return nonDefeatedLeaders; // Retornamos la lista de líderes no derrotados
     }
 
@@ -168,10 +166,14 @@ public class LeagueController {
         List<Leader> leaders = leaderDAO.listarLideresConEquipo(); // Método que retorna una lista de líderes con sus equipos de pokemones
 
         // Configuración de columnas para el JTable
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = (DefaultTableModel) this.leagueView.tLeague.getModel();
         model.addColumn("Leader");
         model.addColumn("Pokemon");
         model.addColumn("Dificultad");
+        System.out.println("f");
+        leaders.add(new Leader("primero"));
+        leaders.add(new Leader("segudo"));
+        leaders.add(new Leader("tercero"));
 
         // Recorrer la lista de líderes y agregar filas al modelo de la tabla
         for (Leader leader : leaders) {
@@ -182,12 +184,12 @@ public class LeagueController {
                     pokemon.getName(),
                     leader.getDifficulty()
                 };
+                System.out.println(row);
+                System.out.println("-");
                 model.addRow(row);
             }
         }
 
-        // Asignar el modelo al JTable
-        leagueView.jTable1.setModel(model);
     }
 
 }
