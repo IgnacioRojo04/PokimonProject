@@ -39,12 +39,17 @@ public class MainView extends javax.swing.JFrame {
         showPlayerView(this.playerController.playerDao.player.getTeamPokemon());
         showMenuPanel();
         showMarketView();
-        backMarket();
         showLeagueView();
         showPokemonView();
+        showGym();
+        
         backPoke();
         backGym();
-        showGym();
+        backMarket();
+        backHomePlayerView();
+        backHomePlayerContinue();
+        backLeague();
+        
         buyMarket();
         sellPoke();
         trainPokemon();
@@ -54,8 +59,6 @@ public class MainView extends javax.swing.JFrame {
         continueGame();
         selectPlayer();
         deletePlayer();
-        backHomePlayerView();
-        backHomePlayerContinue();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
 
         addWindowListener(new WindowAdapter() {

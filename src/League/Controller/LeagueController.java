@@ -10,13 +10,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 
-
-
-
-//import org.mariadb.jdbc.Connection;
-import java.sql.Connection;
-
-
 /**
  * Controlador para gestionar la Liga Pokémon, donde el jugador puede
  * enfrentarse a los líderes de gimnasio. Proporciona métodos para listar los
@@ -35,6 +28,7 @@ public class LeagueController {
 
     public LeagueController(LeagueView leagueView) {
         this.leagueView = leagueView;
+        // falta DAO
     }
 
     /**

@@ -21,7 +21,7 @@ public class LeaderDAOJDBC {
 
     public void connectar() {
         try {
-            DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
+            conexion =  DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
             System.out.println("Conectado dao leader");
         } catch (SQLException ex) {
             System.out.println("NO CONECTO DAO leader");
@@ -29,15 +29,13 @@ public class LeaderDAOJDBC {
         }
     }
 
-    public LeaderDAOJDBC(Connection connection) {
-        this.conexion = connection;
-    }
-
     public LeaderDAOJDBC() {
+         this.leader = leader;
+        connectar();
+        this.leaderList = new ArrayList<>();
     }
-
-//   public LeaderDAOJDBC() {
-//    }
+    
+    // Si no se utiliza, ELIMINAR
     public LeaderDAOJDBC(Leader leader) {
         this.leader = leader;
         connectar();
@@ -231,20 +229,6 @@ public class LeaderDAOJDBC {
 
     public List<Leader> getLeaderList() {
         return leaderList;
-    }
-
-    public static Connection getConexion() {
-        if (conexion == null) {
-            try {
-                conexion = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/pokemones?user=root&password=root");
-                //System.out.println("Conectado dao leader");
-            } catch (SQLException ex) {
-                System.out.println("NO CONECTO DAO leader");
-                java.util.logging.Logger.getLogger(PlayerDAOJDBC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                return null;
-            }
-        }
-        return conexion;
     }
 
 }
