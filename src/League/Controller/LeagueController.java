@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  * Controlador para gestionar la Liga Pokémon, donde el jugador puede
  * enfrentarse a los líderes de gimnasio. Proporciona métodos para listar los
@@ -21,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LeagueController {
 
-    private List<Leader> leadersList;
+    // private List<Leader> leadersList;
     private LeaderDAOJDBC leaderDAO;
     public LeagueView leagueView;
     public Leader leader;
@@ -45,7 +44,6 @@ public class LeagueController {
 
     }
 
-
     // public LeagueController(LeaderDAOJDBC leaderDAO) {
     // Inicializa la lista de líderes llamando al método listar
     //       this.leadersList = leaderDAO.listarNombreLideres();
@@ -57,7 +55,7 @@ public class LeagueController {
      * @param leaderId ID del líder que ha sido derrotado.
      */
     public void markLeaderAsDefeated(int leaderId) {
-        for (Leader leader : leadersList) {
+        for (Leader leader : this.leaderDAO.leaderList) {
             if (leader.getId() == leaderId) {
                 leader.setDefeated(true);
                 System.out.println("Felicidades haz derrotado al líder " + leader.getName() + ", ya fue marcado como derrotado, sigue con los demás lideres antes de que se recuperen.");
@@ -75,7 +73,7 @@ public class LeagueController {
     public List<Leader> getNonDefeatedLeaders() {
         List<Leader> nonDefeatedLeaders = new ArrayList<>(); // Lista para almacenar los líderes no derrotados
         // Recorrer cada líder en la lista de líderes
-        for (Leader leader : leadersList) {
+        for (Leader leader : this.leaderDAO.leaderList) {
             // Si el líder no está derrotado, lo añadimos a la lista de no derrotados
             if (!leader.isDefeated()) {
                 nonDefeatedLeaders.add(leader);
@@ -93,7 +91,7 @@ public class LeagueController {
         List<Leader> DefeatedLeaders = new ArrayList<>(); // Lista para almacenar los líderes no derrotados
 
         // Recorrer cada líder en la lista de líderes
-        for (Leader leader : leadersList) {
+        for (Leader leader : this.leaderDAO.leaderList) {
             // Si el líder no está derrotado, lo añadimos a la lista de no derrotados
             if (leader.isDefeated() == true) {
                 DefeatedLeaders.add(leader);
@@ -149,8 +147,8 @@ public class LeagueController {
     }
 
     public Leader getLeader(int index) {
-        if (index >= 0 && index < leadersList.size()) {
-            return leadersList.get(index);
+        if (index >= 0 && index < this.leaderDAO.leaderList.size()) {
+            return this.leaderDAO.leaderList.get(index);
         } else {
             // Retorna null o lanza una excepción en caso de que el índice no sea válido
             System.out.println("Índice de líder inválido: " + index);
@@ -163,31 +161,38 @@ public class LeagueController {
     }
 
     public void cargarDatosLigaEnTabla() {
-        List<Leader> leaders = leaderDAO.listarLideresConEquipo(); // Método que retorna una lista de líderes con sus equipos de pokemones
+        //List<Leader> leaders = leaderDAO.listarLideresConEquipo(); // Método que retorna una lista de líderes con sus equipos de pokemones
 
         // Configuración de columnas para el JTable
         DefaultTableModel model = (DefaultTableModel) this.leagueView.tLeague.getModel();
-        model.addColumn("Leader");
-        model.addColumn("Pokemon");
-        model.addColumn("Dificultad");
-        System.out.println("f");
-        leaders.add(new Leader("primero"));
-        leaders.add(new Leader("segudo"));
-        leaders.add(new Leader("tercero"));
+        
+        System.out.println(this.leaderDAO.leaderList);
+        System.out.println("g");
+        this.leaderDAO.leaderList.add(new Leader("primero"));
+        this.leaderDAO.leaderList.add(new Leader("segudo"));
+        this.leaderDAO.leaderList.add(new Leader("tercero"));
+        System.out.println(this.leaderDAO.leaderList);
+        System.out.println("H");
 
         // Recorrer la lista de líderes y agregar filas al modelo de la tabla
-        for (Leader leader : leaders) {
-            for (Pokemon pokemon : leader.getTeamPokemon()) {
+        for (Leader leader : this.leaderDAO.leaderList) {
+            System.out.println(leader);
+            for (Pokemon pokemon : leader.teamPokemon) {
+                System.out.println(leader.teamPokemon);
                 // Cada fila contendrá el nombre del líder, nombre del pokemon y dificultad del líder
                 Object[] row = new Object[]{
                     leader.getName(),
                     pokemon.getName(),
                     leader.getDifficulty()
                 };
+                
+                
                 System.out.println(row);
                 System.out.println("-");
                 model.addRow(row);
+                
             }
+            this.leagueView.cbLeaders.addItem(leader.getName());
         }
 
     }

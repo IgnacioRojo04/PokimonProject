@@ -29,6 +29,9 @@ public class Leader extends Character{
         this.difficulty = this.getId() - 10;
         // borar esot es solo prueba
         this.teamPokemon = new ArrayList<>();
+        this.teamPokemon.add(new Pokemon("pika"));
+        this.teamPokemon.add(new Pokemon("squirt"));
+        this.teamPokemon.add(new Pokemon("charma"));
     }
     
     public Leader(String name, List<Pokemon> teamPokemon, int money, boolean defeated) {
