@@ -40,6 +40,7 @@ public class PokemonController {
      */
      
     public PokemonController(Player player) {
+       // System.out.println(player);
         this.pokemonView = new PokemonView();
         this.pokemonDao = new PokemonDAOJDBC(player);
     }
@@ -65,6 +66,9 @@ public class PokemonController {
                 pokemon.getCost(),});
             this.pokemonView.cbPokeName.addItem(pokemon.getName());
         }
+        
+    }
+    public void savePlayer(Player player){
         
     }
 

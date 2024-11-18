@@ -3,6 +3,9 @@
 package Player.Model.Entity;
 //import Player.Model.Entity.Character;
 
+import Character.Character;
+
+
 public class Player extends Character{
 
     public Player(String name){

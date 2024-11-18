@@ -103,7 +103,6 @@ public class PlayerController {
         model.setRowCount(0);
         tablePlayerView.cbPlayer.removeAllItems();
         this.playerDao.listar();
-        System.out.println("asada");
         for (Player player : this.playerDao.playerList) {
             System.out.println(player.getName());
             model.addRow(new Object[]{
@@ -120,7 +119,6 @@ public class PlayerController {
     
     public void selectContinue() {
         int indice = this.tablePlayerView.cbPlayer.getSelectedIndex();
-        System.out.println(this.playerDao.playerList.get(indice).getName());
         this.playerDao.player = this.playerDao.playerList.get(indice);
     }
 

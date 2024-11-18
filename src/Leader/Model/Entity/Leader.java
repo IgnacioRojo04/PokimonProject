@@ -1,6 +1,7 @@
 
-package Player.Model.Entity;
+package Leader.Model.Entity;
 
+import Character.Character;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +25,20 @@ public class Leader extends Character{
     public Leader() {
     }
     
-     public Leader( String name) {
+     public Leader(String name) {
         super(name) ;  
-        this.difficulty = this.getId() - 10;
+        this.difficulty = this.getId() - 9;
         // borar esot es solo prueba
         this.teamPokemon = new ArrayList<>();
-        this.teamPokemon.add(new Pokemon("pika"));
-        this.teamPokemon.add(new Pokemon("squirt"));
-        this.teamPokemon.add(new Pokemon("charma"));
+ 
+    }
+     public Leader(String name, int money, int id) {
+        super(name, money, id);
+        this.defeated = false;
+        this.difficulty = this.getId() - 9;
     }
     
-    public Leader(String name, List<Pokemon> teamPokemon, int money, boolean defeated) {
+    public Leader(String name, List<Pokemon> teamPokemon, int money) {
         super(name, money);
         this.teamPokemon = new ArrayList<>();
         this.defeated = false;
@@ -89,7 +93,10 @@ public class Leader extends Character{
 
     @Override
     public String toString() {
-        return "Leader{" + '}';
+        for(Pokemon pokemon: this.teamPokemon){
+            System.out.println(pokemon);
+        }
+        return "leader:";
     }
 
     

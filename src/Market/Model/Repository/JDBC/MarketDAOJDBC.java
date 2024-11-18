@@ -1,21 +1,15 @@
 package Market.Model.Repository.JDBC;
 
 import Interface.DAO;
-
-import Interface.DAO;
-import java.sql.Statement;
 import java.util.List;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashSet;
-import Market.Model.Entity.Market;
 import Player.Model.Entity.Player;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MarketDAOJDBC implements DAO<Pokemon> {
 
@@ -53,7 +47,6 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
                 Pokemon pokemon = new Pokemon();
 
                 // Asignar los valores de las columnas a los atributos del objeto Pokemon
-                
                 pokemon.setId(rs.getInt("ID"));
                 pokemon.setIdPoke(rs.getInt("ID_POKE"));                // Columna ID_POKE -> id del Pokemon
                 pokemon.setRarity(rs.getInt("RAREZA"));             // Columna RAREZA -> rareza
@@ -71,8 +64,8 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       
-    } 
+
+    }
 
     @Override
     public void crear(Pokemon t) {
@@ -126,9 +119,9 @@ public class MarketDAOJDBC implements DAO<Pokemon> {
     @Override
     public void actualizar(Pokemon t) {
         String sqlUpdate = "UPDATE pokeusables SET ID_ENTRENADOR = ? WHERE ID = ?";
-        try(PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate)) {
-           stmtUpdate.setInt(1, this.player.getId());
-            stmtUpdate.setInt(2, t.getId()); 
+        try (PreparedStatement stmtUpdate = conexion.prepareStatement(sqlUpdate)) {
+            stmtUpdate.setInt(1, this.player.getId());
+            stmtUpdate.setInt(2, t.getId());
             int filasActualizadas = stmtUpdate.executeUpdate();
 
             if (filasActualizadas > 0) {
