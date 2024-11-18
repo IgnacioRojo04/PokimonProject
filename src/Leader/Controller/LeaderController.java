@@ -6,6 +6,7 @@ import Leader.Model.Entity.Leader;
 import Leader.Model.Repository.LeaderRepository;
 import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LeaderController {
 
-    private LeaderRepository leaderRepository;
+    public LeaderRepository leaderRepository;
     public LeaderView leagueView;
 
     public LeaderController(LeaderView leagueView) {
@@ -111,39 +112,6 @@ public class LeaderController {
      * batalla.
      * @return true si el jugador gana la batalla, false si pierde.
      */
-    public boolean battleLeader(List<Pokemon> playerTeam, Leader leader) {
-
-        List<Pokemon> leaderTeam = leader.getTeamPokemon();
-
-        // Calcular el poder de batalla del equipo del jugador
-        int playerLevelSum = 0;
-        int playerRaritySum = 0;
-        for (Pokemon pokemon : playerTeam) {
-            playerLevelSum += pokemon.getLevel();
-            playerRaritySum += pokemon.getRarity();
-        }
-        int playerPower = playerLevelSum * playerRaritySum;
-
-        // Calcular el poder de batalla del equipo del líder
-        int leaderLevelSum = 0;
-        int leaderRaritySum = 0;
-        for (Pokemon pokemon : leaderTeam) {
-            leaderLevelSum += pokemon.getLevel();
-            leaderRaritySum += pokemon.getRarity();
-        }
-        int leaderPower = leaderLevelSum * leaderRaritySum;
-
-        // Comparar el poder de batalla del jugador con el del líder
-        if (playerPower > leaderPower) {
-            markLeaderAsDefeated(leader.getId());
-            System.out.println("¡Has ganado la batalla contra el líder " + leader.getName() + "!");
-            return true; // El jugador gana la batalla
-        } else {
-            System.out.println("Has perdido la batalla contra el líder " + leader.getName() + ". ¡Sigue entrenando!");
-            return false; // El jugador pierde la batalla
-        }
-    }
-
     public Leader getLeader(int index) {
         if (index >= 0 && index < this.leaderRepository.leaderList.size()) {
             return this.leaderRepository.leaderList.get(index);
@@ -157,10 +125,7 @@ public class LeaderController {
         this.leaderRepository = leaderDAO;
     }
 
-    public boolean cargarDatosLigaEnTabla(boolean bol) {
-        //List<Leader> leaders = leaderDAO.listarLideresConEquipo(); // Método que retorna una lista de líderes con sus equipos de pokemones
-
-        // Configuración de columnas para el JTable
+    public boolean FillList(boolean bol) {
         if (bol) {
             this.leaderRepository.listarNombreLideres();
             for (Leader l : this.leaderRepository.leaderList) {
@@ -168,44 +133,79 @@ public class LeaderController {
                     if (p.getOwner() == l.getId()) {
                         l.teamPokemon.add(p);
                     }
-
                 }
             }
+            this.cargarDatosLigaEnTabla();
+        }
+        return false;
+    }
 
-            DefaultTableModel model = (DefaultTableModel) this.leagueView.tLeague.getModel();
-            DefaultTableModel modelDefeated = (DefaultTableModel) this.leagueView.tDefeated.getModel();
-            DefaultTableModel modelAlive = (DefaultTableModel) this.leagueView.tAlive.getModel();
-            this.leagueView.cbLeaders.removeAllItems();
-//         this.leagueView.tLeague.removeAll();
-//         this.leagueView.tAlive.removeAll();
-//         this.leagueView.tDefeated.removeAll();
-            // Recorrer la lista de líderes y agregar filas al modelo de la tabla
-            for (Leader leader : this.leaderRepository.leaderList) {
-                for (Pokemon pokemon : leader.teamPokemon) {
-                    System.out.println(leader.teamPokemon);
-                    // Cada fila contendrá el nombre del líder, nombre del pokemon y dificultad del líder
-                    Object[] row = new Object[]{
-                        leader.getName(),
-                        pokemon.getName(),
-                        leader.getDifficulty()
-                    };
+    public void cargarDatosLigaEnTabla() {
+        //List<Leader> leaders = leaderDAO.listarLideresConEquipo(); // Método que retorna una lista de líderes con sus equipos de pokemones
+        // Configuración de columnas para el JTable
+        DefaultTableModel model = (DefaultTableModel) this.leagueView.tLeague.getModel();
+        DefaultTableModel modelDefeated = (DefaultTableModel) this.leagueView.tDefeated.getModel();
+        DefaultTableModel modelAlive = (DefaultTableModel) this.leagueView.tAlive.getModel();
+        this.leagueView.cbLeaders.removeAllItems();
+        modelDefeated.setRowCount(0);
+        model.setRowCount(0);
+        modelAlive.setRowCount(0);
+//        // Recorrer la lista de líderes y agregar filas al modelo de la tabla
+//        for (Leader leader : this.leaderRepository.leaderList) {
+//            for (Pokemon pokemon : leader.teamPokemon) {
+//                System.out.println(leader.teamPokemon);
+//                // Cada fila contendrá el nombre del líder, nombre del pokemon y dificultad del líder
+//                Object[] row = new Object[]{
+//                    leader.getName(),
+//                    pokemon.getName(),
+//                    leader.getDifficulty()
+//                };
+//                model.addRow(row);
+//            }
+//            if (leader.isDefeated()) {
+//                Object[] row = new Object[]{
+//                    leader.getName(),};
+//                modelDefeated.addRow(row);
+//                defeatedLeader.add(leader);
+//                this.leaderRepository.leaderList.remove(leader);
+//            } else {
+//                Object[] row = new Object[]{
+//                    leader.getName(),};
+//                modelAlive.addRow(row);
+//                this.leagueView.cbLeaders.addItem(leader.getName());
+//            }
+//        }
 
-                    model.addRow(row);
+        Iterator<Leader> iterator = this.leaderRepository.leaderList.iterator();
 
-                }
-                if (leader.isDefeated()) {
-                    Object[] row = new Object[]{
-                        leader.getName(),};
-                    modelDefeated.addRow(row);
-                } else {
-                    Object[] row = new Object[]{
-                        leader.getName(),};
-                    modelAlive.addRow(row);
-                }
+        while (iterator.hasNext()) {
+            Leader leader = iterator.next();
+            for (Pokemon pokemon : leader.teamPokemon) {
+                System.out.println(leader.teamPokemon);
+                // Cada fila contendrá el nombre del líder, nombre del pokemon y dificultad del líder
+                Object[] row = new Object[]{
+                    leader.getName(),
+                    pokemon.getName(),
+                    leader.getDifficulty()
+                };
+                model.addRow(row);
+            }
+            if (leader.isDefeated()) {
+                
+                this.leaderRepository.defeatedLeaderList.add(leader);
+                iterator.remove(); // Eliminar de manera segura el líder actual
+            } else {
+                Object[] row = new Object[]{leader.getName()};
+                modelAlive.addRow(row);
                 this.leagueView.cbLeaders.addItem(leader.getName());
             }
         }
-        return false;
+        
+        for(Leader leader: this.leaderRepository.defeatedLeaderList){
+            System.out.println(leader + "56");
+            Object[] row = new Object[]{leader.getName()};
+                modelDefeated.addRow(row);
+        }
     }
 
 }

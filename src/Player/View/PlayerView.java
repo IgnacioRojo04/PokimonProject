@@ -21,7 +21,7 @@ public class PlayerView extends javax.swing.JPanel {
    private Image intro;
 
     public PlayerView() {
-        this.intro = new ImageIcon("src/img/intro.png").getImage();
+        this.intro = new ImageIcon("src/img/intro.jpg").getImage();
         initComponents();
         setVisible(true);
     }

@@ -93,10 +93,8 @@ public class Leader extends Character{
 
     @Override
     public String toString() {
-        for(Pokemon pokemon: this.teamPokemon){
-            System.out.println(pokemon);
-        }
-        return "leader:";
+
+        return "leader:" + name + this.defeated;
     }
 
     

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public abstract class Character {
 
-    private String name;
+    public String name;
     public List<Pokemon> teamPokemon; 
     private int money;
     private int id;

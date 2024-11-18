@@ -63,7 +63,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
     @Override
     public void crear(Player player) {
         try {
-            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 100)";
+            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 150)";
             PreparedStatement pstmtPlayer = conexion.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
             pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.executeUpdate();

@@ -22,7 +22,7 @@ public class TablePlayerView extends javax.swing.JPanel {
     private Image pikachu;
     
     public TablePlayerView() {
-        this.pikachu = new ImageIcon("src/img/pikachu.png").getImage();
+        this.pikachu = new ImageIcon("src/img/pikachu.jpg").getImage();
         initComponents();
        
     }

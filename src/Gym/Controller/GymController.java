@@ -74,7 +74,7 @@ public class GymController {
         int indice = this.gymView.cbGym.getSelectedIndex();
         Pokemon pokeTrain = teamPokemon.get(indice);
         System.out.println(indice);
-        pokeTrain.setLevel(pokeTrain.getLevel() + (int) (Math.random() * 10));
+        pokeTrain.setLevel(pokeTrain.getLevel() + (int) ((Math.random() * 10) + 1));
         if (pokeTrain.getLevel() > 100) pokeTrain.setLevel(100);
         pokeTrain.setCost(pokeTrain.getLevel() * pokeTrain.getRarity());
         this.repaintView(teamPokemon);

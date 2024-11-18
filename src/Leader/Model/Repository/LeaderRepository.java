@@ -17,7 +17,8 @@ import java.util.Map;
 
 public class LeaderRepository {
 
-    public List<Leader> leaderList; // for()poke
+    public List<Leader> leaderList; 
+    public List<Leader> defeatedLeaderList;
     public static Connection conexion = null;
     
 
@@ -34,6 +35,7 @@ public class LeaderRepository {
     public LeaderRepository() {
         connectar();
         this.leaderList = new ArrayList<>();
+        this.defeatedLeaderList = new ArrayList<>();
     }
 
     // Si no se utiliza, ELIMINAR

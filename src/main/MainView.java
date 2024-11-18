@@ -30,6 +30,7 @@ public class MainView extends javax.swing.JFrame {
     private Home homeView = new Home();
     private Menu menu = new Menu();
     public boolean leagueFill = true;
+    
     private CardLayout layout;
 
     public MainView() {
@@ -42,7 +43,7 @@ public class MainView extends javax.swing.JFrame {
         showLeagueView();
         showPokemonView();
         showGym();
-
+        battleLeader();
         backPoke();
         backGym();
         backMarket();
@@ -143,8 +144,8 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnLiga.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                leagueFill = leagueController.cargarDatosLigaEnTabla(leagueFill);
+                pokemonController.pokemonDao.listar();
+                leagueFill = leagueController.FillList(leagueFill);
                 System.out.println(leagueFill);
                 layout.show(container, "LeaderPoke");
             }
@@ -155,6 +156,7 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnGym.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                pokemonController.pokemonDao.listar();
                 gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney() + "");
                 gymController.repaintView(playerController.playerDao.player.getTeamPokemon());
                 layout.show(container, "Gym");
@@ -166,7 +168,7 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnPoke.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 System.out.println("ID  jaajajja " + playerController.playerDao.player.getId());
+                System.out.println("ID  jaajajja " + playerController.playerDao.player.getId());
                 System.out.println(playerController.playerDao.player.getName());
                 pokemonController.fillTable(playerController.playerDao.player);
                 pokemonController.showMoney(playerController.playerDao.player.getMoney());
@@ -287,8 +289,9 @@ public class MainView extends javax.swing.JFrame {
                     if (playerController.playerDao.player.getMoney() >= 5 && pokeTrained.getLevel() < 100) {
                         playerController.setMoney(-5);
                         pokemonController.pokemonDao.actualizar(gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player));
-                        jdExeption.setTitle("Hoy toco pecho");
-                        lblDialog.setText("Never Pony.");
+                        gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney()+ "");
+                        jdExeption.setTitle("Entrenaste!");
+                        lblDialog.setText("Alto Machamp");
                         jdExeption.setSize(400, 100);
                         jdExeption.setModal(true);
                         jdExeption.setVisible(true);
@@ -323,50 +326,69 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtener el equipo del jugador y el líder seleccionado
-                List<Pokemon> playerTeam = playerController.playerDao.player.getTeamPokemon();
-                Leader selectedLeader = leagueController.getLeader(leagueController.leagueView.cbLeaders.getSelectedIndex());
+                if (playerController.playerDao.player.teamPokemon.size() > 0 && playerController.playerDao.player.getMoney() >= 10) {
+                    List<Pokemon> playerTeam = playerController.playerDao.player.getTeamPokemon();
+                    Leader selectedLeader = leagueController.getLeader(leagueController.leagueView.cbLeaders.getSelectedIndex());
 
-                // Obtener el equipo del líder
-                List<Pokemon> leaderTeam = selectedLeader.getTeamPokemon();
+                    // Obtener el equipo del líder
+                    List<Pokemon> leaderTeam = selectedLeader.getTeamPokemon();
+                    playerController.setMoney(-10);
+                    // Calcular el poder de batalla del equipo del jugador
+                    int playerLevelSum = 0;
+                    int playerRaritySum = 0;
+                    for (Pokemon pokemon : playerTeam) {
+                        playerLevelSum += pokemon.getLevel();
+                        playerRaritySum += pokemon.getRarity();
+                    }
+                    int playerPower = playerLevelSum * playerRaritySum;
 
-                // Calcular el poder de batalla del equipo del jugador
-                int playerLevelSum = 0;
-                int playerRaritySum = 0;
-                for (Pokemon pokemon : playerTeam) {
-                    playerLevelSum += pokemon.getLevel();
-                    playerRaritySum += pokemon.getRarity();
-                }
-                int playerPower = playerLevelSum * playerRaritySum;
+                    // Calcular el poder de batalla del equipo del líder
+                    int leaderLevelSum = 0;
+                    int leaderRaritySum = 0;
+                    for (Pokemon pokemon : leaderTeam) {
+                        leaderLevelSum += pokemon.getLevel();
+                        leaderRaritySum += pokemon.getRarity();
+                    }
+                    int leaderPower = leaderLevelSum * leaderRaritySum;
 
-                // Calcular el poder de batalla del equipo del líder
-                int leaderLevelSum = 0;
-                int leaderRaritySum = 0;
-                for (Pokemon pokemon : leaderTeam) {
-                    leaderLevelSum += pokemon.getLevel();
-                    leaderRaritySum += pokemon.getRarity();
-                }
-                int leaderPower = leaderLevelSum * leaderRaritySum;
+                    System.out.println(leaderPower + "medio" + playerPower);
+                    // Crear mensaje para el diálogo según el resultado de la batalla
+                    String title;
+                    String message;
 
-                // Crear mensaje para el diálogo según el resultado de la batalla
-                String title;
-                String message;
+                    if (playerPower >= leaderPower) {
+                        // Si el jugador gana, marca al líder como derrotado
+                        leagueController.markLeaderAsDefeated(selectedLeader.getId());
+                        title = "¡Victoria!";
+                        message = "¡Has ganado la batalla contra el líder " + selectedLeader.getName() + "!";
+                        
+                        for(Leader leader: leagueController.leaderRepository.leaderList){
+                            if(leader.equals(selectedLeader)){
+                                leader.setDefeated(true);
+                                playerController.setMoney(leader.getMoney());
+                            }
+                        }
+                       leagueController.cargarDatosLigaEnTabla();
+                    } else {
+                        title = "Derrota";
+                        message = "Has perdido la batalla contra el líder " + selectedLeader.getName() + ". ¡Sigue entrenando!";
+                        
+                    }
 
-                if (playerPower >= leaderPower) {
-                    // Si el jugador gana, marca al líder como derrotado
-                    leagueController.markLeaderAsDefeated(selectedLeader.getId());
-                    title = "¡Victoria!";
-                    message = "¡Has ganado la batalla contra el líder " + selectedLeader.getName() + "!";
+                    // Mostrar el resultado en un diálogo emergente
+                    jdExeption.setTitle(title);
+                    lblDialog.setText(message);
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
                 } else {
-                    title = "Derrota";
-                    message = "Has perdido la batalla contra el líder " + selectedLeader.getName() + ". ¡Sigue entrenando!";
-                }
+                    jdExeption.setTitle("Lista vacia");
+                    lblDialog.setText("No tenes pokemones. No tenes suficiente dinero.");
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
 
-                // Mostrar el resultado en un diálogo emergente
-                jdExeption.setTitle(title);
-                lblDialog.setText(message);
-                jdExeption.setSize(400, 100);
-                jdExeption.setModal(true);
-                jdExeption.setVisible(true);
+                }
             }
         });
     }

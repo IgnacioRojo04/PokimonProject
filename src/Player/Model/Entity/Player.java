@@ -12,7 +12,7 @@ public class Player extends Character{
         super(name, 12);
     }
     public Player(){
-         super("prueba", 200);
+         super("prueba", 150);
     }
     
     @Override

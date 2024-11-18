@@ -121,5 +121,4 @@ public class PlayerController {
         int indice = this.tablePlayerView.cbPlayer.getSelectedIndex();
         this.playerDao.player = this.playerDao.playerList.get(indice);
     }
-
 }
