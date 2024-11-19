@@ -27,12 +27,10 @@ public class Home extends javax.swing.JPanel {
         initComponents();
        this.btnNewGame.setBounds(100, 100, 150, 30);   // Ajusta estas posiciones como quieras
        this.btnContinue.setBounds(100, 150, 150, 30);
-        this.btnUs.setBounds(100, 200, 150, 30);
-
+      
         // Añadir los botones al Home
         add(btnNewGame);
         add(btnContinue);   
-        add(btnUs);
        
     }
 
@@ -51,7 +49,6 @@ public class Home extends javax.swing.JPanel {
 
         btnNewGame = new javax.swing.JButton();
         btnContinue = new javax.swing.JButton();
-        btnUs = new javax.swing.JButton();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -70,9 +67,6 @@ public class Home extends javax.swing.JPanel {
             }
         });
         add(btnContinue, new java.awt.GridBagConstraints());
-
-        btnUs.setText("Nosotros");
-        add(btnUs, new java.awt.GridBagConstraints());
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
@@ -87,6 +81,5 @@ public class Home extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnContinue;
     public javax.swing.JButton btnNewGame;
-    public javax.swing.JButton btnUs;
     // End of variables declaration//GEN-END:variables
 }
