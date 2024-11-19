@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashSet;
+//import java.util.HashSet;
 
 public class PlayerDAOJDBC implements DAO<Player> {
 
@@ -43,14 +43,13 @@ public class PlayerDAOJDBC implements DAO<Player> {
             ResultSet rs = stmtSelect.executeQuery();
             while (rs.next()) {
                 Player player = new Player();
-                
                 player.setId(rs.getInt("ID"));
                 player.setName(rs.getString("NOMBRE"));
                 System.out.println("PLAYER NAME:" + player.getName());
                 player.setMoney(rs.getInt("DINERO"));  
                 
                 System.out.println("DIMERO PLAYER" + player.getMoney());
-                
+                System.out.println("ID PLAYER: xd " + player.getId());
                 this.playerList.add(player);
             }
 
@@ -64,7 +63,7 @@ public class PlayerDAOJDBC implements DAO<Player> {
     @Override
     public void crear(Player player) {
         try {
-            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 100)";
+            String insertStmtPlayer = "INSERT INTO entrenadores(NOMBRE, DINERO) VALUES(?, 150)";
             PreparedStatement pstmtPlayer = conexion.prepareStatement(insertStmtPlayer, Statement.RETURN_GENERATED_KEYS);
             pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.executeUpdate();
@@ -116,8 +115,8 @@ public class PlayerDAOJDBC implements DAO<Player> {
 
     @Override
     public void eliminar(int id) {
-        String deletePokeUsablesSQL = "DELETE FROM pokeusables WHERE ID_ENTRENADOR >= ?";
-        String deleteEntrenadorSQL = "DELETE FROM entrenadores WHERE ID >= ?";
+        String deletePokeUsablesSQL = "DELETE FROM pokeusables WHERE ID_ENTRENADOR = ?";
+        String deleteEntrenadorSQL = "DELETE FROM entrenadores WHERE ID = ?";
 
         try {
             try (PreparedStatement pstmtPokeUsables = conexion.prepareStatement(deletePokeUsablesSQL)) {

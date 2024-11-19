@@ -35,6 +35,10 @@ public class Menu extends javax.swing.JPanel {
         this.btnMarket.setOpaque(false);
         this.btnMarket.setContentAreaFilled(false);
         this.btnMarket.setBorderPainted(false);
+        
+        this.btnLiga.setOpaque(false);
+        this.btnLiga.setContentAreaFilled(false);
+        this.btnLiga.setBorderPainted(false);
 
     }
 
@@ -52,6 +56,9 @@ public class Menu extends javax.swing.JPanel {
         lblArrow1 = new javax.swing.JLabel();
         lblArrow2 = new javax.swing.JLabel();
         lblArrow = new javax.swing.JLabel();
+        lblLiga = new javax.swing.JLabel();
+        btnLiga = new javax.swing.JButton();
+        lblArrow3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -65,7 +72,7 @@ public class Menu extends javax.swing.JPanel {
 
         lblMain.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMain.setText("Haz click en alguna de las opciones para viajar !!");
-        add(lblMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 340, 40));
+        add(lblMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 340, 40));
 
         lblGym.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblGym.setText("Gym");
@@ -90,21 +97,42 @@ public class Menu extends javax.swing.JPanel {
 
         lblArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
         add(lblArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, -1, -1));
+
+        lblLiga.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        lblLiga.setText("Liga Pokemon");
+        add(lblLiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 340, 50));
+
+        btnLiga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLigaActionPerformed(evt);
+            }
+        });
+        add(btnLiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, 370, 70));
+
+        lblArrow3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow-little-removebg-preview.png"))); // NOI18N
+        add(lblArrow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 300, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMarketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarketActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMarketActionPerformed
 
+    private void btnLigaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLigaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLigaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnGym;
+    public javax.swing.JButton btnLiga;
     public javax.swing.JButton btnMarket;
     public javax.swing.JButton btnPoke;
     private javax.swing.JLabel lblArrow;
     private javax.swing.JLabel lblArrow1;
     private javax.swing.JLabel lblArrow2;
+    private javax.swing.JLabel lblArrow3;
     private javax.swing.JLabel lblGym;
+    private javax.swing.JLabel lblLiga;
     private javax.swing.JLabel lblMain;
     private javax.swing.JLabel lblMarket;
     private javax.swing.JLabel lblPoke;

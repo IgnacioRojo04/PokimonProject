@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Interface/DAO.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/Repository/JDBC/PokemonDAOJDBC.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/Menu.java</file>
@@ -15,15 +16,41 @@
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/MainView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/Home.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/View/PokemonView.java</file>
+=======
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/Repository/JDBC/PokemonDAOJDBC.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/View/TablePlayerView.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Leader/View/LeaderView.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Market/Controller/MarketController.java</file>
+>>>>>>> liga
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Gym/Controller/GymController.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Controller/PokemonController.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Market/View/MarketView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/PokemonProject.java</file>
+<<<<<<< HEAD
+=======
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Leader/Model/Entity/Leader.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Interface/DAO.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/Menu.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Gym/View/GymView.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/Model/Repository/JDBC/PlayerDAOJDBC.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/Controller/PlayerController.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Leader/Model/Repository/LeaderRepository.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/MainView.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/main/Home.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/View/PokemonView.java</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/img/intro.jpg</file>
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Leader/Controller/LeaderController.java</file>
+>>>>>>> liga
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Market/Model/Entity/Market.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/View/PlayerView.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Market/Model/Repository/JDBC/MarketDAOJDBC.java</file>
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Player/Model/Entity/Player.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Pókemon/Model/Entity/Pokemon.java</file>
+=======
+            <file>file:/C:/Users/retam/OneDrive/Documentos/TDS/Segundo%20año/Programación%20orientada%20a%20objetos/%23TP%20Final/PokimonProject/src/Character/Character.java</file>
+>>>>>>> liga
         </group>
     </open-files>
 </project-private>

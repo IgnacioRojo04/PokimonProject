@@ -18,8 +18,9 @@ import java.util.List;
  *
  * @author retam
  */
-public class PokemonDAOJDBC implements DAO<Pokemon>{
-     private Player player;
+public class PokemonDAOJDBC implements DAO<Pokemon> {
+
+    public Player player;
     private Connection conexion = null;
     String URL = "jdbc:mariadb://localhost:3306/pokemones"; // Nombre de tu base de datos
     String USER = "root"; // Usuario de tu base de datos
@@ -28,6 +29,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
     public PokemonDAOJDBC(Player player) {
         conectar();
         this.player = player;
+        System.out.println(player + "ggg");
     }
 
     public void conectar() {
@@ -49,16 +51,17 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
                 + "JOIN pokemones p ON pu.ID_POKE = p.id "
                 + "JOIN entrenadores e ON pu.ID_ENTRENADOR = e.id "
                 + "WHERE pu.ID_ENTRENADOR = ?";
-        System.out.println("HOLAAA " + this.player.getId());
+        System.out.println("HOLAAAs " + this.player.getId());
         try (PreparedStatement stmtSelect = conexion.prepareStatement(sqlSelect)) {
             System.out.println(this.player.getId());
             stmtSelect.setInt(1, this.player.getId());
 
             // Ejecutar la consulta y obtener los resultados
             ResultSet rs = stmtSelect.executeQuery();
-
+            System.out.println(rs);
             // Recorrer los resultados
             while (rs.next()) {
+                System.out.println("getint" + rs.getInt("ID"));
                 // Crear una nueva instancia de Pokemon
                 Pokemon pokemon = new Pokemon();
 
@@ -72,6 +75,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
                 pokemon.setName(rs.getString("pokemon_name"));      // Columna pokemon_name -> nombre del Pokemon
                 pokemon.setEntrenador(rs.getString("entrenador_name"));  // Columna entrenador_name -> nombre del entrenador
 
+                System.out.println(pokemon.getName());
                 // Añadir el Pokemon a la lista
                 this.player.getTeamPokemon().add(pokemon);
             }
@@ -81,7 +85,7 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
-        
+
     }
 
     @Override
@@ -95,7 +99,9 @@ public class PokemonDAOJDBC implements DAO<Pokemon>{
             stmtInsert.setInt(1, t.getIdPoke());         // ID del Pokemon
             stmtInsert.setInt(2, t.getRarity());     // Rareza del Pokemon
             stmtInsert.setInt(3, t.getLevel());      // Nivel del Pokemon
-            stmtInsert.setInt(4, t.getCost());       // Precio del Pokemon
+            stmtInsert.setInt(4, t.getCost());
+            System.out.println("HOLAAAAAAA: este es el id_ENTRENDOR");// Precio del Pokemon
+            System.out.println(this.player.getId());
             stmtInsert.setInt(5, this.player.getId());
 
             // Ejecutar la inserción

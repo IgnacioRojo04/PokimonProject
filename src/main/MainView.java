@@ -1,8 +1,11 @@
 package main;
 
 import Gym.Controller.GymController;
+import Leader.Controller.LeaderController;
+import Leader.View.LeaderView;
 import Market.Controller.MarketController;
 import Player.Controller.PlayerController;
+import Leader.Model.Entity.Leader;
 import Pókemon.Controller.PokemonController;
 import Pókemon.Model.Entity.Pokemon;
 import java.awt.CardLayout;
@@ -19,25 +22,35 @@ import javax.swing.JFrame;
  */
 public class MainView extends javax.swing.JFrame {
 
+    private LeaderController leagueController = new LeaderController();
     private PlayerController playerController = new PlayerController();
     private MarketController marketController = new MarketController(this.playerController.playerDao.player);
     private PokemonController pokemonController = new PokemonController(this.playerController.playerDao.player);
     private GymController gymController = new GymController();
     private Home homeView = new Home();
     private Menu menu = new Menu();
+    public boolean leagueFill = true;
+    
     private CardLayout layout;
 
     public MainView() {
+        System.out.println(this.playerController.playerDao.player);
         initComponents();
         container_add();
         showPlayerView(this.playerController.playerDao.player.getTeamPokemon());
         showMenuPanel();
         showMarketView();
-        backMarket();
+        showLeagueView();
         showPokemonView();
+        showGym();
+        battleLeader();
         backPoke();
         backGym();
-        showGym();
+        backMarket();
+        backHomePlayerView();
+        backHomePlayerContinue();
+        backLeague();
+
         buyMarket();
         sellPoke();
         trainPokemon();
@@ -47,8 +60,6 @@ public class MainView extends javax.swing.JFrame {
         continueGame();
         selectPlayer();
         deletePlayer();
-        backHomePlayerView();
-        backHomePlayerContinue();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre inmediato
 
         addWindowListener(new WindowAdapter() {
@@ -73,6 +84,18 @@ public class MainView extends javax.swing.JFrame {
         container.add(this.pokemonController.pokemonView, "Pokemon");
         container.add(this.gymController.gymView, "Gym");
         container.add(this.playerController.tablePlayerView, "TablePlayer");
+        if (this.leagueController != null) {
+            System.out.println("LeagueController initialized.");
+            if (this.leagueController.leagueView != null) {
+                System.out.println("LeagueView initialized.");
+                container.add(this.leagueController.leagueView, "LeaderPoke");
+            } else {
+                System.err.println("LeagueView is null, cannot add to container.");
+            }
+        } else {
+            System.err.println("LeagueController is null.");
+        }
+        //container.add(this.leagueController.leagueView, "LeaderPoke");
         setContentPane(container);
         this.layout = (CardLayout) container.getLayout();
         layout.show(container, "Home");
@@ -92,6 +115,7 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!playerController.createPlayer()) {
+                    System.out.println("ID  jaajajja " + playerController.playerDao.player.getId());
                     layout.show(container, "Menu");
                 } else {
                     jdExeption.setTitle("No podes crear tu entrenador:");
@@ -116,10 +140,23 @@ public class MainView extends javax.swing.JFrame {
         });
     }
 
+    public void showLeagueView() {
+        this.menu.btnLiga.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pokemonController.pokemonDao.listar();
+                leagueFill = leagueController.FillList(leagueFill);
+                System.out.println(leagueFill);
+                layout.show(container, "LeaderPoke");
+            }
+        });
+    }
+
     public void showGym() {
         this.menu.btnGym.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                pokemonController.pokemonDao.listar();
                 gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney() + "");
                 gymController.repaintView(playerController.playerDao.player.getTeamPokemon());
                 layout.show(container, "Gym");
@@ -131,6 +168,7 @@ public class MainView extends javax.swing.JFrame {
         this.menu.btnPoke.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("ID  jaajajja " + playerController.playerDao.player.getId());
                 System.out.println(playerController.playerDao.player.getName());
                 pokemonController.fillTable(playerController.playerDao.player);
                 pokemonController.showMoney(playerController.playerDao.player.getMoney());
@@ -159,6 +197,16 @@ public class MainView extends javax.swing.JFrame {
 
     public void backGym() {
         this.gymController.gymView.btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("back");
+                layout.show(container, "Menu");
+            }
+        });
+    }
+
+    public void backLeague() {
+        this.leagueController.leagueView.btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("back");
@@ -235,24 +283,112 @@ public class MainView extends javax.swing.JFrame {
         this.gymController.gymView.btnTrain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String title = "";
-                Pokemon entrenado = playerController.playerDao.player.getTeamPokemon().get(gymController.gymView.cbGym.getSelectedIndex());
-                if (playerController.playerDao.player.getMoney() >= 5 && entrenado.getLevel() < 100) {
-                    playerController.setMoney(-5);
-                    pokemonController.pokemonDao.actualizar(gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player));
-                    jdExeption.setTitle("Hoy toco pecho");
-                    lblDialog.setText("Never Pony.");
+                if (playerController.playerDao.player.teamPokemon.size() > 0) {
+                    String title = "";
+                    Pokemon pokeTrained = playerController.playerDao.player.getTeamPokemon().get(gymController.gymView.cbGym.getSelectedIndex());
+                    System.out.println(pokeTrained);
+                    if (playerController.playerDao.player.getMoney() >= 5 && pokeTrained.getLevel() < 100) {
+                        playerController.setMoney(-5);
+                        pokemonController.pokemonDao.actualizar(gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player));
+                        gymController.gymView.lblMoney.setText(playerController.playerDao.player.getMoney()+ "");
+                        jdExeption.setTitle("Entrenaste!");
+                        lblDialog.setText("Alto Machamp");
+                        jdExeption.setSize(400, 100);
+                        jdExeption.setModal(true);
+                        jdExeption.setVisible(true);
+                    } else {
+                        jdExeption.setTitle("No podes Entrenar");
+                        if (playerController.playerDao.player.getMoney() < 5) {
+                            title += "No Tienes Dinero.";
+                        } else if (pokeTrained.getLevel() >= 100) {
+                            title += "Limite de nivel";
+                        }
+                        lblDialog.setText(title);
+                        jdExeption.setSize(400, 100);
+                        jdExeption.setModal(true);
+                        jdExeption.setVisible(true);
+                    }
+                } else {
+                    jdExeption.setTitle("No hay pokemones para entrenar.");
+                    lblDialog.setText("Compra en el Market! o Captura alguno!.");
+                    jdExeption.setSize(400, 100);
+                    jdExeption.setModal(true);
+                    jdExeption.setVisible(true);
+                }
+
+            }
+
+        });
+    }
+
+    public void battleLeader() {
+        // Escucha el evento de presionar el botón de enfrentar al líder
+        this.leagueController.leagueView.btnFight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el equipo del jugador y el líder seleccionado
+                if (playerController.playerDao.player.teamPokemon.size() > 0 && playerController.playerDao.player.getMoney() >= 10) {
+                    List<Pokemon> playerTeam = playerController.playerDao.player.getTeamPokemon();
+                    Leader selectedLeader = leagueController.getLeader(leagueController.leagueView.cbLeaders.getSelectedIndex());
+
+                    // Obtener el equipo del líder
+                    List<Pokemon> leaderTeam = selectedLeader.getTeamPokemon();
+                    playerController.setMoney(-10);
+                    // Calcular el poder de batalla del equipo del jugador
+                    int playerLevelSum = 0;
+                    int playerRaritySum = 0;
+                    for (Pokemon pokemon : playerTeam) {
+                        playerLevelSum += pokemon.getLevel();
+                        playerRaritySum += pokemon.getRarity();
+                    }
+                    int playerPower = playerLevelSum * playerRaritySum;
+
+                    // Calcular el poder de batalla del equipo del líder
+                    int leaderLevelSum = 0;
+                    int leaderRaritySum = 0;
+                    for (Pokemon pokemon : leaderTeam) {
+                        leaderLevelSum += pokemon.getLevel();
+                        leaderRaritySum += pokemon.getRarity();
+                    }
+                    int leaderPower = leaderLevelSum * leaderRaritySum;
+
+                    System.out.println(leaderPower + "medio" + playerPower);
+                    // Crear mensaje para el diálogo según el resultado de la batalla
+                    String title;
+                    String message;
+
+                    if (playerPower >= leaderPower) {
+                        // Si el jugador gana, marca al líder como derrotado
+                        leagueController.markLeaderAsDefeated(selectedLeader.getId());
+                        title = "¡Victoria!";
+                        message = "¡Has ganado la batalla contra el líder " + selectedLeader.getName() + "!";
+                        
+                        for(Leader leader: leagueController.leaderRepository.leaderList){
+                            if(leader.equals(selectedLeader)){
+                                leader.setDefeated(true);
+                                playerController.setMoney(leader.getMoney());
+                            }
+                        }
+                       leagueController.cargarDatosLigaEnTabla();
+                    } else {
+                        title = "Derrota";
+                        message = "Has perdido la batalla contra el líder " + selectedLeader.getName() + ". ¡Sigue entrenando!";
+                        
+                    }
+
+                    // Mostrar el resultado en un diálogo emergente
+                    jdExeption.setTitle(title);
+                    lblDialog.setText(message);
                     jdExeption.setSize(400, 100);
                     jdExeption.setModal(true);
                     jdExeption.setVisible(true);
                 } else {
-                    jdExeption.setTitle("No podes Entrenar");
-                    if (playerController.playerDao.player.getMoney() < 5 )title+="No Tienes Dinero.";
-                    else if (entrenado.getLevel() >= 100)title+="Limite de nivel";
-                    lblDialog.setText(title);
+                    jdExeption.setTitle("Lista vacia");
+                    lblDialog.setText("No tenes pokemones. No tenes suficiente dinero.");
                     jdExeption.setSize(400, 100);
                     jdExeption.setModal(true);
                     jdExeption.setVisible(true);
+
                 }
             }
         });
@@ -359,6 +495,7 @@ public class MainView extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 playerController.selectContinue();
+                pokemonController.pokemonDao.player = playerController.playerDao.player;
                 layout.show(container, "Menu");
             }
         });

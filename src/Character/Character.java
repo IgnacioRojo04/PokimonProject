@@ -1,5 +1,5 @@
 
-package Player.Model.Entity;
+package Character;
 
 import Pókemon.Model.Entity.Pokemon;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import java.util.Objects;
 
 public abstract class Character {
 
-    private String name;
-    private List<Pokemon> teamPokemon;
+    public String name;
+    public List<Pokemon> teamPokemon; 
     private int money;
     private int id;
 
@@ -25,6 +25,16 @@ public abstract class Character {
         this.money = money;
         id = 0;
          this.teamPokemon = new ArrayList<>();
+    }
+    public Character(String name, int money, int id) {
+        this.name = name;
+        this.money = money;
+        this.id = id;
+        this.teamPokemon = new ArrayList<>();
+    }
+    
+    public Character(String name){
+        this.name=name;
     }
 
     public String getName() {
