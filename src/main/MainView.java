@@ -286,6 +286,7 @@ public class MainView extends javax.swing.JFrame {
                 if (playerController.playerDao.player.teamPokemon.size() > 0) {
                     String title = "";
                     Pokemon pokeTrained = playerController.playerDao.player.getTeamPokemon().get(gymController.gymView.cbGym.getSelectedIndex());
+                    System.out.println(pokeTrained);
                     if (playerController.playerDao.player.getMoney() >= 5 && pokeTrained.getLevel() < 100) {
                         playerController.setMoney(-5);
                         pokemonController.pokemonDao.actualizar(gymController.trainPokemon(playerController.playerDao.player.getTeamPokemon(), playerController.playerDao.player));
